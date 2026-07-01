@@ -33,9 +33,9 @@ export default function Carousel3D() {
       const width = window.innerWidth;
       const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
       setIsMobile(width <= 768 || isTouchDevice);
-      if (width <= 640) setCylinderWidth(2200);
-      else if (width <= 768) setCylinderWidth(2800);
-      else if (width <= 1024) setCylinderWidth(3000);
+      if (width <= 640) setCylinderWidth(2800);
+      else if (width <= 768) setCylinderWidth(3200);
+      else if (width <= 1024) setCylinderWidth(3400);
       else setCylinderWidth(3800);
     };
     updateDeviceSettings();
@@ -67,6 +67,9 @@ export default function Carousel3D() {
       const currentAngle = rotation.get();
       const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
       const targetAngle = snappedAngle - angleStep;
+
+      setCurrentIndex((prev) => (prev + 1) % faceCount);
+
       controls
         .start({
           rotateY: targetAngle,
@@ -74,11 +77,10 @@ export default function Carousel3D() {
         })
         .then(() => {
           rotation.set(targetAngle);
-          setCurrentIndex((prev) => (prev + 1) % faceCount);
         });
     }, 2500);
     return () => clearInterval(interval);
-  }, [currentIndex, isAutoScrolling, isDragging, controls, rotation, faceCount, angleStep]);
+  }, [isAutoScrolling, isDragging, controls, rotation, faceCount, angleStep]);
 
   const handleUpdate = (latest: ResolvedValues) => {
     if (typeof latest.rotateY === "number") {
@@ -104,6 +106,8 @@ export default function Carousel3D() {
       const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
       const targetAngle = snappedAngle + direction * angleStep;
 
+      setCurrentIndex(direction > 0 ? (currentIndex - 1 + faceCount) % faceCount : (currentIndex + 1) % faceCount);
+
       controls
         .start({
           rotateY: targetAngle,
@@ -111,7 +115,6 @@ export default function Carousel3D() {
         })
         .then(() => {
           rotation.set(targetAngle);
-          setCurrentIndex(direction > 0 ? (currentIndex - 1 + faceCount) % faceCount : (currentIndex + 1) % faceCount);
         });
       setDragDistance(0);
     }
@@ -127,16 +130,10 @@ export default function Carousel3D() {
     <div className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 -mt-8 md:-mt-24">
       <div className="flex grow items-center justify-center [perspective:2500px] [transform-style:preserve-3d]">
         <motion.div
-          drag="x"
-          dragElastic={0}
-          dragMomentum={false}
-          dragConstraints={false}
-          whileDrag={{ cursor: "grabbing", scale: 0.98 }}
-          onDragStart={handleDragStart}
-          onDrag={handleDrag}
-          onDragEnd={handleDragEnd}
-          onMouseEnter={() => { setIsAutoScrolling(false); controls.stop(); }}
-          onMouseLeave={() => { if (!isDragging) setIsAutoScrolling(true); }}
+          onPanStart={handleDragStart}
+          onPan={handleDrag}
+          onPanEnd={handleDragEnd}
+          whileTap={{ cursor: "grabbing", scale: 0.98 }}
           animate={controls}
           onUpdate={handleUpdate}
           style={{
@@ -148,27 +145,42 @@ export default function Carousel3D() {
           }}
           className="flex min-h-[550px] md:min-h-[650px] lg:min-h-[750px] cursor-grab active:cursor-grabbing items-center justify-center [transform-style:preserve-3d]"
         >
-          {IMAGES.map((url, i) => (
-            <div
-              key={i}
-              className="group absolute flex h-fit items-center justify-center [backface-visibility:hidden]"
-              style={{
-                width: `${faceWidth}px`,
-                transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
-              }}
-            >
-              <div className="relative w-[280px] md:w-[360px] lg:w-[480px] aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl transition-transform duration-300 ease-out group-hover:scale-105 group-hover:border-gold-500/50">
-                <Image
-                  src={url}
-                  alt={`Carousel image ${i}`}
-                  fill
-                  className="pointer-events-none object-cover select-none"
-                  draggable={false}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none mix-blend-overlay"></div>
+          {IMAGES.map((url, i) => {
+            const distance = Math.min(
+              Math.abs(i - currentIndex),
+              faceCount - Math.abs(i - currentIndex)
+            );
+
+            let scaleClass = 'scale-[0.75] z-0';
+            if (distance === 0) scaleClass = 'scale-[1.05] md:scale-[1.15] z-30';
+            else if (distance === 1) scaleClass = 'scale-[0.95] z-20';
+            else if (distance === 2) scaleClass = 'scale-[0.85] z-10';
+
+            return (
+              <div
+                key={i}
+                className="group absolute flex h-fit items-center justify-center [backface-visibility:hidden]"
+                style={{
+                  width: `${faceWidth}px`,
+                  transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
+                }}
+              >
+                <div
+                  className={`relative w-[440px] md:w-[360px] lg:w-[480px] aspect-[2.2/4] md:aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl transition-all ease-out ${scaleClass} group-hover:border-gold-500/50`}
+                  style={{ transitionDuration: isDragging ? '300ms' : '1000ms' }}
+                >
+                  <Image
+                    src={url}
+                    alt={`Carousel image ${i}`}
+                    fill
+                    className="pointer-events-none object-cover select-none"
+                    draggable={false}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none mix-blend-overlay"></div>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </motion.div>
       </div>
     </div>

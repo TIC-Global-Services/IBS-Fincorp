@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import React, { useMemo } from "react";
 
 interface TextBlurRevealProps {
@@ -13,7 +13,7 @@ interface TextBlurRevealProps {
 export function TextBlurReveal({ text, as: Component = "p", className = "", delay = 0 }: TextBlurRevealProps) {
   const words = useMemo(() => text.split(" "), [text]);
 
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
@@ -21,7 +21,7 @@ export function TextBlurReveal({ text, as: Component = "p", className = "", dela
     },
   };
 
-  const item = {
+  const item: Variants = {
     hidden: { opacity: 0, y: 10, filter: "blur(8px)" },
     show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] } },
   };

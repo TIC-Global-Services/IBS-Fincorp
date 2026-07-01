@@ -3,32 +3,32 @@ import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 
 const faqs = [
   {
-    question: "Is IBSFINCORP a bank or NBFC?",
-    answer: "No. IBSFINCORP is a strategic loan consulting and facilitation service provider (Corporate DSA). All loan sanctions are made by regulated banks and NBFCs based on their eligibility criteria and policies."
+    question: "Is IBSFINCORP A Bank Or NBFC?",
+    answer: "No. IBSFINCORP Is A Strategic Loan Consulting And Facilitation Service Provider (Corporate DSA). All Loan Sanctions Are Made By Regulated Banks And NBFCs Based On Their Eligibility Criteria And Policies."
   },
   {
-    question: "Does IBSFINCORP Facilitate Bank-to-Bank Loan Transfers?",
-    answer: "Yes, we facilitate seamless Bank-to-Bank Loan Transfers (Balance Transfers). We help you move your existing high-value loans to lenders offering better interest rates, higher top-up amounts, or more favorable repayment terms."
+    question: "Can You Guarantee Loan Approval?",
+    answer: "Loan Approval, Interest Rates, And Terms Are Determined Solely By The Respective Lender. IBSFINCORP Helps You Present The Strongest Possible Application To The Most Suitable Lender For Your Profile."
   },
   {
-    question: "What documents do I need to get started?",
-    answer: "Basic requirements include KYC documents, recent bank statements, financial/ITR records, and property documents if applicable. Your dedicated relationship manager will provide a customized, streamlined checklist based on your profile."
+    question: "What Is The Minimum Loan Amount You Handle?",
+    answer: "We Specialise In High-Value Secured, Property-Backed Funding Mandates Above ₹50 Lakhs To Multi-Crore Levels"
   },
   {
-    question: "Which cities do you serve?",
-    answer: "We primarily serve prime borrowers across South India, with a strong presence in major cities across Tamil Nadu, Karnataka, and Pondicherry."
+    question: "Which Cities Do You Serve?",
+    answer: "Primary Focus On Chennai, Coimbatore, Madurai, Salem (Tamil Nadu), Bangalore, Mysore (Karnataka), And Pondicherry. Support Also Available For Other Major Indian Cities Subject To Eligibility And Lender Coverage."
+  },
+  {
+    question: "What Documents Do I Need To Get Started?",
+    answer: "Our Team Guides You Through The Complete Documentation Requirements Based On Your Loan Type And Selected Lender. We Provide Doorstep Assistance Throughout The Documentation Process."
   },
   {
     question: "Does IBSFINCORP Charge Any Service Fees?",
-    answer: "No, our services are completely commission-free for borrowers. We are officially remunerated directly by the lending institutions and partner banks."
+    answer: "No. IBSFINCORP Does Not Charge Clients For Premium Consultation Or Support Services. We Work In Association With Leading Banks And NBFCs To Facilitate Suitable Funding Solutions."
   },
   {
-    question: "What is the minimum loan amount you handle?",
-    answer: "Our services are exclusively tailored for premium borrowers. We typically handle high-value loan requirements to ensure we can dedicate the necessary time and expertise to your portfolio."
-  },
-  {
-    question: "Can you guarantee loan approval?",
-    answer: "While we have a high success rate due to our rigorous pre-screening and expert structuring, final loan approvals are always at the sole discretion of the lending institutions based on their internal credit policies."
+    question: "Does IBSFINCORP Facilitate Bank-To-Bank Loan Transfers?",
+    answer: "Yes. IBSFINCORP Supports Balance Transfer Of Eligible High-Value Secured Loans Between Banks And NBFCs To Help Clients Explore More Suitable Funding Terms And Structures."
   }
 ];
 
@@ -42,12 +42,12 @@ export default function FaqSection() {
 
         {/* Left Column - Titles */}
         <div className="lg:w-5/12 lg:sticky lg:top-32 pt-4">
-          <TextBlurReveal 
-            as="h2" 
+          <TextBlurReveal
+            as="h2"
             text="Frequently Asked Questions"
-            className="text-5xl md:text-6xl font-medium tracking-tight mb-6 text-dark-900 leading-[1.1]"
+            className="text-3xl md:text-6xl font-medium tracking-tight mb-6 text-dark-900 leading-[1.2] text-center"
           />
-          <p className="text-dark-900 font-medium text-lg">
+          <p className="text-dark-900 font-medium text-sm text-center tracking-tight">
             Honest Answers For Premium Borrowers.
           </p>
         </div>
@@ -66,7 +66,7 @@ export default function FaqSection() {
                 <div
                   className="px-6 overflow-hidden transition-all duration-500 max-h-0 opacity-0 group-hover:max-h-40 group-hover:pb-6 group-hover:opacity-100"
                 >
-                  <p className="text-[#828282] leading-relaxed text-sm">{faq.answer}</p>
+                  <p className="text-[#828282] leading-tight tracking-tight text-sm">{faq.answer}</p>
                 </div>
               </div>
             ))}

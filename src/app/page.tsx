@@ -10,11 +10,13 @@ import PartnersSection from "@/components/sections/partners-section";
 import LocationsSection from "@/components/sections/locations-section";
 import CtaSection from "@/components/sections/cta-section";
 import FaqSection from "@/components/sections/faq-section";
+import { ConsultationModal } from "@/components/ui/consultation-modal";
 
 export default function Home() {
   return (
     <>
       <Header />
+      <ConsultationModal />
       <main className="flex-1 overflow-x-hidden">
         <HeroSection />
         <AboutStatsSection />

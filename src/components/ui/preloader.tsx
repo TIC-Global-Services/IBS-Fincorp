@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 
 export function Preloader() {
   const [isVisible, setIsVisible] = useState(true);
@@ -32,7 +32,7 @@ export function Preloader() {
     };
   }, []);
 
-  const pathVariants = {
+  const pathVariants: Variants = {
     hidden: { 
       pathLength: 0, 
       fillOpacity: 0, 
@@ -58,7 +58,7 @@ export function Preloader() {
     }
   };
 
-  const fillVariants = {
+  const fillVariants: Variants = {
     hidden: { fillOpacity: 0 },
     visible: (stage: number) => {
       let delay = 0;

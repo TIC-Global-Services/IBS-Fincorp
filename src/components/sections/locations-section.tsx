@@ -1,10 +1,10 @@
 export default function LocationsSection() {
   return (
-    <section id="locations" className="py-24 bg-white text-dark-900 overflow-hidden">
-      <div className="container mx-auto px-6 md:px-12">
+    <section id="locations" className="py-10 bg-white text-dark-900 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Serving South India's Prime Borrowers</h2>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-tight mb-4">Serving South India's Prime Borrowers</h2>
           <p className="text-[#828282] text-lg">Present Where Your Assets And Ambitions Are.</p>
         </div>
 

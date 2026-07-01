@@ -1,8 +1,22 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 
 export default function ComparisonAppSection() {
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: timelineRef,
+    offset: ["start 80%", "end 50%"]
+  });
+
+  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  const line1Opacity = useTransform(scrollYProgress, [0.33, 0.4], [0, 1]);
+  const line2Opacity = useTransform(scrollYProgress, [0.66, 0.73], [0, 1]);
+
   return (
     <section id="comparison" className="py-24 bg-comparison-gradient text-dark-900 overflow-hidden relative">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
@@ -79,28 +93,30 @@ export default function ComparisonAppSection() {
           <TextBlurReveal
             as="h2"
             text="What Makes IBSFINCORP Different"
-            className="text-4xl md:text-5xl font-medium tracking-tight mb-4"
+            className="text-3xl md:text-5xl font-medium tracking-tight mb-4"
           />
-          <p className="text-lg opacity-80">Unlock Exclusive High-Value Benefits</p>
+          <p className="text-sm md:text-lg">Unlock Exclusive High-Value Benefits</p>
         </div>
         {/* Comparison Table */}
-        <div className="max-w-[1140px] mx-auto mb-32 relative z-10 text-dark-900 mt-12 h-[450px]">
-          <div className="relative h-full">
+        <div className="max-w-[1200px] mx-auto mb-32 relative z-10 text-dark-900 mt-12">
+          <div className="relative">
             {/* Main Table BG */}
             <div className="absolute inset-0 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl pointer-events-none"></div>
 
             {/* Middle Column Border */}
-            <div className="absolute inset-y-0 left-[33.333333%] w-[33.333333%] border-l border-white/20 pointer-events-none"></div>
+            <div className="absolute inset-y-0 left-[40%] w-[30%] border-l border-white/20 pointer-events-none"></div>
 
             {/* IBS Highlight BG */}
-            <div className="absolute inset-y-0 right-0 w-[33.333333%] bg-white/20 backdrop-blur-xl border-l border-white/20 rounded-r-3xl pointer-events-none"></div>
+            <div className="absolute inset-y-0 right-0 w-[30%] bg-white/20 backdrop-blur-xl border-l border-white/20 rounded-r-3xl pointer-events-none"></div>
 
             {/* Table Content */}
-            <div className="relative z-10 grid grid-cols-3 h-full p-4" style={{ gridTemplateRows: 'repeat(8, minmax(0, 1fr))' }}>
+            <div className="relative z-10 grid grid-cols-[40%_30%_30%] py-4 md:py-6 auto-rows-fr">
               {/* Headers */}
-              <div className="font-medium text-2xl px-8 flex items-center">Features</div>
-              <div className="font-medium text-2xl px-4 text-center flex items-center justify-center">Conventional Loan Agents</div>
-              <div className="font-medium text-2xl px-4 text-center flex items-center justify-center">IBSFINCORP</div>
+              <div className="font-medium text-[11px] sm:text-sm md:text-2xl pl-5 pr-2 md:pl-10 md:pr-4 flex items-center justify-start pb-4">Features</div>
+              <div className="font-medium text-[11px] sm:text-sm md:text-2xl px-1 md:px-4 text-center flex items-center justify-center pb-4 leading-tight">
+                <span>Conventional<br className="hidden sm:block" /> Loan Agents</span>
+              </div>
+              <div className="font-medium text-[11px] sm:text-sm md:text-2xl px-1 md:px-4 text-center flex items-center justify-center pb-4">IBSFINCORP</div>
 
               {/* Rows */}
               {[
@@ -113,12 +129,12 @@ export default function ComparisonAppSection() {
                 "Zero Client Commission",
               ].map((feature, idx) => (
                 <React.Fragment key={idx}>
-                  <div className="px-8 font-medium text-lg tracking-tight flex items-center">{feature}</div>
-                  <div className={`px-4 text-center text-xl flex items-center justify-center font-light ${idx === 0 || idx === 4 ? "opacity-100" : "opacity-50"}`}>
-                    {idx === 0 || idx === 4 ? <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} /> : "✕"}
+                  <div className="pl-5 pr-2 md:pl-10 md:pr-4 font-medium text-[11px] sm:text-xs md:text-lg tracking-tight flex items-center leading-tight py-2 md:py-4">{feature}</div>
+                  <div className={`px-1 md:px-4 text-center text-base md:text-xl flex items-center justify-center font-light py-2 md:py-4 ${idx === 0 || idx === 4 ? "opacity-100" : "opacity-50"}`}>
+                    {idx === 0 || idx === 4 ? <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" /> : "✕"}
                   </div>
-                  <div className="px-4 text-center font-light text-xl flex items-center justify-center opacity-100">
-                    <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} />
+                  <div className="px-1 md:px-4 text-center font-light text-base md:text-xl flex items-center justify-center opacity-100 py-2 md:py-4">
+                    <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" />
                   </div>
                 </React.Fragment>
               ))}
@@ -127,8 +143,27 @@ export default function ComparisonAppSection() {
         </div>
 
         {/* 3 Steps / Timeline */}
-        <div className="max-w-6xl mx-auto relative z-10 mt-32 mb-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0">
+        <div className="max-w-6xl mx-auto relative z-10 mt-32 mb-12" ref={timelineRef}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 relative">
+
+            {/* Desktop Continuous Bottom Track Line */}
+            <div className="hidden md:block absolute bottom-0 left-0 w-full h-[1px] bg-white/20 z-10 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] -webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)"></div>
+
+            {/* Desktop Continuous Bottom Glow Line */}
+            <div className="hidden md:block absolute bottom-0 left-0 w-full h-[2px] z-20 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] -webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)">
+              <motion.div
+                className="w-full h-full bg-gold-400 origin-left shadow-[0_0_10px_2px_rgba(255,215,0,0.5)]"
+                style={{ scaleX }}
+              />
+            </div>
+            {/* Mobile Continuous Left Track Line */}
+            <div className="md:hidden absolute top-[41px] bottom-[250px] sm:bottom-[220px] left-0 w-[1px] bg-white/20 z-10"></div>
+            {/* Mobile Continuous Left Glow Line */}
+            <motion.div
+              className="md:hidden absolute top-[41px] bottom-[250px] sm:bottom-[220px] left-0 w-[2px] bg-gold-400 z-20 origin-top shadow-[0_0_10px_2px_rgba(255,215,0,0.5)]"
+              style={{ scaleY }}
+            />
+
             {/* Step 1 */}
             <div className="group relative px-8 pb-12">
               <h2 className="text-6xl font-semibold text-white mb-4">01</h2>
@@ -138,15 +173,25 @@ export default function ComparisonAppSection() {
               </p>
 
               {/* Right Vertical Line */}
-              <div className="absolute right-0 bottom-0 w-[1px] h-full bg-white/10 z-10"></div>
-              <div className="absolute right-0 bottom-0 w-[1px] h-full bg-gradient-to-t from-gold-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+              <div className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-white/10 z-10"></div>
+              <motion.div
+                className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-gradient-to-t from-gold-400 to-transparent z-10"
+                style={{ opacity: line1Opacity }}
+              />
 
-              {/* Bottom Horizontal Line */}
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/20 z-10"></div>
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent to-gold-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+              {/* Corner Dot (Desktop right-bottom) */}
+              <div className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
+              <motion.div
+                className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
+                style={{ opacity: line1Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+              />
 
-              {/* Corner Dot */}
-              <div className="absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-gold-400 shadow-[0_0_15px_4px_rgba(255,215,0,0.6)] z-20"></div>
+              {/* Corner Dot (Mobile top-left) */}
+              <div className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
+              <motion.div
+                className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
+                style={{ opacity: 1, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+              />
             </div>
 
             {/* Step 2 */}
@@ -158,15 +203,25 @@ export default function ComparisonAppSection() {
               </p>
 
               {/* Right Vertical Line */}
-              <div className="absolute right-0 bottom-0 w-[1px] h-full bg-white/10 z-10"></div>
-              <div className="absolute right-0 bottom-0 w-[1px] h-full bg-gradient-to-t from-gold-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+              <div className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-white/10 z-10"></div>
+              <motion.div
+                className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-gradient-to-t from-gold-400 to-transparent z-10"
+                style={{ opacity: line2Opacity }}
+              />
 
-              {/* Bottom Horizontal Line */}
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/20 z-10"></div>
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gold-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+              {/* Corner Dot (Desktop) */}
+              <div className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
+              <motion.div
+                className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
+                style={{ opacity: line2Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+              />
 
-              {/* Corner Dot */}
-              <div className="absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-gold-400 shadow-[0_0_15px_4px_rgba(255,215,0,0.6)] z-20"></div>
+              {/* Corner Dot (Mobile) */}
+              <div className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
+              <motion.div
+                className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
+                style={{ opacity: line1Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+              />
             </div>
 
             {/* Step 3 */}
@@ -177,12 +232,12 @@ export default function ComparisonAppSection() {
                 Your personal and financial information is managed with strict confidentiality, security, and responsible data practices.
               </p>
 
-              {/* Left Vertical Line (Hover Only - Overlaps Step 2) */}
-              <div className="absolute left-0 bottom-0 w-[1px] h-full bg-gradient-to-t from-gold-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
-
-              {/* Bottom Horizontal Line */}
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white/20 z-10"></div>
-              <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-gold-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+              {/* Corner Dot (Mobile) */}
+              <div className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
+              <motion.div
+                className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
+                style={{ opacity: line2Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+              />
             </div>
           </div>
         </div>

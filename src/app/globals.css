@@ -79,27 +79,81 @@ body {
   animation: scroll-right 40s linear infinite;
 }
 
+@keyframes scroll-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes scroll-down {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 30s linear infinite;
+}
+
+.animate-scroll-down {
+  animation: scroll-down 30s linear infinite;
+}
+
 .animate-scroll-left:hover,
-.animate-scroll-right:hover {
+.animate-scroll-right:hover,
+.animate-scroll-up:hover,
+.animate-scroll-down:hover {
   animation-play-state: paused;
 }
 
-@keyframes float {
+@keyframes float-up {
   0%, 100% { transform: translateY(0) translateX(0); }
-  33% { transform: translateY(-20px) translateX(15px); }
-  66% { transform: translateY(15px) translateX(-10px); }
+  50% { transform: translateY(-28px) translateX(8px); }
 }
 
-@keyframes float-delayed {
+@keyframes float-up-2 {
   0%, 100% { transform: translateY(0) translateX(0); }
-  33% { transform: translateY(20px) translateX(-15px); }
-  66% { transform: translateY(-15px) translateX(15px); }
+  50% { transform: translateY(-35px) translateX(-6px); }
 }
 
-.animate-float {
-  animation: float 12s ease-in-out infinite;
+@keyframes float-up-3 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-22px) translateX(12px); }
 }
 
-.animate-float-delayed {
-  animation: float-delayed 14s ease-in-out infinite;
+@keyframes float-down {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(28px) translateX(-8px); }
+}
+
+@keyframes float-down-2 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(35px) translateX(6px); }
+}
+
+@keyframes float-down-3 {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(22px) translateX(-12px); }
+}
+
+.animate-float-up {
+  animation: float-up 8s ease-in-out infinite;
+}
+
+.animate-float-up-2 {
+  animation: float-up-2 10s ease-in-out infinite;
+}
+
+.animate-float-up-3 {
+  animation: float-up-3 9s ease-in-out infinite;
+}
+
+.animate-float-down {
+  animation: float-down 8s ease-in-out infinite;
+}
+
+.animate-float-down-2 {
+  animation: float-down-2 10s ease-in-out infinite;
+}
+
+.animate-float-down-3 {
+  animation: float-down-3 9s ease-in-out infinite;
 }
