@@ -1,0 +1,99 @@
+import Image from "next/image";
+import { AnimatedHomeIcon, AnimatedCardIcon, AnimatedSeamlessIcon, AnimatedPersonIcon } from "@/components/ui/animated-icons";
+import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
+
+export default function SolutionsSection() {
+  return (
+    <section id="solutions" className="py-24 bg-white text-dark-900">
+      <div className="container mx-auto px-6 md:px-12">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <TextBlurReveal
+            as="h2"
+            text="Secured Loan Solutions"
+            className="text-4xl md:text-5xl font-medium mb-4 tracking-tight"
+          />
+          <p className="text-lg">Tailored High-Value Loan Solutions For Ambitious Growth</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          {/* Left Column - Large Card */}
+          <div className="relative rounded-3xl overflow-hidden min-h-[500px] flex flex-col justify-end p-8 border border-gray-200">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <Image src="/assets/loanbg.png" alt="Loan Background" fill className="object-cover" />
+            </div>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/40 to-white/10 z-0 pointer-events-none"></div>
+
+            <div className="relative z-10 bg-white/20 backdrop-blur-md rounded-2xl p-14 border border-white/50 shadow-lg">
+              <div className="flex items-start gap-4 mb-8">
+                {/* House Icon */}
+                <AnimatedHomeIcon width={72} height={72} className="mt-2" color="#1D1E1C" />
+                <div>
+                  <h3 className="text-2xl font-medium mb-2">Loan Against Property (LAP)</h3>
+                  <p className="text-[#828282] text-sm leading-tight tracking-tight max-w-sm">
+                    Unlock High-Value Funding Strategically With Your Property.
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium mb-4 text-lg tracking-tight">Funding Solutions Under Loan Against Property</h4>
+                <ul className="grid grid-cols-1 text-base text-[#3C3C3C] list-disc list-inside tracking-tight leading-tight">
+                  <li>Term Loan</li>
+                  <li>Commercial Property Purchase & Construction</li>
+                  <li>Industrial Property Purchase & Construction</li>
+                  <li>Dropline OD (DLOD)</li>
+                  <li>School Funding</li>
+                  <li>Bank To Bank Balance Transfer</li>
+                  <li>NRI Mortgage</li>
+                  <li>Lease Rental Discounting</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - 3 Stacked Cards */}
+          <div className="flex flex-col gap-6">
+
+            {/* Card 1 */}
+            <div className="bg-gray-100 rounded-3xl p-8 flex items-center gap-6 flex-1">
+              <AnimatedCardIcon width={100} height={100} />
+              <div>
+                <h3 className="text-2xl font-medium">Strong Credit Profile</h3>
+                <p className="text-base text-[#828282] tracking-tight leading-tight">
+                  Designed For Financially Disciplined Businesses And Individuals Seeking Structured Funding Solutions.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-[#FFBB00] rounded-3xl p-8 flex items-center gap-6 flex-1 text-dark-900">
+              <AnimatedSeamlessIcon width={72} height={72} />
+              <div>
+                <h3 className="text-2xl font-medium">Seamless Experience</h3>
+                <p className="text-base tracking-tight leading-tight">
+                  Save Time And Effort With A Smooth, Transparent, And Relationship-Driven Funding Journey.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-[#1D1E1C] rounded-3xl p-8 flex items-center gap-6 flex-1 text-white">
+              <AnimatedPersonIcon width={64} height={64} />
+              <div>
+                <h3 className="text-2xl font-medium">Dedicated Expert Support</h3>
+                <p className="text-base tracking-tight leading-tight">
+                  Get Tailored Guidance From Experienced Funding Specialists At Every Stage.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
