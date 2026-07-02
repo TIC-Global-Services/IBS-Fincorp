@@ -49,11 +49,12 @@ export default function FaqSection() {
           <TextBlurReveal
             as="h2"
             text="Frequently Asked Questions"
-            className="text-3xl md:text-6xl font-medium tracking-tight mb-6 text-dark-900 leading-[1.2] text-center"
+            className="text-3xl md:text-6xl font-medium tracking-tight mb-6 text-dark-900 leading-[1]"
           />
-          <p className="text-dark-900 font-medium text-sm text-center tracking-tight">
-            Honest Answers For Premium Borrowers.
-          </p>
+          <TextBlurReveal
+            as="p"
+            text="Honest Answers For Premium Borrowers."
+            className="text-dark-900 font-medium text-lg tracking-tight" />
         </div>
 
         {/* Right Column - Accordion Container */}
@@ -90,9 +91,8 @@ export default function FaqSection() {
                     </div>
                   </button>
                   <div
-                    className={`px-6 overflow-hidden transition-all duration-500 ${
-                      isOpen ? "max-h-[250px] pb-6 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
-                    }`}
+                    className={`px-6 overflow-hidden transition-all duration-500 ${isOpen ? "max-h-[250px] pb-6 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
+                      }`}
                   >
                     <p className="text-[#828282] leading-tight tracking-tight text-sm">{faq.answer}</p>
                   </div>

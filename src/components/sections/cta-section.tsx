@@ -16,8 +16,7 @@ export default function CtaSection() {
               fill
               className="object-cover"
             />
-            {/* Subtle overlay to ensure text readability */}
-            <div className="absolute inset-0 bg-black/30"></div>
+
           </div>
 
           {/* Content */}
@@ -32,9 +31,9 @@ export default function CtaSection() {
               delay={0.3}
               text="Your Dedicated Relationship Manager Will Guide You Through The Next Steps."
               className="text-lg md:text-xl mb-8 leading-tight tracking-tight" />
-            <button onClick={openConsultationModal} className="bg-[#1D1E1C] text-white pl-6 pr-2 py-2 rounded-full text-sm md:text-base font-medium hover:bg-black transition-all duration-300 flex items-center justify-center gap-4 group shadow-lg">
+            <button onClick={openConsultationModal} className="bg-white/30 text-white pl-6 pr-2 py-2 rounded-full text-sm md:text-base font-normal hover:bg-black transition-all duration-300 flex items-center justify-center gap-4 group shadow-lg">
               Book A Free Consultation
-              <span className="w-8 h-8 rounded-full bg-[#1D1E1C] flex items-center justify-center text-sm group-hover:bg-white group-hover:text-black transition-colors">↗</span>
+              <span className="w-10 h-10 rounded-full bg-[#1D1E1C] flex items-center justify-center text-lg group-hover:bg-white group-hover:text-black transition-colors">↗</span>
             </button>
           </div>
 

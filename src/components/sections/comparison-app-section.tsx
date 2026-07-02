@@ -28,7 +28,7 @@ export default function ComparisonAppSection() {
           <div className="md:absolute left-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mb-12 md:mb-0 md:-translate-y-30">
             <div className="flex flex-col items-end text-right max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
-                <div className="relative w-12 h-12">
+                <div className="relative w-13 h-13">
                   <Image src="/assets/higherloan.png" alt="Higher Loan Icon" fill className="object-contain" />
                 </div>
               </div>
@@ -40,7 +40,7 @@ export default function ComparisonAppSection() {
 
             <div className="flex flex-col items-end text-right max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
-                <div className="relative w-8 h-8">
+                <div className="relative w-13 h-13">
                   <Image src="/assets/flexible.png" alt="Flexible Repayment Icon" fill className="object-contain" />
                 </div>
               </div>
@@ -65,7 +65,7 @@ export default function ComparisonAppSection() {
           <div className="md:absolute right-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mt-12 md:mt-0 md:translate-y-25">
             <div className="flex flex-col items-start text-left max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
-                <div className="relative w-10 h-10">
+                <div className="relative w-13 h-13">
                   <Image src="/assets/doorstep.png" alt="Doorstep Assistance Icon" fill className="object-contain" />
                 </div>
               </div>
@@ -77,7 +77,7 @@ export default function ComparisonAppSection() {
 
             <div className="flex flex-col items-start text-left max-w-[320px] ">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
-                <div className="relative w-12 h-12">
+                <div className="relative w-13 h-13">
                   <Image src="/assets/trust.png" alt="Trusted Partner Icon" fill className="object-contain" />
                 </div>
               </div>

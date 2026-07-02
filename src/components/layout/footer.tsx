@@ -6,8 +6,8 @@ export default function Footer() {
       <div className="container mx-auto">
         {/* Regulatory Disclosure */}
         <div className="bg-white/20 rounded-[2rem] p-6 mb-8 text-center max-w-7xl mx-auto backdrop-blur-md shadow-xl">
-          <h2 className="text-xl md:text-[42px] font-medium mb-4 tracking-tight">Regulatory & Compliance Disclosure</h2>
-          <p className="text-xs md:text-lg max-w-4xl mx-auto leading-tight tracking-tight">
+          <h2 className="text-xl md:text-[42px] font-medium mb-4 tracking-tight text-dark-900">Regulatory & Compliance Disclosure</h2>
+          <p className="text-xs md:text-lg max-w-4xl mx-auto leading-tight tracking-tight text-dark-900">
             IBSFINCORP, a brand of INCETTO BUSINESS SOLUTIONS PRIVATE LIMITED is a strategic loan consulting firm and Corporate DSA. We are not a Bank or NBFC. Loans are sanctioned and disbursed by RBI-regulated lending institutions subject to their eligibility criteria and policies.
           </p>
         </div>
@@ -26,7 +26,7 @@ export default function Footer() {
             </div>
 
             {/* LOCATIONS */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-3">
               <h3 className="font-semibold mb-6 tracking-tight text-white text-center md:text-left text-sm md:text-base">LOCATIONS</h3>
               <div className="text-xs sm:text-sm tracking-tight grid grid-cols-2 md:grid-cols-1 gap-6 md:gap-6 text-center md:text-left">
                 <div>
@@ -34,7 +34,7 @@ export default function Footer() {
                     <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
                     REGISTERED OFFICE - CHENNAI
                   </p>
-                  <span className="text-white/60 leading-relaxed text-[11px] sm:text-xs block px-1">
+                  <span className="text-white leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
                     No. 158, 2nd Floor, Gulecha Towers, Arcot Road, Vadapalani, Chennai 600026
                   </span>
                 </div>
@@ -43,7 +43,7 @@ export default function Footer() {
                     <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0" />
                     BRANCH OFFICE - BANGALORE
                   </p>
-                  <span className="text-white/60 leading-relaxed text-[11px] sm:text-xs block px-1">
+                  <span className="text-white leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
                     No. 756, 10th Main Road, 33rd Cross, 4th Block, Jayanagar, Bangalore 560011
                   </span>
                 </div>
@@ -64,7 +64,7 @@ export default function Footer() {
             </div>
 
             {/* Contact Actions */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-3">
               <h3 className="font-semibold mb-6 tracking-tight text-white text-center md:text-left text-sm md:text-base">CONTACT</h3>
               <ul className="text-xs sm:text-sm tracking-tight space-y-3 mb-6 font-normal">
                 <li className="flex items-center justify-center md:justify-start gap-2 text-white/80">
