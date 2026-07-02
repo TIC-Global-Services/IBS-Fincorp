@@ -24,7 +24,7 @@ export default function SolutionsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
           {/* Left Column - Large Card */}
-          <div className="relative rounded-3xl overflow-hidden min-h-[500px] flex flex-col justify-end p-4 md:p-8 border border-gray-200">
+          <div className="relative rounded-3xl overflow-hidden min-h-[400px] flex flex-col justify-end p-4 md:p-8 border border-gray-200">
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <Image src="/assets/loanbg.png" alt="Loan Background" fill className="object-cover" />

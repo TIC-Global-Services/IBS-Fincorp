@@ -42,7 +42,7 @@ export default function PartnersSection() {
   );
 
   return (
-    <section id="partners" className="py-24 bg-white text-dark-900 overflow-hidden">
+    <section id="partners" className="py-18 bg-white text-dark-900 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 mb-16">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">

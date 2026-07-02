@@ -18,21 +18,21 @@ export default function ComparisonAppSection() {
   const line2Opacity = useTransform(scrollYProgress, [0.66, 0.73], [0, 1]);
 
   return (
-    <section id="comparison" className="py-24 bg-comparison-gradient text-dark-900 overflow-hidden relative">
+    <section id="comparison" className="py-18 bg-comparison-gradient text-dark-900 overflow-hidden relative">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
 
         {/* App Showcase with Floating Cards */}
         <div className="relative flex flex-col md:flex-row items-center justify-center min-h-[700px] mb-32 mt-10">
 
           {/* Left Cards */}
-          <div className="md:absolute left-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mb-12 md:mb-0 md:-translate-y-30">
+          <div className="md:absolute left-0 top-1/4 flex flex-col gap-8 md:gap-14 z-20 w-full md:w-auto px-4 mb-12 md:mb-0 md:-translate-y-15">
             <div className="flex flex-col items-end text-right max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
                 <div className="relative w-13 h-13">
                   <Image src="/assets/higherloan.png" alt="Higher Loan Icon" fill className="object-contain" />
                 </div>
               </div>
-              <h3 className="font-semibold text-2xl mb-2">Higher Loan Amounts</h3>
+              <h3 className="font-semibold text-xl md:text-2xl mb-2">Higher Loan Amounts</h3>
               <p className="text-sm leading-tight font-Manrope">
                 Access substantial funding based on your property value and repayment capacity.
               </p>
@@ -44,7 +44,7 @@ export default function ComparisonAppSection() {
                   <Image src="/assets/flexible.png" alt="Flexible Repayment Icon" fill className="object-contain" />
                 </div>
               </div>
-              <h3 className="font-semibold text-2xl mb-2">Flexible Repayment Tenures</h3>
+              <h3 className="font-semibold text-xl md:text-2xl mb-2">Flexible Repayment Tenures</h3>
               <p className="text-sm leading-tigth font-Manrope">
                 Choose customized repayment plans that align with your financial goals and cash flow.
               </p>
@@ -62,14 +62,14 @@ export default function ComparisonAppSection() {
           </div>
 
           {/* Right Cards */}
-          <div className="md:absolute right-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mt-12 md:mt-0 md:translate-y-25">
+          <div className="md:absolute right-0 top-1/4 flex flex-col gap-10 md:gap-14 z-20 w-full md:w-auto px-4 mt-12 md:mt-0 md:translate-y-5">
             <div className="flex flex-col items-start text-left max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
                 <div className="relative w-13 h-13">
                   <Image src="/assets/doorstep.png" alt="Doorstep Assistance Icon" fill className="object-contain" />
                 </div>
               </div>
-              <h3 className="font-semibold text-2xl mb-2">Doorstep Assistance</h3>
+              <h3 className="font-semibold text-xl md:text-2xl mb-2">Doorstep Assistance</h3>
               <p className="text-sm leading-tight font-Manrope">
                 Document Collection And Coordination Come To You. No Queues, No Branch Visits Required At Any Stage.
               </p>
@@ -81,7 +81,7 @@ export default function ComparisonAppSection() {
                   <Image src="/assets/trust.png" alt="Trusted Partner Icon" fill className="object-contain" />
                 </div>
               </div>
-              <h3 className="font-semibold text-2xl mb-2">Trusted & Reliable Partner</h3>
+              <h3 className="font-semibold text-xl md:text-2xl mb-2">Trusted & Reliable Partner</h3>
               <p className="text-sm leading-tight font-Manrope">
                 Built on transparency, integrity, and long-term financial relationships.
               </p>

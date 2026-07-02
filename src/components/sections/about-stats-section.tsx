@@ -5,7 +5,7 @@ import { CircularProgress } from "@/components/ui/circular-progress";
 
 export default function AboutStatsSection() {
   return (
-    <section id="about" className="py-24 bg-white text-dark-900">
+    <section id="about" className="py-18 bg-white text-dark-900">
       <div className="container mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center max-w-5xl mx-auto mb-20">

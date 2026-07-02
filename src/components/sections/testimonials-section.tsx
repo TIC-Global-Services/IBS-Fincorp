@@ -81,7 +81,7 @@ export default function TestimonialsSection() {
   useEffect(() => {
     let ctx = gsap.context(() => {
       const isMobile = window.matchMedia("(max-width: 768px)").matches;
-      const staggerDelay = isMobile ? 0.25 : 0.6;
+      const staggerDelay = isMobile ? 0.4 : 0.6;
       const startY = isMobile ? "80vh" : "120vh";
       const endY = isMobile ? "-80vh" : "-120vh";
 

@@ -38,7 +38,7 @@ export default function FaqSection() {
   const [activeIdx, setActiveIdx] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-32 relative bg-transparent overflow-hidden z-0">
+    <section id="faq" className="py-18 relative bg-transparent overflow-hidden z-0">
       {/* Golden Background Glow */}
       <div className="absolute bottom-0 left-0 w-full md:w-1/2 h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-gold-400/40 via-gold-400/5 to-transparent -z-10 pointer-events-none"></div>
 

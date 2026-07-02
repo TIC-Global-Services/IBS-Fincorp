@@ -1,21 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useState, useRef } from "react";
 import {
   motion,
   useMotionValue,
-  useAnimation,
   useTransform,
-  PanInfo,
-  ResolvedValues,
+  animate,
 } from "framer-motion";
-import Image from "next/image";
 
 const baseImages = [
-  "/assets/herocarousel/4ffca7dcb1d15d7d75c8c65ed32b64bab3ccdedc.jpg",
-  "/assets/herocarousel/5a445c17a639f5115404c1e79a5edb61a55fdc28.jpg",
-  "/assets/herocarousel/75c2393021a0fcdc2cdf589cac8a0a56d7ae680b.jpg",
-  "/assets/herocarousel/8b7655739679ccc1183e510329c597e67bbca885.jpg",
-  "/assets/herocarousel/b999d3aa82dea1dd1d617f8897eedeea98a330a5.jpg",
+  "/assets/herocarousel/img1.webp",
+  "/assets/herocarousel/img2.webp",
+  "/assets/herocarousel/img3.webp",
+  "/assets/herocarousel/img4.webp",
+  "/assets/herocarousel/img5.webp",
 ];
 
 // Duplicate to make 15 faces (3 sets) for the perfect curve
@@ -25,14 +23,11 @@ export default function Carousel3D() {
   const [cylinderWidth, setCylinderWidth] = useState<number>(2400);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState<boolean>(true);
-  const [isDragging, setIsDragging] = useState<boolean>(false);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const updateDeviceSettings = () => {
       const width = window.innerWidth;
-      const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-      setIsMobile(width <= 768 || isTouchDevice);
       if (width <= 640) setCylinderWidth(2800);
       else if (width <= 768) setCylinderWidth(3200);
       else if (width <= 1024) setCylinderWidth(3400);
@@ -48,9 +43,7 @@ export default function Carousel3D() {
   const radius = cylinderWidth / (1.7 * Math.PI);
   const angleStep = 360 / faceCount;
 
-  const [dragDistance, setDragDistance] = useState<number>(0);
   const rotation = useMotionValue(0);
-  const controls = useAnimation();
 
   const transform = useTransform(
     rotation,
@@ -62,88 +55,81 @@ export default function Carousel3D() {
   }, [rotation]);
 
   useEffect(() => {
-    if (!isAutoScrolling || isDragging) return;
+    const unsubscribe = rotation.on("change", (latest) => {
+      const currentStep = Math.round(-latest / angleStep);
+      const activeIndex = ((currentStep % faceCount) + faceCount) % faceCount;
+      setCurrentIndex(activeIndex);
+    });
+    return () => unsubscribe();
+  }, [rotation, angleStep, faceCount]);
+
+  useEffect(() => {
+    if (!isAutoScrolling) return;
     const interval = setInterval(() => {
       const currentAngle = rotation.get();
       const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
       const targetAngle = snappedAngle - angleStep;
 
-      setCurrentIndex((prev) => (prev + 1) % faceCount);
-
-      controls
-        .start({
-          rotateY: targetAngle,
-          transition: { duration: 1, ease: "easeInOut" },
-        })
-        .then(() => {
-          rotation.set(targetAngle);
-        });
+      animate(rotation, targetAngle, {
+        duration: 1,
+        ease: "easeInOut",
+      });
     }, 2500);
     return () => clearInterval(interval);
-  }, [isAutoScrolling, isDragging, controls, rotation, faceCount, angleStep]);
+  }, [isAutoScrolling, rotation, faceCount, angleStep]);
 
-  const handleUpdate = (latest: ResolvedValues) => {
-    if (typeof latest.rotateY === "number") {
-      rotation.set(latest.rotateY);
-    }
-  };
+  useEffect(() => {
+    return () => {
+      if (autoPlayTimeoutRef.current) {
+        clearTimeout(autoPlayTimeoutRef.current);
+      }
+    };
+  }, []);
 
-  const handleDragStart = () => {
-    setIsDragging(true);
+  const handleCardClick = (index: number) => {
+    if (index === currentIndex) return;
+
+    // Pause auto-scrolling
     setIsAutoScrolling(false);
-    setDragDistance(0);
-    controls.stop();
-  };
-
-  const handleDrag = (_: any, info: PanInfo) => {
-    const newDragDistance = dragDistance + info.delta.x;
-    setDragDistance(newDragDistance);
-    const dragThreshold = isMobile ? 60 : 90;
-
-    if (Math.abs(newDragDistance) >= dragThreshold) {
-      const currentAngle = rotation.get();
-      const direction = newDragDistance > 0 ? 1 : -1;
-      const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
-      const targetAngle = snappedAngle + direction * angleStep;
-
-      setCurrentIndex(direction > 0 ? (currentIndex - 1 + faceCount) % faceCount : (currentIndex + 1) % faceCount);
-
-      controls
-        .start({
-          rotateY: targetAngle,
-          transition: { duration: 0.3, ease: "easeOut" },
-        })
-        .then(() => {
-          rotation.set(targetAngle);
-        });
-      setDragDistance(0);
+    if (autoPlayTimeoutRef.current) {
+      clearTimeout(autoPlayTimeoutRef.current);
     }
-  };
+    // Resume auto-scrolling after 5 seconds of inactivity
+    autoPlayTimeoutRef.current = setTimeout(() => {
+      setIsAutoScrolling(true);
+    }, 5000);
 
-  const handleDragEnd = () => {
-    setIsDragging(false);
-    setDragDistance(0);
-    setTimeout(() => setIsAutoScrolling(true), 2500);
+    const currentAngle = rotation.get();
+    const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
+    
+    // Calculate the shortest path step rotation
+    const currentStep = Math.round(-snappedAngle / angleStep);
+    const diff = ((index - (currentStep % faceCount)) + faceCount) % faceCount;
+    
+    let stepsToRotate = diff;
+    if (diff > faceCount / 2) {
+      stepsToRotate = diff - faceCount;
+    }
+
+    const targetStep = currentStep + stepsToRotate;
+    const targetAngle = -targetStep * angleStep;
+
+    animate(rotation, targetAngle, {
+      duration: 0.8,
+      ease: "easeInOut",
+    });
   };
 
   return (
     <div className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 -mt-8 md:-mt-24">
       <div className="flex grow items-center justify-center [perspective:2500px] [transform-style:preserve-3d]">
         <motion.div
-          onPanStart={handleDragStart}
-          onPan={handleDrag}
-          onPanEnd={handleDragEnd}
-          whileTap={{ cursor: "grabbing", scale: 0.98 }}
-          animate={controls}
-          onUpdate={handleUpdate}
           style={{
             transform: transform,
-            rotateY: rotation,
             width: cylinderWidth,
             transformStyle: "preserve-3d",
-            touchAction: "pan-x",
           }}
-          className="flex min-h-[550px] md:min-h-[650px] lg:min-h-[750px] cursor-grab active:cursor-grabbing items-center justify-center [transform-style:preserve-3d]"
+          className="flex min-h-[550px] md:min-h-[650px] lg:min-h-[750px] items-center justify-center [transform-style:preserve-3d]"
         >
           {IMAGES.map((url, i) => {
             const distance = Math.min(
@@ -162,24 +148,26 @@ export default function Carousel3D() {
                 className="group absolute flex h-fit items-center justify-center [backface-visibility:hidden]"
                 style={{
                   width: `${faceWidth}px`,
+                  left: "50%",
+                  marginLeft: `-${faceWidth / 2}px`,
                   transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
                 }}
               >
                 <div
-                  className={`relative w-[440px] md:w-[360px] lg:w-[480px] aspect-[2.2/4] md:aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl transition-all ease-out ${scaleClass} group-hover:border-gold-500/50`}
-                  style={{ transitionDuration: isDragging ? '300ms' : '1000ms' }}
+                  onClick={() => handleCardClick(i)}
+                  className={`relative w-[440px] md:w-[360px] lg:w-[480px] aspect-[2.2/4] md:aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl transition-all ease-out ${scaleClass} group-hover:border-gold-500/50 cursor-pointer`}
+                  style={{ transitionDuration: '1000ms' }}
                 >
-                  <Image
+                  <img
                     src={url}
                     alt={`Carousel image ${i}`}
-                    fill
-                    className="pointer-events-none object-cover select-none"
+                    className="pointer-events-none object-cover select-none w-full h-full absolute inset-0"
                     draggable={false}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none mix-blend-overlay"></div>
                 </div>
               </div>
-            )
+            );
           })}
         </motion.div>
       </div>

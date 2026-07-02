@@ -151,7 +151,7 @@ export default function WhyChooseUsSection() {
   ];
 
   return (
-    <section id="why-us" className="py-24 bg-white text-dark-900 overflow-hidden">
+    <section id="why-us" className="py-18 bg-white text-dark-900 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center max-w-5xl mx-auto mb-16">

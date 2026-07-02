@@ -33,7 +33,12 @@ export default function CtaSection() {
               className="text-lg md:text-xl mb-8 leading-tight tracking-tight" />
             <button onClick={openConsultationModal} className="bg-white/30 text-white pl-6 pr-2 py-2 rounded-full text-sm md:text-base font-normal hover:bg-black transition-all duration-300 flex items-center justify-center gap-4 group shadow-lg">
               Book A Free Consultation
-              <span className="w-10 h-10 rounded-full bg-[#1D1E1C] flex items-center justify-center text-lg group-hover:bg-white group-hover:text-black transition-colors">↗</span>
+              <span className="w-10 h-10 rounded-full bg-[#1D1E1C] flex items-center justify-center group-hover:bg-white group-hover:text-black transition-colors">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                  <line x1="7" y1="17" x2="17" y2="7"></line>
+                  <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+              </span>
             </button>
           </div>
 

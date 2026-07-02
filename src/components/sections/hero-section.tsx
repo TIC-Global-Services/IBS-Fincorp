@@ -12,7 +12,7 @@ export default function HeroSection() {
   const [isFormView, setIsFormView] = useState(false);
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 flex flex-col items-center justify-center overflow-hidden bg-hero-gradient text-center">
+    <section className="relative min-h-screen pt-24 pb-18 flex flex-col items-center justify-center overflow-hidden bg-hero-gradient text-center">
       {/* Dark Overlay when in Form View */}
       <div className={`absolute inset-0 bg-black/60 transition-opacity duration-500 pointer-events-none z-0 ${isFormView ? 'opacity-100' : 'opacity-0'}`} />
 
@@ -50,7 +50,7 @@ export default function HeroSection() {
               </button>
               <button
                 onClick={openConsultationModal}
-                className="bg-white text-dark-900 pl-6 pr-1 md:pl-8 md:pr-2 h-11 md:h-14 rounded-full font-medium hover:bg-gray-200 transition-colors flex-1 md:flex-none flex items-center justify-between md:justify-center gap-1 md:gap-4 group whitespace-nowrap"
+                className="bg-white text-dark-900 pl-8 pr-1 md:pl-8 md:pr-2 h-11 md:h-14 rounded-full font-medium hover:bg-gray-200 transition-colors flex-1 md:flex-none flex items-center justify-between md:justify-center gap-1 md:gap-4 group whitespace-nowrap"
               >
                 <span className="text-xs md:text-sm tracking-tight font-normal truncate">Book A Consultation</span>
                 <span className="bg-[#1D1E1C] text-white w-8 h-8 md:w-11 md:h-11 shrink-0 rounded-full flex items-center justify-center text-xl font-light group-hover:bg-gold-500 transition-colors">

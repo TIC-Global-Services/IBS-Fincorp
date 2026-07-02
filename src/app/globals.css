@@ -39,6 +39,10 @@ body {
   color: var(--foreground);
 }
 
+.container {
+  max-width: 1280px !important;
+}
+
 .bg-gold-gradient {
   background: linear-gradient(180deg, rgba(230, 184, 0, 0.1) 0%, rgba(10, 10, 10, 1) 100%);
 }
@@ -64,13 +68,23 @@ body {
 }
 
 @keyframes scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes scroll-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-50%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .animate-scroll-left {
@@ -82,13 +96,23 @@ body {
 }
 
 @keyframes scroll-up {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
 }
 
 @keyframes scroll-down {
-  0% { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(-50%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .animate-scroll-up {
@@ -107,33 +131,75 @@ body {
 }
 
 @keyframes float-up {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-28px) translateX(8px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-28px) translateX(8px);
+  }
 }
 
 @keyframes float-up-2 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-35px) translateX(-6px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-35px) translateX(-6px);
+  }
 }
 
 @keyframes float-up-3 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(-22px) translateX(12px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(-22px) translateX(12px);
+  }
 }
 
 @keyframes float-down {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(28px) translateX(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(28px) translateX(-8px);
+  }
 }
 
 @keyframes float-down-2 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(35px) translateX(6px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(35px) translateX(6px);
+  }
 }
 
 @keyframes float-down-3 {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  50% { transform: translateY(22px) translateX(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+
+  50% {
+    transform: translateY(22px) translateX(-12px);
+  }
 }
 
 .animate-float-up {
