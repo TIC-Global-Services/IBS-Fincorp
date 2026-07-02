@@ -62,7 +62,7 @@ export default function PartnersSection() {
 
       {/* Scrolling Marquees */}
       <div
-        className="relative w-full flex flex-col gap-6 pb-12"
+        className="relative w-full flex flex-col gap-6 pb-4 md:pb-12"
         style={{
           maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
           WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"

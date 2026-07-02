@@ -45,7 +45,7 @@ export default function FaqSection() {
       <div className="container mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16 lg:gap-8 items-start max-w-7xl">
 
         {/* Left Column - Titles */}
-        <div className="lg:w-5/12 lg:sticky lg:top-32 pt-4">
+        <div className="lg:w-5/12 lg:sticky lg:top-32">
           <TextBlurReveal
             as="h2"
             text="Frequently Asked Questions"

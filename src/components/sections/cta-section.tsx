@@ -4,7 +4,7 @@ import { openConsultationModal } from "@/components/ui/consultation-modal";
 
 export default function CtaSection() {
   return (
-    <section className="py-24 bg-white relative overflow-hidden flex justify-center">
+    <section className="py-18 bg-white relative overflow-hidden flex justify-center">
       <div className="container mx-auto px-4 flex justify-center max-w-[1400px]">
         <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl w-full h-[600px] flex flex-col items-center justify-center text-center p-8">
 
