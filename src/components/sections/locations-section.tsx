@@ -14,7 +14,7 @@ export default function LocationsSection() {
           <TextBlurReveal
             as="p"
             text="Present Where Your Assets And Ambitions Are."
-            className="text-lg"
+            className="text-sm md:text-lg"
             delay={0.3}
           />
         </div>

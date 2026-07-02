@@ -163,7 +163,7 @@ export default function WhyChooseUsSection() {
           <TextBlurReveal
             as="p"
             text="Built For High-Credit Clients Who Expect a Premium Experience"
-            className="text-dark-900 text-sm md:text-lg"
+            className="text-dark-900 text-sm md:text-lg max-w-2xs md:max-w-none mx-auto md:mx-0"
             delay={0.3}
           />
         </div>

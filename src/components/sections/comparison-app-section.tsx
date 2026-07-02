@@ -18,7 +18,7 @@ export default function ComparisonAppSection() {
   const line2Opacity = useTransform(scrollYProgress, [0.66, 0.73], [0, 1]);
 
   return (
-    <section id="comparison" className="py-18 bg-comparison-gradient text-dark-900 overflow-hidden relative">
+    <section id="comparison" className="py-8 bg-comparison-gradient text-dark-900 overflow-hidden relative">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
 
         {/* App Showcase with Floating Cards */}

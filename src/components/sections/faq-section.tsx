@@ -49,12 +49,12 @@ export default function FaqSection() {
           <TextBlurReveal
             as="h2"
             text="Frequently Asked Questions"
-            className="text-3xl md:text-6xl font-medium tracking-tight mb-6 text-dark-900 leading-[1]"
+            className="text-3xl md:text-6xl font-medium tracking-tight mb-6 text-dark-900 leading-[1] text-center md:text-left"
           />
           <TextBlurReveal
             as="p"
             text="Honest Answers For Premium Borrowers."
-            className="text-dark-900 font-medium text-lg tracking-tight" />
+            className="text-dark-900 font-medium text-sm md:text-lg tracking-tight text-center md:text-left" />
         </div>
 
         {/* Right Column - Accordion Container */}
