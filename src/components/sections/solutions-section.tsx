@@ -13,7 +13,12 @@ export default function SolutionsSection() {
             text="Secured Loan Solutions"
             className="text-2xl md:text-5xl font-medium mb-4 tracking-tight"
           />
-          <p className="text-sm md:text-base">Tailored High-Value Loan Solutions For Ambitious Growth</p>
+          <TextBlurReveal
+            as="p"
+            text="Tailored High-Value Loan Solutions For Ambitious Growth"
+            className="text-sm md:text-lg"
+            delay={0.3}
+          />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -24,23 +29,20 @@ export default function SolutionsSection() {
             <div className="absolute inset-0 z-0">
               <Image src="/assets/loanbg.png" alt="Loan Background" fill className="object-cover" />
             </div>
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/40 to-white/10 z-0 pointer-events-none"></div>
-
-            <div className="relative z-10 bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-14 border border-white/50 shadow-lg">
+            <div className="relative z-10 bg-white/50 backdrop-blur-md rounded-2xl p-6 md:p-14 border border-white/50 shadow-lg">
               <div className="flex items-start gap-3 md:gap-4 mb-6 md:mb-8">
                 {/* House Icon */}
                 <AnimatedHomeIcon width={72} height={72} className="w-12 h-12 md:w-[72px] md:h-[72px] shrink-0 mt-1 md:mt-2" color="#1D1E1C" />
                 <div>
-                  <h3 className="text-xl md:text-2xl font-medium mb-1 md:mb-2 leading-tight">Loan Against Property (LAP)</h3>
-                  <p className="text-[#828282] text-xs md:text-sm leading-tight tracking-tight max-w-sm">
+                  <h3 className="text-xl md:text-2xl font-medium mb-1 md:mb-2 leading-tight tracking-tight">Loan Against Property (LAP)</h3>
+                  <p className="text-[#828282] text-xs md:text-sm leading-tight tracking-tight max-w-3xs">
                     Unlock High-Value Funding Strategically With Your Property.
                   </p>
                 </div>
               </div>
 
               <div>
-                <h4 className="font-medium mb-3 md:mb-4 text-base md:text-lg tracking-tight">Funding Solutions Under Loan Against Property</h4>
+                <h4 className="font-medium mb-2 text-base md:text-lg tracking-tight">Funding Solutions Under Loan Against Property</h4>
                 <ul className="grid grid-cols-1 text-[13px] sm:text-sm md:text-base text-[#3C3C3C] list-disc list-inside tracking-tight leading-snug md:leading-tight space-y-1">
                   <li>Term Loan</li>
                   <li>Commercial Property Purchase & Construction</li>

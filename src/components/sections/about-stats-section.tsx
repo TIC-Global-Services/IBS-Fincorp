@@ -8,14 +8,14 @@ export default function AboutStatsSection() {
     <section id="about" className="py-24 bg-white text-dark-900">
       <div className="container mx-auto px-6 md:px-12">
         {/* Section Header */}
-        <div className="text-center max-w-4xl mx-auto mb-20">
+        <div className="text-center max-w-5xl mx-auto mb-20">
           <div className="inline-flex items-center gap-2 border border-gray-200 rounded-full px-4 py-1 mb-8 text-sm md:text-base font-medium tracking-tighter">
             <span className="w-1.5 h-1.5 bg-gold-500 rounded-full"></span> ABOUT US
           </div>
           <TextBlurReveal
             as="h2"
             text="Empowering Businesses & Professionals with Intelligent Funding Solutions that Drive Growth, Liquidity, and Financial Success through Strategic Loan Against Property Solutions."
-            className="text-xl md:text-5xl font-medium leading-tight tracking-tight md:tracking-tighter"
+            className="text-xl md:text-5xl font-medium leading-tighter tracking-tight"
           />
         </div>
 

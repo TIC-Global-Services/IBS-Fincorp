@@ -1,11 +1,22 @@
+import { TextBlurReveal } from "../ui/text-blur-reveal";
+
 export default function LocationsSection() {
   return (
     <section id="locations" className="py-10 bg-white text-dark-900 overflow-hidden">
       <div className="container mx-auto px-4 md:px-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <h2 className="text-4xl md:text-5xl font-medium tracking-tight mb-4">Serving South India's Prime Borrowers</h2>
-          <p className="text-[#828282] text-lg">Present Where Your Assets And Ambitions Are.</p>
+          <TextBlurReveal
+            as="h2"
+            text="Serving South India's Prime Borrowers"
+            className="text-4xl md:text-5xl font-medium tracking-tight mb-4"
+          />
+          <TextBlurReveal
+            as="p"
+            text="Present Where Your Assets And Ambitions Are."
+            className="text-lg"
+            delay={0.3}
+          />
         </div>
 
         {/* Map Container */}
@@ -25,9 +36,8 @@ export default function LocationsSection() {
           <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.05)]"></div>
         </div>
 
-        {/* Location Points */}
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row flex-wrap justify-between gap-8 md:gap-4 px-4">
-
+        {/* Location Points - Desktop View */}
+        <div className="hidden md:flex max-w-5xl mx-auto flex-row justify-between gap-4 px-4">
           <div className="flex gap-4 items-start">
             <div className="w-3 h-3 bg-[#FFBB00] rounded-full mt-1.5 "></div>
             <div>
@@ -59,7 +69,53 @@ export default function LocationsSection() {
               <p className="text-sm">Subject To Eligibility & Lender Coverage</p>
             </div>
           </div>
+        </div>
 
+        {/* Location Points - Mobile Marquee View */}
+        <div
+          className="md:hidden relative w-full flex overflow-hidden py-2"
+          style={{
+            maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
+          }}
+        >
+          <div className="flex w-max animate-scroll-left hover:pause-animation gap-12">
+            {[...Array(2)].map((_, setIdx) => (
+              <div key={setIdx} className="flex gap-12 flex-shrink-0 items-center">
+                <div className="flex gap-3 items-center flex-shrink-0">
+                  <div className="w-2.5 h-2.5 bg-[#FFBB00] rounded-full"></div>
+                  <div className="text-left">
+                    <h4 className="font-medium text-[15px] mb-0.5 leading-tight">Tamil Nadu</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Chennai · Coimbatore · Madurai · Salem</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 items-center flex-shrink-0">
+                  <div className="w-2.5 h-2.5 bg-[#FFBB00] rounded-full"></div>
+                  <div className="text-left">
+                    <h4 className="font-medium text-[15px] mb-0.5 leading-tight">Karnataka</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Bangalore · Mysore</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 items-center flex-shrink-0">
+                  <div className="w-2.5 h-2.5 bg-[#FFBB00] rounded-full"></div>
+                  <div className="text-left">
+                    <h4 className="font-medium text-[15px] mb-0.5 leading-tight">Pondicherry (UT)</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Puducherry</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 items-center flex-shrink-0">
+                  <div className="w-2.5 h-2.5 bg-[#FFBB00] rounded-full"></div>
+                  <div className="text-left">
+                    <h4 className="font-medium text-[15px] mb-0.5 leading-tight">Other Major Indian Cities</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Subject To Eligibility & Lender Coverage</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -13,6 +13,8 @@
 
   --font-sans: var(--font-inter-tight);
   --font-secondary: var(--font-plus-jakarta-sans);
+  --font-manrope: var(--font-manrope);
+  --font-Manrope: var(--font-manrope);
 }
 
 :root {
@@ -156,4 +158,13 @@ body {
 
 .animate-float-down-3 {
   animation: float-down-3 9s ease-in-out infinite;
+}
+
+/* Force pointer cursor on all buttons, links, and clickable inputs */
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  cursor: pointer !important;
 }

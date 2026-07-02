@@ -158,7 +158,13 @@ export default function WhyChooseUsSection() {
           <TextBlurReveal
             as="h2"
             text="Why High-Credit Clients Choose Us"
-            className="text-4xl md:text-5xl font-bold tracking-tight"
+            className="text-4xl md:text-5xl font-medium tracking-tight mb-4"
+          />
+          <TextBlurReveal
+            as="p"
+            text="Built For High-Credit Clients Who Expect a Premium Experience"
+            className="text-dark-900 text-sm md:text-lg"
+            delay={0.3}
           />
         </div>
 

@@ -30,7 +30,7 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex justify-center items-center gap-6 text-sm font-medium">
+          <nav className="hidden lg:flex justify-center items-center gap-12 text-base font-normal">
             <Link href="#about" className="hover:text-gold-400 transition-colors whitespace-nowrap">About</Link>
             <Link href="#solutions" className="hover:text-gold-400 transition-colors whitespace-nowrap">Solutions</Link>
             <Link href="#why-us" className="hover:text-gold-400 transition-colors whitespace-nowrap">Why IBSFINCORP</Link>

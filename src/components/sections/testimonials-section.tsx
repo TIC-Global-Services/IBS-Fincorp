@@ -82,19 +82,21 @@ export default function TestimonialsSection() {
     let ctx = gsap.context(() => {
       const isMobile = window.matchMedia("(max-width: 768px)").matches;
       const staggerDelay = isMobile ? 0.25 : 0.6;
+      const startY = isMobile ? "80vh" : "120vh";
+      const endY = isMobile ? "-80vh" : "-120vh";
 
       const leftCards = gsap.utils.toArray<HTMLElement>('.card-left');
       const rightCards = gsap.utils.toArray<HTMLElement>('.card-right');
 
       // Entry State
-      gsap.set(leftCards, { y: "120vh" });
-      gsap.set(rightCards, { y: "120vh" });
+      gsap.set(leftCards, { y: startY });
+      gsap.set(rightCards, { y: startY });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=3000",
+          end: isMobile ? "+=1200" : "+=3000",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -106,7 +108,7 @@ export default function TestimonialsSection() {
         const delay = i * staggerDelay;
         // Continuous Linear Vertical Scroll
         tl.to(card, {
-          y: "-120vh",
+          y: endY,
           duration: 2, ease: "none"
         }, delay);
       });
@@ -116,7 +118,7 @@ export default function TestimonialsSection() {
         const delay = i * staggerDelay;
         // Continuous Linear Vertical Scroll
         tl.to(card, {
-          y: "-120vh",
+          y: endY,
           duration: 2, ease: "none"
         }, delay);
       });
@@ -127,9 +129,9 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <section id="reviews" className="bg-[#fcfcfc] relative">
+    <section id="reviews" className="bg-white relative">
 
-      <div ref={containerRef} className="h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-[#fcfcfc] perspective-[900px]">
+      <div ref={containerRef} className="h-screen w-full flex flex-col items-center justify-center overflow-hidden perspective-[900px]">
 
         {/* Pinned Title Layer */}
         <div className="absolute inset-0 z-0 flex flex-col items-center justify-center pointer-events-none">
@@ -137,9 +139,14 @@ export default function TestimonialsSection() {
             <TextBlurReveal
               as="h2"
               text="Trusted By Prime Borrowers"
-              className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-dark-900 mb-4"
+              className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-dark-900 mb-4"
             />
-            <p className="text-[#828282] font-medium text-lg">Real Experiences From Clients Across South India.</p>
+            <TextBlurReveal
+              as="p"
+              text="Real Experiences From Clients Across South India."
+              className="text-dark-900 font-normal text-lg"
+              delay={0.3}
+            />
           </div>
         </div>
 

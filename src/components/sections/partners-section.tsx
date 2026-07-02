@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { TextBlurReveal } from "../ui/text-blur-reveal";
 
 export default function PartnersSection() {
   const partners = [
@@ -45,8 +46,17 @@ export default function PartnersSection() {
       <div className="container mx-auto px-6 md:px-12 mb-16">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
-          <p className="text-gold-500 font-bold tracking-widest text-sm mb-4 uppercase">Your Trust, Our Network</p>
-          <h2 className="text-4xl md:text-5xl font-medium tracking-tight">Backed By 50+ Banks & NBFCs</h2>
+          <TextBlurReveal
+            as="h2"
+            text="Backed By 50+ Banks & NBFCs"
+            className="text-4xl md:text-5xl font-medium tracking-tight mb-2"
+          />
+          <TextBlurReveal
+            as="p"
+            text="We match you with the most suitable lender — not just the first available. Strategic funding solutions facilitated through leading RBI-regulated Banks & NBFCs across India."
+            className="text-sm md:text-lg leading-tight tracking-tight font-normal "
+            delay={0.3}
+          />
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter_Tight, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter_Tight, Plus_Jakarta_Sans, Manrope } from "next/font/google";
 import Image from "next/image";
 import "./globals.css";
 import { Preloader } from "@/components/ui/preloader";
@@ -10,6 +10,11 @@ const interTight = Inter_Tight({
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
+  subsets: ["latin"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
 });
 
@@ -26,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${interTight.variable} ${plusJakartaSans.variable} h-full antialiased dark`}
+      className={`${interTight.variable} ${plusJakartaSans.variable} ${manrope.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground overflow-x-hidden">
         <Preloader />

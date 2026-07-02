@@ -88,7 +88,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="border-t border-white/20 pt-6 flex flex-col items-center justify-center text-center text-xs md:text-sm font-normal tracking-tight space-y-1">
+          <div className="border-t border-white/20 pt-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-center text-xs md:text-sm font-normal tracking-tight space-y-1">
             <p>© 2026 IBSFINCORP. All Rights Reserved.</p>
             <p className="text-white/60">Designed & Developed By TIC Global Services</p>
           </div>

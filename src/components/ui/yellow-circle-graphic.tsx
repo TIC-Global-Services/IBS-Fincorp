@@ -22,7 +22,7 @@ export default function YellowCircleGraphic({ className = "" }: { className?: st
       viewBox="0 0 488 492"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: false, margin: "-100px" }}
       preserveAspectRatio="xMidYMid meet"
     >
       <g transform="matrix(1,0,0,1,-310.898942,-171.092289)">

@@ -25,27 +25,27 @@ export default function ComparisonAppSection() {
         <div className="relative flex flex-col md:flex-row items-center justify-center min-h-[700px] mb-32 mt-10">
 
           {/* Left Cards */}
-          <div className="md:absolute left-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mb-12 md:mb-0 md:-translate-y-16">
+          <div className="md:absolute left-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mb-12 md:mb-0 md:-translate-y-30">
             <div className="flex flex-col items-end text-right max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
-                <div className="relative w-8 h-8">
+                <div className="relative w-12 h-12">
                   <Image src="/assets/higherloan.png" alt="Higher Loan Icon" fill className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-2xl mb-2">Higher Loan Amounts</h3>
-              <p className="text-sm text-[#828282] leading-relaxed">
+              <p className="text-sm leading-tight font-Manrope">
                 Access substantial funding based on your property value and repayment capacity.
               </p>
             </div>
 
-            <div className="flex flex-col items-end text-right max-w-[320px] md:-ml-8">
+            <div className="flex flex-col items-end text-right max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
                 <div className="relative w-8 h-8">
                   <Image src="/assets/flexible.png" alt="Flexible Repayment Icon" fill className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-2xl mb-2">Flexible Repayment Tenures</h3>
-              <p className="text-sm text-[#828282] leading-relaxed">
+              <p className="text-sm leading-tigth font-Manrope">
                 Choose customized repayment plans that align with your financial goals and cash flow.
               </p>
             </div>
@@ -62,27 +62,27 @@ export default function ComparisonAppSection() {
           </div>
 
           {/* Right Cards */}
-          <div className="md:absolute right-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mt-12 md:mt-0 md:-translate-y-4">
+          <div className="md:absolute right-0 top-1/4 flex flex-col gap-16 z-20 w-full md:w-auto px-4 mt-12 md:mt-0 md:translate-y-25">
             <div className="flex flex-col items-start text-left max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
-                <div className="relative w-8 h-8">
+                <div className="relative w-10 h-10">
                   <Image src="/assets/doorstep.png" alt="Doorstep Assistance Icon" fill className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-2xl mb-2">Doorstep Assistance</h3>
-              <p className="text-sm text-[#828282] leading-relaxed">
+              <p className="text-sm leading-tight font-Manrope">
                 Document Collection And Coordination Come To You. No Queues, No Branch Visits Required At Any Stage.
               </p>
             </div>
 
-            <div className="flex flex-col items-start text-left max-w-[320px] md:-ml-8">
+            <div className="flex flex-col items-start text-left max-w-[320px] ">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
-                <div className="relative w-8 h-8">
+                <div className="relative w-12 h-12">
                   <Image src="/assets/trust.png" alt="Trusted Partner Icon" fill className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-2xl mb-2">Trusted & Reliable Partner</h3>
-              <p className="text-sm text-[#828282] leading-relaxed">
+              <p className="text-sm leading-tight font-Manrope">
                 Built on transparency, integrity, and long-term financial relationships.
               </p>
             </div>
@@ -95,7 +95,12 @@ export default function ComparisonAppSection() {
             text="What Makes IBSFINCORP Different"
             className="text-3xl md:text-5xl font-medium tracking-tight mb-4"
           />
-          <p className="text-sm md:text-lg">Unlock Exclusive High-Value Benefits</p>
+          <TextBlurReveal
+            as="p"
+            text="Unlock Exclusive High-Value Benefits"
+            className="text-sm md:text-lg"
+            delay={0.3}
+          />
         </div>
         {/* Comparison Table */}
         <div className="max-w-[1200px] mx-auto mb-32 relative z-10 text-dark-900 mt-12">
@@ -110,11 +115,11 @@ export default function ComparisonAppSection() {
             <div className="absolute inset-y-0 right-0 w-[30%] bg-white/20 backdrop-blur-xl border-l border-white/20 rounded-r-3xl pointer-events-none"></div>
 
             {/* Table Content */}
-            <div className="relative z-10 grid grid-cols-[40%_30%_30%] py-4 md:py-6 auto-rows-fr">
+            <div className="relative z-10 grid grid-cols-[40%_30%_30%] py-4 md:py-6">
               {/* Headers */}
               <div className="font-medium text-[11px] sm:text-sm md:text-2xl pl-5 pr-2 md:pl-10 md:pr-4 flex items-center justify-start pb-4">Features</div>
               <div className="font-medium text-[11px] sm:text-sm md:text-2xl px-1 md:px-4 text-center flex items-center justify-center pb-4 leading-tight">
-                <span>Conventional<br className="hidden sm:block" /> Loan Agents</span>
+                <span>Conventional<br className="sm:hidden" /> Loan Agents</span>
               </div>
               <div className="font-medium text-[11px] sm:text-sm md:text-2xl px-1 md:px-4 text-center flex items-center justify-center pb-4">IBSFINCORP</div>
 
@@ -129,11 +134,11 @@ export default function ComparisonAppSection() {
                 "Zero Client Commission",
               ].map((feature, idx) => (
                 <React.Fragment key={idx}>
-                  <div className="pl-5 pr-2 md:pl-10 md:pr-4 font-medium text-[11px] sm:text-xs md:text-lg tracking-tight flex items-center leading-tight py-2 md:py-4">{feature}</div>
-                  <div className={`px-1 md:px-4 text-center text-base md:text-xl flex items-center justify-center font-light py-2 md:py-4 ${idx === 0 || idx === 4 ? "opacity-100" : "opacity-50"}`}>
+                  <div className="pl-5 pr-2 md:pl-10 md:pr-4 font-medium text-[11px] sm:text-xs md:text-lg tracking-tight flex items-center leading-tight py-2 md:py-2.5">{feature}</div>
+                  <div className={`px-1 md:px-4 text-center text-base md:text-xl flex items-center justify-center font-light py-2 md:py-2.5 ${idx === 0 || idx === 4 ? "opacity-100" : "opacity-50"}`}>
                     {idx === 0 || idx === 4 ? <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" /> : "✕"}
                   </div>
-                  <div className="px-1 md:px-4 text-center font-light text-base md:text-xl flex items-center justify-center opacity-100 py-2 md:py-4">
+                  <div className="px-1 md:px-4 text-center font-light text-base md:text-xl flex items-center justify-center opacity-100 py-2 md:py-2.5">
                     <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" />
                   </div>
                 </React.Fragment>
