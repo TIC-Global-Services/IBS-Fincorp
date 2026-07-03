@@ -9,11 +9,10 @@ import {
 } from "framer-motion";
 
 const baseImages = [
-  "/assets/herocarousel/img1.webp",
-  "/assets/herocarousel/img2.webp",
-  "/assets/herocarousel/img3.webp",
-  "/assets/herocarousel/img4.webp",
-  "/assets/herocarousel/img5.webp",
+  "/assets/herocarousel/video1.mp4",
+  "/assets/herocarousel/video2.mp4",
+  "/assets/herocarousel/video3.mp4",
+  "/assets/herocarousel/video4.mp4",
 ];
 
 // Duplicate to make 15 faces (3 sets) for the perfect curve
@@ -158,13 +157,14 @@ export default function Carousel3D() {
                   className={`relative w-[440px] md:w-[360px] lg:w-[480px] aspect-[2.2/4] md:aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl transition-all ease-out ${scaleClass} group-hover:border-gold-500/50 cursor-pointer`}
                   style={{ transitionDuration: '1000ms' }}
                 >
-                  <img
+                  <video
                     src={url}
-                    alt={`Carousel image ${i}`}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                     className="pointer-events-none object-cover select-none w-full h-full absolute inset-0"
-                    draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none mix-blend-overlay"></div>
                 </div>
               </div>
             );

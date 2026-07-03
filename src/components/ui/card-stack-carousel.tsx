@@ -2,18 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-
-const IMAGES = [
-  "/assets/herocarousel/4ffca7dcb1d15d7d75c8c65ed32b64bab3ccdedc.jpg",
-  "/assets/herocarousel/5a445c17a639f5115404c1e79a5edb61a55fdc28.jpg",
-  "/assets/herocarousel/75c2393021a0fcdc2cdf589cac8a0a56d7ae680b.jpg",
-  "/assets/herocarousel/8b7655739679ccc1183e510329c597e67bbca885.jpg",
-  "/assets/herocarousel/b999d3aa82dea1dd1d617f8897eedeea98a330a5.jpg",
+const VIDEOS = [
+  "/assets/herocarousel/video1.mp4",
+  "/assets/herocarousel/video2.mp4",
+  "/assets/herocarousel/video3.mp4",
+  "/assets/herocarousel/video4.mp4",
 ];
 
 export default function CardStackCarousel() {
-  const [cards, setCards] = useState(IMAGES);
+  const [cards, setCards] = useState(VIDEOS);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -65,15 +62,14 @@ export default function CardStackCarousel() {
               }}
               className="absolute inset-0 w-full h-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
             >
-              <Image
+              <video
                 src={src}
-                alt="Secured Loans"
-                fill
-                sizes="(max-width: 768px) 100vw, 320px"
-                className="object-cover"
-                priority={index === 0}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
             </motion.div>
           );
         })}
