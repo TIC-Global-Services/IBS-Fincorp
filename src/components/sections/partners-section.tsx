@@ -2,33 +2,50 @@ import Image from "next/image";
 import { TextBlurReveal } from "../ui/text-blur-reveal";
 
 export default function PartnersSection() {
-  const partners = [
-    { name: "TATA CAPITAL", logo: "/assets/banks/tata.jpg" },
-    { name: "ICICI Bank", logo: "/assets/banks/icici.jpg" },
-    { name: "Kotak", logo: "/assets/banks/kotak.jpg" },
-    { name: "Piramal", logo: "/assets/banks/piramal.jpg" },
-    { name: "Small Finance Bank", logo: "/assets/banks/sf.jpg" },
-    { name: "HDFC BANK" },
-    { name: "AXIS BANK" },
-    { name: "BAJAJ FINSERV" },
-    { name: "Godrej Capital" },
-    { name: "FEDERAL BANK" },
-    { name: "IDFC FIRST Bank" },
-    { name: "YES BANK" },
+  type Partner = { name: string; logo: string };
+
+  const partners: Partner[] = [
+    { name: "ICICI Bank", logo: "/assets/banks/icici.webp" },
+    { name: "Kotak", logo: "/assets/banks/kotak.webp" },
+    { name: "Small Finance Bank", logo: "/assets/banks/sf.webp" },
+    { name: "HDFC BANK", logo: "/assets/banks/hdfc.webp" },
+    { name: "AXIS BANK", logo: "/assets/banks/axisbank.webp" },
+    { name: "Godrej Capital", logo: "/assets/banks/godrej.webp" },
+    { name: "FEDERAL BANK", logo: "/assets/banks/federal.webp" },
+    { name: "IOB Bank", logo: "/assets/banks/iob.webp" },
+    { name: "BOB Bank", logo: "/assets/banks/bob.webp" },
+    { name: "IndusInd Bank", logo: "/assets/banks/indusind.webp" },
+    { name: "Deutsche Bank", logo: "/assets/banks/deutsche.webp" },
+    { name: "Axis Finance", logo: "/assets/banks/axisfin.webp" },
+    { name: "TATA CAPITAL", logo: "/assets/banks/tatacapital.webp" },
+    { name: "Kotak Prime", logo: "/assets/banks/kotak.webp" },
+    { name: "Poonawalla", logo: "/assets/banks/poonawalla.webp" },
+    { name: "Godrej Capital", logo: "/assets/banks/godrej.webp" },
+    { name: "Cholamandalam", logo: "/assets/banks/cholamandalam.webp" },
+    { name: "Aditya Birla Capital", logo: "/assets/banks/adityabirla.webp" },
+    { name: "Bank of Baroda", logo: "/assets/banks/bob.webp" },
+    { name: "IndusInd Bank", logo: "/assets/banks/indusind.webp" },
+    { name: "Deutsche Bank", logo: "/assets/banks/deutsche.webp" },
+    { name: "Axis Finance", logo: "/assets/banks/axisfin.webp" },
+    { name: "TATA CAPITAL", logo: "/assets/banks/tatacapital.webp" },
+    { name: "Kotak Prime", logo: "/assets/banks/kotakprime.webp" },
+    { name: "Piramal", logo: "/assets/banks/piramal.webp" },
+    { name: "SMFG", logo: "/assets/banks/smfg.webp" },
+    { name: "BAJAJ FINSERV", logo: "/assets/banks/bajajfin.webp" },
   ];
 
   const row1 = [...partners];
   const row2 = [...partners].reverse();
   const row3 = [...partners.slice(6), ...partners.slice(0, 6)];
 
-  const renderRow = (items: typeof partners, direction: "left" | "right") => (
+  const renderRow = (items: Partner[], direction: "left" | "right") => (
     <div className={`flex w-max hover:pause-animation ${direction === "left" ? "animate-scroll-left" : "animate-scroll-right"}`}>
       {[...Array(2)].map((_, setIdx) => (
         <div key={setIdx} className="flex gap-6 pr-6">
           {items.map((partner, idx) => (
-            <div key={`${setIdx}-${idx}`} className="bg-white border border-gray-100 rounded-[2rem] p-4 w-24 h-24 md:w-32 md:h-32 flex-shrink-0 flex items-center justify-center shadow-sm relative overflow-hidden">
+            <div key={`${setIdx}-${idx}`} className="bg-white border border-gray-100 rounded-[2rem] p-5 md:p-6 w-24 h-24 md:w-32 md:h-32 flex-shrink-0 flex items-center justify-center shadow-sm relative overflow-hidden">
               {partner.logo ? (
-                <div className="relative w-14 h-14 md:w-20 md:h-20">
+                <div className="relative w-full h-full rounded-xl overflow-hidden">
                   <Image src={partner.logo} alt={partner.name} fill className="object-contain" />
                 </div>
               ) : (

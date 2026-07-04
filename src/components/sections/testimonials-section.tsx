@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Image from "next/image";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 
 if (typeof window !== "undefined") {
@@ -11,43 +12,91 @@ if (typeof window !== "undefined") {
 
 const reviewsLeft = [
   {
-    text: "Outstanding experience! The team at IBSFINCORP understood our business requirements perfectly. We got a ₹50Cr Loan Against Property at an incredibly competitive rate. The process was transparent, and the doorstep service saved us a lot of time.",
+    text: "I had a great experience with IBSFINCORP. Their service truly stands out in the loan market. The team was supportive, responsive, and made the entire loan process smooth and hassle-free. I highly recommend IBSFINCORP for anyone looking for reliable financial guidance.",
+    initial: "G",
+    name: "Giridharan Dhanapal",
+    role: "Giri Enterprises, Chennai",
+    image: "/assets/testimonialphotos/Giri.webp"
+  },
+  {
+    text: "Excellent service overall! The entire team was highly efficient. A special thanks to Mr. Dinesh for coordinating seamlessly with both the bankers and clients. I highly recommend IBSFINCORP for their professional financial consulting services.",
+    initial: "F",
+    name: "Fayaz Ahamed",
+    role: "Gulf Stone Engineering PVT LTD, Chennai",
+    image: "/assets/testimonialphotos/fayaz.webp"
+  },
+  {
+    text: "I had a great experience with IBSFINCORP. I was facing difficulty in getting a loan, but the team supported me throughout the process and made everything simple and hassle-free. Their guidance, quick response, and excellent service made all the difference. I strongly recommend IBSFINCORP.",
     initial: "R",
-    name: "Rajesh K.",
-    role: "Managing Director, Chennai"
+    name: "Raja Raja RRR",
+    role: "RRR Chicken, Chennai",
+    image: "/assets/testimonialphotos/rrrchicken.webp"
   },
   {
-    text: "IBSFINCORP helped us secure working capital for our manufacturing expansion. Their team processed our loan in record time with minimal paperwork. Truly a partner we can rely on for our financial needs.",
+    text: "I struggled to get a Mortgage Loan after facing many rejections from banks. IBSFINCORP handled my case professionally, managed case-wise deviations, increased the LTV, and made the entire process easy. Highly satisfied with their expertise.",
     initial: "V",
-    name: "Venkatesh P.",
-    role: "CEO, Coimbatore"
+    name: "Vinoth Babu",
+    role: "APR Traders, Chennai",
+    image: "/assets/testimonialphotos/VinothBabu.webp"
   },
   {
-    text: "I approached IBSFINCORP for a startup loan when traditional banks turned me down. They believed in my vision and funded my agritech venture. Two years later, we are profitable and growing. Forever grateful.",
-    initial: "P",
-    name: "Priya M.",
-    role: "Founder, Agritech Startup"
+    text: "Excellent support from IBSFINCORP in structuring my loan despite DIP status. Their team guided me throughout the process, helped secure the maximum loan amount, and completed everything smoothly within just 10 days.",
+    initial: "J",
+    name: "Jagadeswari D",
+    role: "ROAM BABY ROAM, Chennai",
+    image: "/assets/testimonialphotos/Jagadheeshwari.webp"
+  },
+  {
+    text: "I am extremely happy with the services provided by IBSFINCORP. They structured my loan in the best possible way, matching my financial needs and securing a higher loan amount than expected.",
+    initial: "E",
+    name: "EVP rajeswari",
+    role: "EVP HOUSING CHENNAI PRIVATE LIMITED, Chennai",
+    image: "/assets/testimonialphotos/Rajeshwari.webp"
   }
 ];
 
 const reviewsRight = [
   {
-    text: "As an NRI, getting a property loan in India seemed daunting, but IBSFINCORP made it seamless. Their dedicated expert guided me through every step, and the loan was sanctioned much faster than I expected. Highly recommended for high-value loans.",
+    text: "Very professional team. Worked efficiently and got things done very fast. Full documents were scrutinized before submission, helping achieve the best possible results with no rejections.",
     initial: "A",
-    name: "Dr. Ananya S.",
-    role: "NRI Investor, Bangalore"
+    name: "Aadesh K Chetty",
+    role: "NATURES DESTINY, Chennai",
+    image: "/assets/testimonialphotos/AdeeshChetty.webp"
   },
   {
-    text: "The refinancing solution they structured for our real estate project saved us nearly 2% in interest. Their financial expertise and personalized approach set them apart from any other NBFC I have worked with.",
+    text: "We approached IBSFINCORP for our Business Improvement Loan. The entire experience was seamless from start to finish. They guided us through every step with professionalism and made the funding process stress-free.",
+    initial: "M",
+    name: "M Arasu",
+    role: "Revaa Tours, Bengaluru",
+    image: "/assets/testimonialphotos/Arasu.webp"
+  },
+  {
+    text: "The team quickly understood our requirement, advised the right bank and the right loan product. They were knowledgeable, professional, and guided us throughout the process.",
     initial: "S",
-    name: "Sundar R.",
-    role: "Real Estate Developer, Hyderabad"
+    name: "Sailaja Karra",
+    role: "Juniper solutions, Bengaluru",
+    image: "/assets/testimonialphotos/Saijala.webp"
   },
   {
-    text: "Their Loan Against Securities product is a game-changer. I got liquidity without selling my portfolio, and the process was completed in just 5 days. The interest rates are the most competitive in the market.",
-    initial: "K",
-    name: "Karthik N.",
-    role: "Portfolio Manager, Bangalore"
+    text: "Very good service and guidance provided. The enthusiastic team reduced our EMI burden and helped us save approximately ₹9 lakh per annum by reducing our interest cost.",
+    initial: "S",
+    name: "Sri Viveka Vidyalaya 07",
+    role: "Sri Viveka Vidyalaya Educational Trust, Bengaluru",
+    image: "/assets/testimonialphotos/SriVivekaVidyalaya.webp"
+  },
+  {
+    text: "IBSFINCORP, in my experience, are reliable, flexible and committed to clients. Their expertise in liaising with different financial institutions and banks to secure loans was exemplary. They were transparent, responsive and delivered exactly what they promised.",
+    initial: "R",
+    name: "Ravi Kumar",
+    role: "Hotel Jade Garden, Bengaluru",
+    image: "/assets/testimonialphotos/jade.webp"
+  },
+  {
+    text: "I was trying to get a Loan Against Property but couldn't get the required funds. After contacting IBSFINCORP, my case was handled smoothly and my loan was sanctioned within the promised timeline.",
+    initial: "C",
+    name: "Chandrakanth Krishna",
+    role: "Punarva Agrotech, Bengaluru",
+    image: "/assets/testimonialphotos/punarva6.webp"
   }
 ];
 
@@ -63,9 +112,15 @@ const ReviewCard = ({ review }: { review: any }) => (
         "{review.text}"
       </p>
       <div className="flex items-center gap-2 md:gap-4">
-        <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-[#1D1E1C] flex items-center justify-center text-gold-500 font-bold text-xs md:text-lg shrink-0">
-          {review.initial}
-        </div>
+        {review.image ? (
+          <div className="relative w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden shrink-0 border border-white/20">
+            <Image src={review.image} alt={review.name} fill className="object-cover" />
+          </div>
+        ) : (
+          <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-[#1D1E1C] flex items-center justify-center text-gold-500 font-bold text-xs md:text-lg shrink-0">
+            {review.initial}
+          </div>
+        )}
         <div className="min-w-0">
           <h4 className="font-bold text-dark-900 text-[10px] md:text-sm truncate">{review.name}</h4>
           <p className="text-[8px] md:text-xs text-[#828282] truncate">{review.role}</p>
@@ -96,7 +151,7 @@ export default function TestimonialsSection() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: isMobile ? "+=1200" : "+=3000",
+          end: isMobile ? "+=2000" : "+=5000",
           scrub: 1,
           pin: true,
           anticipatePin: 1,

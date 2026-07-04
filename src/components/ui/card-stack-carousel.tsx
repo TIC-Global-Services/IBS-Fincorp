@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 const VIDEOS = [
   "/assets/herocarousel/video1.mp4",
@@ -11,6 +11,7 @@ const VIDEOS = [
 
 export default function CardStackCarousel() {
   const [cards, setCards] = useState(VIDEOS);
+  const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -18,9 +19,19 @@ export default function CardStackCarousel() {
         const [first, ...rest] = prev;
         return [...rest, first];
       });
+      videoRefs.current.forEach((video) => { video.muted = true; });
     }, 3000);
     return () => clearInterval(timer);
   }, []);
+
+  const handleFrontClick = () => {
+    const frontSrc = cards[0];
+    const video = videoRefs.current.get(frontSrc);
+    if (video) {
+      video.muted = false;
+      video.play().catch(() => {});
+    }
+  };
 
   return (
     <div className="relative w-[280px] h-[380px] sm:w-[320px] sm:h-[450px]">
@@ -61,14 +72,16 @@ export default function CardStackCarousel() {
                 damping: 28,
               }}
               className="absolute inset-0 w-full h-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+              onClick={isFront ? handleFrontClick : undefined}
             >
               <video
+                ref={(el) => { if (el) videoRefs.current.set(src, el); else videoRefs.current.delete(src); }}
                 src={src}
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               />
             </motion.div>
           );

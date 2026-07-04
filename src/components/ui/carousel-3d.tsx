@@ -22,7 +22,9 @@ export default function Carousel3D() {
   const [cylinderWidth, setCylinderWidth] = useState<number>(2400);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState<boolean>(true);
+  const [activeAudioIndex, setActiveAudioIndex] = useState<number | null>(null);
   const autoPlayTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>(new Array(IMAGES.length).fill(null));
 
   useEffect(() => {
     const updateDeviceSettings = () => {
@@ -85,19 +87,27 @@ export default function Carousel3D() {
     };
   }, []);
 
-  const handleCardClick = (index: number) => {
-    if (index === currentIndex) return;
+  // Sync mute/unmute of video elements based on activeAudioIndex
+  useEffect(() => {
+    videoRefs.current.forEach((video, i) => {
+      if (!video) return;
+      if (i === activeAudioIndex) {
+        video.muted = false;
+        video.play().catch(() => {});
+      } else {
+        video.muted = true;
+      }
+    });
+  }, [activeAudioIndex]);
 
-    // Pause auto-scrolling
-    setIsAutoScrolling(false);
-    if (autoPlayTimeoutRef.current) {
-      clearTimeout(autoPlayTimeoutRef.current);
+  // Force mute when auto-scrolling is active
+  useEffect(() => {
+    if (isAutoScrolling) {
+      setActiveAudioIndex(null);
     }
-    // Resume auto-scrolling after 5 seconds of inactivity
-    autoPlayTimeoutRef.current = setTimeout(() => {
-      setIsAutoScrolling(true);
-    }, 5000);
+  }, [isAutoScrolling]);
 
+  const handleCardClick = (index: number) => {
     const currentAngle = rotation.get();
     const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
     
@@ -113,10 +123,38 @@ export default function Carousel3D() {
     const targetStep = currentStep + stepsToRotate;
     const targetAngle = -targetStep * angleStep;
 
-    animate(rotation, targetAngle, {
-      duration: 0.8,
-      ease: "easeInOut",
-    });
+    if (index === currentIndex) {
+      // Toggle audio if the card is already centered
+      if (activeAudioIndex === index) {
+        setActiveAudioIndex(null);
+        if (autoPlayTimeoutRef.current) {
+          clearTimeout(autoPlayTimeoutRef.current);
+        }
+        autoPlayTimeoutRef.current = setTimeout(() => {
+          setIsAutoScrolling(true);
+        }, 1000);
+      } else {
+        setIsAutoScrolling(false);
+        if (autoPlayTimeoutRef.current) {
+          clearTimeout(autoPlayTimeoutRef.current);
+        }
+        setActiveAudioIndex(index);
+      }
+    } else {
+      // Rotate the card to the middle first, then unmute it
+      setIsAutoScrolling(false);
+      if (autoPlayTimeoutRef.current) {
+        clearTimeout(autoPlayTimeoutRef.current);
+      }
+      
+      const controls = animate(rotation, targetAngle, {
+        duration: 0.8,
+        ease: "easeInOut",
+      });
+      controls.then(() => {
+        setActiveAudioIndex(index);
+      });
+    }
   };
 
   return (
@@ -136,10 +174,20 @@ export default function Carousel3D() {
               faceCount - Math.abs(i - currentIndex)
             );
 
-            let scaleClass = 'scale-[0.75] z-0';
-            if (distance === 0) scaleClass = 'scale-[1.05] md:scale-[1.15] z-30';
-            else if (distance === 1) scaleClass = 'scale-[0.95] z-20';
-            else if (distance === 2) scaleClass = 'scale-[0.85] z-10';
+            let scaleVal = 0.75;
+            let zIndexVal = 0;
+            if (distance === 0) {
+              scaleVal = 1.15;
+              zIndexVal = 30;
+            } else if (distance === 1) {
+              scaleVal = 0.95;
+              zIndexVal = 20;
+            } else if (distance === 2) {
+              scaleVal = 0.85;
+              zIndexVal = 10;
+            }
+
+            const isActiveCard = distance === 0;
 
             return (
               <div
@@ -150,14 +198,17 @@ export default function Carousel3D() {
                   left: "50%",
                   marginLeft: `-${faceWidth / 2}px`,
                   transform: `rotateY(${(360 / faceCount) * i}deg) translateZ(${radius}px)`,
+                  zIndex: zIndexVal,
                 }}
               >
-                <div
+                <motion.div
                   onClick={() => handleCardClick(i)}
-                  className={`relative w-[440px] md:w-[360px] lg:w-[480px] aspect-[2.2/4] md:aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl transition-all ease-out ${scaleClass} group-hover:border-gold-500/50 cursor-pointer`}
-                  style={{ transitionDuration: '1000ms' }}
+                  animate={{ scale: scaleVal }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-[440px] md:w-[360px] lg:w-[480px] aspect-[2.2/4] md:aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl group-hover:border-gold-500/50 cursor-pointer"
                 >
                   <video
+                    ref={(el) => { videoRefs.current[i] = el; }}
                     src={url}
                     autoPlay
                     muted
@@ -165,7 +216,25 @@ export default function Carousel3D() {
                     playsInline
                     className="pointer-events-none object-cover select-none w-full h-full absolute inset-0"
                   />
-                </div>
+
+                  {/* Speaker Overlay Indicator for the active centered card */}
+                  {isActiveCard && (
+                    <div className="absolute bottom-6 right-6 z-40 w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center text-white border border-white/10 shadow-lg pointer-events-none">
+                      {activeAudioIndex === i ? (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                      ) : (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                          <line x1="23" y1="9" x2="17" y2="15"></line>
+                          <line x1="17" y1="9" x2="23" y2="15"></line>
+                        </svg>
+                      )}
+                    </div>
+                  )}
+                </motion.div>
               </div>
             );
           })}
