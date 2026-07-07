@@ -4,6 +4,53 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 
+const AnimatedTick = ({ idx }: { idx: number }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className="w-4 h-4 md:w-[18px] md:h-[18px]"
+    fill="none"
+    stroke="#000000ff"
+    strokeWidth={3}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <motion.path
+      d="M20 6L9 17L4 12"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: false, margin: "-50px" }}
+      transition={{ duration: 0.4, delay: idx * 0.08, ease: "easeOut" }}
+    />
+  </svg>
+);
+
+const AnimatedCross = ({ idx }: { idx: number }) => (
+  <svg
+    viewBox="0 0 24 24"
+    className="w-4 h-4 md:w-[18px] md:h-[18px]"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={3}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <motion.path
+      d="M18 6L6 18"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: false, margin: "-50px" }}
+      transition={{ duration: 0.3, delay: idx * 0.08, ease: "easeOut" }}
+    />
+    <motion.path
+      d="M6 6l12 12"
+      initial={{ pathLength: 0 }}
+      whileInView={{ pathLength: 1 }}
+      viewport={{ once: false, margin: "-50px" }}
+      transition={{ duration: 0.3, delay: idx * 0.08 + 0.12, ease: "easeOut" }}
+    />
+  </svg>
+);
+
 export default function ComparisonAppSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -136,10 +183,14 @@ export default function ComparisonAppSection() {
                 <React.Fragment key={idx}>
                   <div className="pl-5 pr-2 md:pl-10 md:pr-4 font-medium text-[11px] sm:text-xs md:text-lg tracking-tight flex items-center leading-tight py-2 md:py-2.5">{feature}</div>
                   <div className={`px-1 md:px-4 text-center text-base md:text-xl flex items-center justify-center font-light py-2 md:py-2.5 ${idx === 0 || idx === 4 ? "opacity-100" : "opacity-50"}`}>
-                    {idx === 0 || idx === 4 ? <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" /> : "✕"}
+                    {idx === 0 || idx === 4 ? (
+                      <AnimatedTick idx={idx} />
+                    ) : (
+                      <AnimatedCross idx={idx} />
+                    )}
                   </div>
                   <div className="px-1 md:px-4 text-center font-light text-base md:text-xl flex items-center justify-center opacity-100 py-2 md:py-2.5">
-                    <Image src="/assets/tick.svg" alt="Tick" width={18} height={18} className="w-4 h-4 md:w-[18px] md:h-[18px]" />
+                    <AnimatedTick idx={idx} />
                   </div>
                 </React.Fragment>
               ))}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 import YellowCircleGraphic from "@/components/ui/yellow-circle-graphic";
+import HouseOutlineGraphic from "@/components/ui/house-outline-graphic";
 import { CircularProgress } from "@/components/ui/circular-progress";
 
 export default function AboutStatsSection() {
@@ -27,7 +28,7 @@ export default function AboutStatsSection() {
             {/* Image Part Card */}
             <div className="bg-[#1D1E1C] rounded-[16px] flex-1 relative flex items-center justify-center p-4">
               <div className="relative w-full h-full max-h-[250px] flex items-center justify-center">
-                <YellowCircleGraphic className="w-full h-full max-h-[250px]" />
+                <YellowCircleGraphic className="w-[85%] h-[85%] max-h-[210px]" />
               </div>
             </div>
 
@@ -53,8 +54,8 @@ export default function AboutStatsSection() {
                   <h3 className="text-5xl font-medium">50<span className="text-4xl">+</span></h3>
                   <p className="text-2xl font-normal max-w-[150px] leading-tight">Bank & NBFC Partners</p>
                 </div>
-                <div className="flex-1 flex items-center justify-center mt-4">
-                  <Image src="/assets/Vector.png" alt="Partners Icon" width={100} height={100} className="object-contain" />
+                <div className="flex-1 flex items-center justify-center mt-4 relative w-full h-full max-h-[160px]">
+                  <HouseOutlineGraphic className="w-[70%] h-[70%] max-h-[125px]" />
                 </div>
               </div>
             </div>
@@ -74,7 +75,7 @@ export default function AboutStatsSection() {
             {/* Image Part Card */}
             <div className="bg-white rounded-[16px] flex-1 relative flex flex-col items-center justify-center p-4">
               <div className="relative w-40 h-40 mb-4">
-                <CircularProgress value={98} size={160} strokeWidth={12}>
+                <CircularProgress value={78} size={160} strokeWidth={12}>
                   <span className="text-3xl font-bold text-dark-900">4.9/5</span>
                 </CircularProgress>
               </div>

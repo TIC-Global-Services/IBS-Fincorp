@@ -72,7 +72,7 @@ const SwipeCard = ({ reason, isTop, index, totalCards, setCards, originalIndex }
         </p>
       </div>
 
-      <div className="absolute bottom-0 right-0 w-full h-[55%] mt-auto pointer-events-none">
+      <div className="absolute bottom-6 left-0 right-0 w-full h-[52%] mt-auto pointer-events-none">
         <Image src={reason.image} alt={reason.title} fill className="object-contain object-bottom" />
       </div>
     </motion.div>
@@ -183,7 +183,7 @@ export default function WhyChooseUsSection() {
                 </p>
               </div>
 
-              <div className="absolute bottom-0 right-0 w-full h-[55%] mt-auto transition-transform duration-500 group-hover:scale-105">
+              <div className="absolute bottom-6 left-0 right-0 w-full h-[52%] mt-auto transition-transform duration-500 group-hover:scale-105">
                 <Image src={reason.image} alt={reason.title} fill className="object-contain object-bottom" />
               </div>
             </div>

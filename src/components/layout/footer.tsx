@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 export default function Footer() {
@@ -90,7 +92,7 @@ export default function Footer() {
 
           <div className="border-t border-white/20 pt-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-center text-xs md:text-sm font-normal tracking-tight space-y-1">
             <p>© 2026 IBSFINCORP. All Rights Reserved.</p>
-            <p className="text-white/60">Designed & Developed By TIC Global Services</p>
+            <p className="text-white/60" onClick={() => window.open('https://www.theinternetcompany.one', '_blank', 'noopener,noreferrer')} style={{ cursor: 'pointer' }}>Designed & Developed By TIC Global Services</p>
           </div>
           <div className="border-t border-white/20 mt-6 pt-6">
             <p className="text-[10px] md:text-xs text-center max-w-6xl leading-relaxed tracking-tight font-normal text-white/50">

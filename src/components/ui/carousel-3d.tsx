@@ -157,8 +157,15 @@ export default function Carousel3D() {
     }
   };
 
+  const handleVideoEnded = (index: number) => {
+    if (index === activeAudioIndex) {
+      const nextIndex = (index + 1) % faceCount;
+      handleCardClick(nextIndex);
+    }
+  };
+
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 -mt-8 md:-mt-24">
+    <div className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 mt-8 md:-mt-24">
       <div className="flex grow items-center justify-center [perspective:2500px] [transform-style:preserve-3d]">
         <motion.div
           style={{
@@ -205,15 +212,16 @@ export default function Carousel3D() {
                   onClick={() => handleCardClick(i)}
                   animate={{ scale: scaleVal }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-[440px] md:w-[360px] lg:w-[480px] aspect-[2.2/4] md:aspect-[3/4] rounded-[32px] overflow-hidden shadow-2xl group-hover:border-gold-500/50 cursor-pointer"
+                  className="relative w-[280px] sm:w-[340px] md:w-[360px] lg:w-[480px] aspect-[2.5/4] md:aspect-[3/4] rounded-[32px] overflow-hidden group-hover:border-gold-500/50 cursor-pointer"
                 >
                   <video
                     ref={(el) => { videoRefs.current[i] = el; }}
                     src={url}
                     autoPlay
                     muted
-                    loop
+                    loop={activeAudioIndex !== i}
                     playsInline
+                    onEnded={() => handleVideoEnded(i)}
                     className="pointer-events-none object-cover select-none w-full h-full absolute inset-0"
                   />
 

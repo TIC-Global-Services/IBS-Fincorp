@@ -64,7 +64,7 @@ export default function SolutionsSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px" }}
           className="grid grid-cols-1 lg:grid-cols-2 gap-6"
         >
           {/* Left Column - Large Card */}
