@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 
@@ -53,6 +53,21 @@ const AnimatedCross = ({ idx }: { idx: number }) => (
 
 export default function ComparisonAppSection() {
   const timelineRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleMute = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    if (videoRef.current) {
+      const nextMuted = !videoRef.current.muted;
+      videoRef.current.muted = nextMuted;
+      setIsMuted(nextMuted);
+      if (videoRef.current.paused) {
+        videoRef.current.play().catch(err => console.log("Play failed: ", err));
+      }
+    }
+  };
+
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start 80%", "end 50%"]
@@ -103,8 +118,42 @@ export default function ComparisonAppSection() {
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gold-500/20 blur-[100px] rounded-full"></div>
 
-            <div className="w-[300px] h-[600px] relative z-10 drop-shadow-2xl hover:scale-105 transition-transform duration-500">
-              <Image src="/assets/mobile.png" alt="Mobile App Mockup" fill className="object-contain" />
+            {/* Video container with sound toggle */}
+            <div 
+              onClick={() => toggleMute()}
+              className="w-[280px] h-[570px] relative z-10 rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-500 flex items-center justify-center cursor-pointer group"
+            >
+              <video
+                ref={videoRef}
+                src="/assets/mobv-processed.mp4"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                className="w-full h-full object-cover relative z-10"
+                style={{ filter: "url(#chroma-key-green)" }}
+              />
+
+              {/* Sound status indicator overlay */}
+              <button
+                onClick={(e) => toggleMute(e)}
+                className="absolute bottom-4 right-4 z-30 p-2.5 bg-black/60 hover:bg-black/80 hover:scale-110 text-white rounded-full transition-all backdrop-blur-xs flex items-center justify-center border border-white/10 shadow-lg"
+                aria-label={isMuted ? "Unmute video" : "Mute video"}
+              >
+                {isMuted ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="22" y1="9" x2="16" y2="15"></line>
+                    <line x1="16" y1="9" x2="22" y2="15"></line>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                  </svg>
+                )}
+              </button>
             </div>
           </div>
 
@@ -299,6 +348,21 @@ export default function ComparisonAppSection() {
         </div>
 
       </div>
+
+      {/* SVG Chroma Key Filter for Green Screen */}
+      <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
+        <defs>
+          <filter id="chroma-key-green" colorInterpolationFilters="sRGB">
+            <feColorMatrix
+              type="matrix"
+              values="1 0 0 0 0
+                      0 1 0 0 0
+                      0 0 1 0 0
+                      2.2 -4.0 2.2 1.0 -0.05"
+            />
+          </filter>
+        </defs>
+      </svg>
     </section>
   );
 }
