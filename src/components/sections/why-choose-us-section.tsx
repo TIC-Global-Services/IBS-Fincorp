@@ -1,9 +1,15 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Image from "next/image";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 import { motion, useMotionValue, useTransform, animate, PanInfo } from "framer-motion";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const SwipeCard = ({ reason, isTop, index, totalCards, setCards, originalIndex }: any) => {
   const x = useMotionValue(0);
@@ -117,6 +123,7 @@ const MobileSwipeDeck = ({ reasons }: { reasons: any[] }) => {
 };
 
 export default function WhyChooseUsSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const reasons = [
     {
       title: "End-To-End Support",
@@ -150,6 +157,36 @@ export default function WhyChooseUsSection() {
     }
   ];
 
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>(".why-card");
+
+      cards.forEach((card, idx) => {
+        const isLeft = idx % 2 === 0;
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            x: isLeft ? -80 : 80
+          },
+          {
+            opacity: 1,
+            x: 0,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: isLeft ? "top 98%" : "top 94%", // trigger immediately near the bottom of viewport
+              end: isLeft ? "top 83%" : "top 79%",   // completes within 15% viewport scroll
+              scrub: 0.3, // snaps quickly to the scroll position
+            }
+          }
+        );
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="why-us" className="py-18 bg-white text-dark-900 overflow-hidden">
       <div className="container mx-auto px-6 md:px-12">
@@ -172,9 +209,9 @@ export default function WhyChooseUsSection() {
         <MobileSwipeDeck reasons={reasons} />
 
         {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-2 gap-8 max-w-6xl mx-auto pb-12">
+        <div ref={containerRef} className="hidden md:grid md:grid-cols-2 gap-8 max-w-6xl mx-auto pb-12">
           {reasons.map((reason, idx) => (
-            <div key={idx} className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col aspect-[6/5] relative overflow-hidden">
+            <div key={idx} className="why-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col aspect-[6/5] relative overflow-hidden">
               <div className="relative z-10">
                 <div className="text-5xl font-semibold text-dark-900 mb-4 group-hover:text-gold-500 transition-colors duration-300">0{idx + 1}</div>
                 <h3 className="text-3xl font-semibold mb-2">{reason.title}</h3>
