@@ -101,7 +101,7 @@ const reviewsRight = [
 ];
 
 const ReviewCard = ({ review }: { review: any }) => (
-  <div className="relative overflow-hidden bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl lg:rounded-[2rem] p-4 lg:p-8 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] w-[165px] sm:w-[220px] md:w-[300px] lg:w-full lg:max-w-[480px] pointer-events-auto">
+  <div className="relative overflow-hidden bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl lg:rounded-[2rem] p-4 lg:p-8 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] w-[270px] sm:w-[360px] md:w-[460px] lg:w-full lg:max-w-[480px] pointer-events-auto">
 
     {/* Top Left Dark Vignette */}
     <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-transparent pointer-events-none opacity-60"></div>
@@ -136,9 +136,9 @@ export default function TestimonialsSection() {
   useEffect(() => {
     let ctx = gsap.context(() => {
       const isMobile = window.matchMedia("(max-width: 1024px)").matches;
-      const staggerDelay = isMobile ? 0.4 : 0.6;
-      const startY = isMobile ? "80vh" : "120vh";
-      const endY = isMobile ? "-80vh" : "-120vh";
+      const staggerDelay = isMobile ? 0.6 : 0.65;
+      const startY = isMobile ? "90vh" : "120vh";
+      const endY = isMobile ? "-90vh" : "-120vh";
 
       const leftCards = gsap.utils.toArray<HTMLElement>('.card-left');
       const rightCards = gsap.utils.toArray<HTMLElement>('.card-right');
@@ -151,7 +151,7 @@ export default function TestimonialsSection() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: isMobile ? "+=2000" : "+=5000",
+          end: isMobile ? "+=3500" : "+=5000",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -170,7 +170,8 @@ export default function TestimonialsSection() {
 
       // Right Column Animation (Pairs exactly with left)
       rightCards.forEach((card, i) => {
-        const delay = i * staggerDelay;
+        // Offset right cards on mobile/tablet to sit exactly halfway between left cards
+        const delay = i * staggerDelay + (isMobile ? staggerDelay / 2 : 0);
         // Continuous Linear Vertical Scroll
         tl.to(card, {
           y: endY,
@@ -209,18 +210,18 @@ export default function TestimonialsSection() {
         <div className="absolute inset-0 z-10 w-full max-w-6xl mx-auto flex justify-between h-full pointer-events-none px-2 md:px-0">
 
           {/* Left Column Area */}
-          <div className="flex w-1/2 relative h-full">
+          <div className="w-full lg:w-1/2 absolute inset-y-0 left-0 h-full">
             {reviewsLeft.map((review, i) => (
-              <div key={`left-${i}`} className="card-left absolute inset-0 flex items-center justify-end pr-2 md:pr-16 lg:pr-24 -mt-[10vh] lg:-mt-[25vh] pointer-events-none">
+              <div key={`left-${i}`} className="card-left absolute inset-0 flex items-center justify-start lg:justify-end pl-4 sm:pl-8 lg:pl-0 lg:pr-24 lg:-mt-[25vh] pointer-events-none">
                 <ReviewCard review={review} />
               </div>
             ))}
           </div>
 
           {/* Right Column Area */}
-          <div className="flex w-1/2 relative h-full">
+          <div className="w-full lg:w-1/2 absolute inset-y-0 right-0 h-full">
             {reviewsRight.map((review, i) => (
-              <div key={`right-${i}`} className="card-right absolute inset-0 flex items-center justify-start pl-2 md:pl-16 lg:pl-24 mt-[10vh] lg:mt-[25vh] pointer-events-none">
+              <div key={`right-${i}`} className="card-right absolute inset-0 flex items-center justify-end lg:justify-start pr-4 sm:pr-8 lg:pr-0 lg:pl-24 lg:mt-[25vh] pointer-events-none">
                 <ReviewCard review={review} />
               </div>
             ))}

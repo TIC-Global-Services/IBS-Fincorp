@@ -3,6 +3,30 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: [0.16, 1, 0.3, 1] as const, // easeOutExpo
+    },
+  },
+};
 
 export default function Header() {
   const [isVisible, setIsVisible] = useState(true);
@@ -43,7 +67,11 @@ export default function Header() {
           {/* Desktop CTA & Mobile Hamburger */}
           <div className="flex justify-end items-center">
             <button className="hidden lg:flex bg-white text-[#1D1E1C] px-6 py-2 rounded-full font-medium text-sm hover:bg-gold-400 transition-colors items-center gap-2 whitespace-nowrap shadow-md">
-              Contact Us <span className="font-bold">↗</span>
+              Contact Us
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
             </button>
 
             {/* Hamburger Icon */}
@@ -63,30 +91,66 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 bg-[#0F0F0F] z-[60] flex flex-col items-center justify-center gap-8 lg:hidden transition-transform duration-300 ${isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-        <button
-          className="absolute top-6 right-6 text-white p-2"
-          onClick={() => setIsMobileMenuOpen(false)}
-          aria-label="Close Menu"
-        >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed inset-0 bg-[#0F0F0F] z-[60] flex flex-col items-center justify-center gap-8 lg:hidden"
+          >
+            <button
+              className="absolute top-6 right-6 text-white p-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close Menu"
+            >
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
 
-        <Link href="#about" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">About</Link>
-        <Link href="#solutions" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Solutions</Link>
-        <Link href="#why-us" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Why IBSFINCORP</Link>
-        <Link href="#partners" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Partners</Link>
-        <Link href="#reviews" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Reviews</Link>
-        <Link href="#locations" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Locations</Link>
-        <Link href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">FAQ</Link>
-
-        <button className="mt-4 bg-white text-[#1D1E1C] px-8 py-3 rounded-full font-medium hover:bg-gold-400 transition-colors flex items-center gap-2 shadow-md">
-          Contact Us <span className="font-bold">↗</span>
-        </button>
-      </div>
+            <motion.nav 
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="flex flex-col items-center gap-6 text-center"
+            >
+              <motion.div variants={itemVariants}>
+                <Link href="#about" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">About</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#solutions" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Solutions</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#why-us" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Why IBSFINCORP</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#partners" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Partners</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#reviews" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Reviews</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#locations" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">Locations</Link>
+              </motion.div>
+              <motion.div variants={itemVariants}>
+                <Link href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">FAQ</Link>
+              </motion.div>
+              <motion.div variants={itemVariants} className="mt-2">
+                <button className="bg-white text-[#1D1E1C] px-8 py-3 rounded-full font-medium hover:bg-gold-400 transition-colors flex items-center gap-2 shadow-md">
+                  Contact Us
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </button>
+              </motion.div>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
