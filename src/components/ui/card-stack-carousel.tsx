@@ -10,31 +10,80 @@ const VIDEOS = [
 ];
 
 export default function CardStackCarousel() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [cards, setCards] = useState(VIDEOS);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCards((prev) => {
-        const [first, ...rest] = prev;
-        return [...rest, first];
-      });
-      videoRefs.current.forEach((video) => { video.muted = true; });
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const rotateCarousel = () => {
+    setCards((prev) => {
+      const [first, ...rest] = prev;
+      return [...rest, first];
+    });
+    setIsMuted(true);
+  };
+
+  const handleVideoEnded = () => {
+    rotateCarousel();
+  };
 
   const handleFrontClick = () => {
     const frontSrc = cards[0];
     const video = videoRefs.current.get(frontSrc);
     if (video) {
       video.muted = false;
+      video.currentTime = 0;
       video.play().catch(() => {});
+      setIsMuted(false);
     }
   };
 
+  useEffect(() => {
+    const frontSrc = cards[0];
+    const video = videoRefs.current.get(frontSrc);
+    if (video) {
+      video.currentTime = 0;
+      video.muted = isMuted;
+      video.play().catch(() => {});
+    }
+  }, [cards, isMuted]);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoRefs.current.forEach((video, src) => {
+            if (src === cards[0]) {
+              video.muted = isMuted;
+              video.play().catch(() => {});
+            } else {
+              video.muted = true;
+              video.play().catch(() => {});
+            }
+          });
+        } else {
+          videoRefs.current.forEach((video) => {
+            video.pause();
+            video.muted = true;
+          });
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.unobserve(container);
+    };
+  }, [cards, isMuted]);
+
   return (
-    <div className="relative w-[280px] h-[380px] sm:w-[320px] sm:h-[450px]">
+    <div ref={containerRef} className="relative w-[280px] h-[380px] sm:w-[320px] sm:h-[450px]">
       <AnimatePresence mode="popLayout">
         {cards.slice(0, 3).map((src, index) => {
           const isFront = index === 0;
@@ -78,9 +127,10 @@ export default function CardStackCarousel() {
                 ref={(el) => { if (el) videoRefs.current.set(src, el); else videoRefs.current.delete(src); }}
                 src={src}
                 autoPlay
-                muted
-                loop
+                muted={!isFront || isMuted}
+                loop={!isFront}
                 playsInline
+                onEnded={isFront ? handleVideoEnded : undefined}
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               />
             </motion.div>

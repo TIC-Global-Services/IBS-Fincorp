@@ -19,6 +19,7 @@ const baseImages = [
 const IMAGES = [...baseImages, ...baseImages, ...baseImages];
 
 export default function Carousel3D() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [cylinderWidth, setCylinderWidth] = useState<number>(2400);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isAutoScrolling, setIsAutoScrolling] = useState<boolean>(true);
@@ -65,21 +66,6 @@ export default function Carousel3D() {
   }, [rotation, angleStep, faceCount]);
 
   useEffect(() => {
-    if (!isAutoScrolling) return;
-    const interval = setInterval(() => {
-      const currentAngle = rotation.get();
-      const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
-      const targetAngle = snappedAngle - angleStep;
-
-      animate(rotation, targetAngle, {
-        duration: 1,
-        ease: "easeInOut",
-      });
-    }, 2500);
-    return () => clearInterval(interval);
-  }, [isAutoScrolling, rotation, faceCount, angleStep]);
-
-  useEffect(() => {
     return () => {
       if (autoPlayTimeoutRef.current) {
         clearTimeout(autoPlayTimeoutRef.current);
@@ -87,12 +73,22 @@ export default function Carousel3D() {
     };
   }, []);
 
+  // Restart the centered video from the beginning when the center card changes
+  useEffect(() => {
+    const video = videoRefs.current[currentIndex];
+    if (video) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    }
+  }, [currentIndex]);
+
   // Sync mute/unmute of video elements based on activeAudioIndex
   useEffect(() => {
     videoRefs.current.forEach((video, i) => {
       if (!video) return;
       if (i === activeAudioIndex) {
         video.muted = false;
+        video.currentTime = 0; // restart unmuted video from beginning
         video.play().catch(() => {});
       } else {
         video.muted = true;
@@ -106,6 +102,45 @@ export default function Carousel3D() {
       setActiveAudioIndex(null);
     }
   }, [isAutoScrolling]);
+
+  // Pause/mute videos when scrolled out of view, play when visible
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          videoRefs.current.forEach((video, i) => {
+            if (!video) return;
+            if (i === activeAudioIndex) {
+              video.muted = false;
+              video.play().catch(() => {});
+            } else {
+              video.muted = true;
+              video.play().catch(() => {});
+            }
+          });
+        } else {
+          videoRefs.current.forEach((video) => {
+            if (video) {
+              video.pause();
+              video.muted = true;
+            }
+          });
+          setActiveAudioIndex(null);
+          setIsAutoScrolling(true);
+        }
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      observer.unobserve(container);
+    };
+  }, [activeAudioIndex]);
 
   const handleCardClick = (index: number) => {
     const currentAngle = rotation.get();
@@ -158,14 +193,31 @@ export default function Carousel3D() {
   };
 
   const handleVideoEnded = (index: number) => {
-    if (index === activeAudioIndex) {
+    if (index === currentIndex) {
       const nextIndex = (index + 1) % faceCount;
-      handleCardClick(nextIndex);
+      const targetAngle = -nextIndex * angleStep;
+
+      if (activeAudioIndex !== null) {
+        // If unmuted, transition to next and unmute it
+        const controls = animate(rotation, targetAngle, {
+          duration: 0.8,
+          ease: "easeInOut",
+        });
+        controls.then(() => {
+          setActiveAudioIndex(nextIndex);
+        });
+      } else {
+        // Muted rotation
+        animate(rotation, targetAngle, {
+          duration: 0.8,
+          ease: "easeInOut",
+        });
+      }
     }
   };
 
   return (
-    <div className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 mt-8 md:-mt-24">
+    <div ref={containerRef} className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 mt-8 md:-mt-24">
       <div className="flex grow items-center justify-center [perspective:2500px] [transform-style:preserve-3d]">
         <motion.div
           style={{
@@ -219,7 +271,7 @@ export default function Carousel3D() {
                     src={url}
                     autoPlay
                     muted
-                    loop={activeAudioIndex !== i}
+                    loop={currentIndex !== i}
                     playsInline
                     onEnded={() => handleVideoEnded(i)}
                     className="pointer-events-none object-cover select-none w-full h-full absolute inset-0"

@@ -20,7 +20,7 @@ export default function Footer() {
             {/* Logo & Description */}
             <div className="lg:col-span-4 text-center md:text-left">
               <div className="py-2 rounded inline-block">
-                <Image src="/assets/logo.png" alt="IBS FINCORP Logo" width={160} height={45} className="object-cover" />
+                <Image src="/assets/logo.png" alt="IBS FINCORP Logo" width={160} height={45} style={{ height: "auto" }} className="object-cover" />
               </div>
               <p className="text-xs md:text-base font-normal">
                 Strategic Loan Consulting Firm (Corporate DSA). Facilitating Premium Secured Loan Across South India. Not A Bank Or NBFC.

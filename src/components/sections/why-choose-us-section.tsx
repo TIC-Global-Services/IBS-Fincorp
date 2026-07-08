@@ -78,8 +78,8 @@ const SwipeCard = ({ reason, isTop, index, totalCards, setCards, originalIndex }
         </p>
       </div>
 
-      <div className="absolute bottom-6 left-0 right-0 w-full h-[52%] mt-auto pointer-events-none">
-        <Image src={reason.image} alt={reason.title} fill className="object-contain object-bottom" />
+      <div className="absolute bottom-6 left-0 right-0 w-full h-[42%] mt-auto pointer-events-none scale-[0.92] origin-bottom">
+        <Image src={reason.image} alt={reason.title} fill sizes="(max-width: 768px) 320px, 320px" className="object-contain object-bottom" />
       </div>
     </motion.div>
   );
@@ -209,19 +209,19 @@ export default function WhyChooseUsSection() {
         <MobileSwipeDeck reasons={reasons} />
 
         {/* Desktop Grid */}
-        <div ref={containerRef} className="hidden md:grid md:grid-cols-2 gap-8 max-w-6xl mx-auto pb-12">
+        <div ref={containerRef} className="hidden md:grid md:grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto pb-12">
           {reasons.map((reason, idx) => (
-            <div key={idx} className="why-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col aspect-[6/5] relative overflow-hidden">
+            <div key={idx} className="why-card bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-[380px] sm:h-[400px] lg:h-[420px] xl:h-auto xl:aspect-[6/5] relative overflow-hidden">
               <div className="relative z-10">
-                <div className="text-5xl font-semibold text-dark-900 mb-4 group-hover:text-gold-500 transition-colors duration-300">0{idx + 1}</div>
-                <h3 className="text-3xl font-semibold mb-2">{reason.title}</h3>
-                <p className="text-base text-[#828282] leading-tight tracking-tight">
+                <div className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-dark-900 mb-2 lg:mb-4 group-hover:text-gold-500 transition-colors duration-300">0{idx + 1}</div>
+                <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-1 lg:mb-2">{reason.title}</h3>
+                <p className="text-xs sm:text-sm lg:text-base text-[#828282] leading-tight tracking-tight">
                   {reason.description}
                 </p>
               </div>
 
-              <div className="absolute bottom-6 left-0 right-0 w-full h-[52%] mt-auto transition-transform duration-500 group-hover:scale-105">
-                <Image src={reason.image} alt={reason.title} fill className="object-contain object-bottom" />
+              <div className="absolute bottom-6 left-0 right-0 w-full h-[38%] sm:h-[45%] xl:h-[52%] mt-auto transition-transform duration-500 group-hover:scale-105">
+                <Image src={reason.image} alt={reason.title} fill sizes="(max-width: 768px) 320px, (max-width: 1200px) 50vw, 560px" className="object-contain object-bottom" />
               </div>
             </div>
           ))}

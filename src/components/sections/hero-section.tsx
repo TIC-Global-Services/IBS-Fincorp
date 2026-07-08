@@ -41,18 +41,18 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="flex flex-row items-center justify-center gap-2 md:gap-4 px-1 w-full max-w-[400px] md:max-w-none mx-auto">
+            <div className="flex flex-row items-center justify-center gap-2 md:gap-4 px-1 w-full max-w-[300px] md:max-w-none mx-auto">
               <button
                 onClick={() => setIsFormView(true)}
-                className="bg-[#1D1E1C] text-white md:px-8 h-12 md:h-14 rounded-full hover:bg-black transition-colors flex-1 md:flex-none flex items-center justify-center text-xs md:text-sm whitespace-nowrap"
+                className="bg-[#1D1E1C] text-white md:px-8 h-10 sm:h-12 md:h-14 rounded-full hover:bg-black transition-colors flex-1 md:flex-none flex items-center justify-center text-[10px] sm:text-xs md:text-sm"
               >
                 Check Eligibility Today
               </button>
               <button
                 onClick={openConsultationModal}
-                className="bg-white text-dark-900 pl-8 pr-1 md:pl-8 md:pr-2 h-11 md:h-14 rounded-full font-medium hover:bg-gray-200 transition-colors flex-1 md:flex-none flex items-center justify-between md:justify-center gap-1 md:gap-4 group whitespace-nowrap"
+                className="bg-white text-dark-900 pl-6 pr-1 md:pl-8 md:pr-2 h-10 sm:h-12 md:h-14 rounded-full font-medium hover:bg-gray-200 transition-colors flex-1 md:flex-none flex items-center justify-between md:justify-center gap-1 md:gap-4 group"
               >
-                <span className="text-xs md:text-sm tracking-tight font-normal truncate">Book A Consultation</span>
+                <span className="text-[10px] sm:text-xs md:text-sm tracking-tight font-normal">Book A Consultation</span>
                 <span className="bg-[#1D1E1C] text-white w-8 h-8 md:w-11 md:h-11 shrink-0 rounded-full flex items-center justify-center text-xl font-light group-hover:bg-gold-500 transition-colors">
                   <svg width="12" height="12" className="md:w-[20px] md:h-[20px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="7" y1="17" x2="17" y2="7"></line>

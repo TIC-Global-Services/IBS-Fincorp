@@ -14,6 +14,7 @@ export default function CtaSection() {
               src="/assets/bookaconsultation.png"
               alt="Book a Consultation"
               fill
+              sizes="(max-width: 1400px) 100vw, 1400px"
               className="object-cover"
             />
 

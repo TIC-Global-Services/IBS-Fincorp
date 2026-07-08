@@ -25,7 +25,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex justify-start">
             <Link href="/">
-              <Image src="/assets/logo.png" alt="IBS FINCORP Logo" width={100} height={25} className="object-contain rounded-md" />
+              <Image src="/assets/logo.png" alt="IBS FINCORP Logo" width={100} height={25} style={{ height: "auto" }} className="object-contain rounded-md" />
             </Link>
           </div>
 

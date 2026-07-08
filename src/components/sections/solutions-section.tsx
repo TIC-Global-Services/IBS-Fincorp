@@ -74,7 +74,7 @@ export default function SolutionsSection() {
           >
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
-              <Image src="/assets/loanbg.png" alt="Loan Background" fill className="object-cover" />
+              <Image src="/assets/loanbg.png" alt="Loan Background" fill sizes="(max-width: 1024px) 100vw, (max-width: 1200px) 50vw, 600px" className="object-cover" />
             </div>
             <div className="relative z-10 bg-white/50 backdrop-blur-md rounded-2xl p-6 md:p-14 border border-white/50 shadow-lg">
               <div className="flex items-start gap-3 md:gap-4 mb-6 md:mb-8">

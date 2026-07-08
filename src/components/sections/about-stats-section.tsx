@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
-import YellowCircleGraphic from "@/components/ui/yellow-circle-graphic";
+import StatsGraphic from "@/components/ui/stats-graphic";
 import HouseOutlineGraphic from "@/components/ui/house-outline-graphic";
 import { CircularProgress } from "@/components/ui/circular-progress";
 
@@ -21,24 +21,24 @@ export default function AboutStatsSection() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-[1fr_0.9fr_1fr] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr_1fr] gap-6">
 
           {/* Card 1: Loans Disbursed */}
           <div className="bg-[#F7F7F7] text-dark-900 rounded-[16px] p-2 flex flex-col h-[450px] shadow-sm border border-gray-100">
             {/* Image Part Card */}
             <div className="bg-[#1D1E1C] rounded-[16px] flex-1 relative flex items-center justify-center p-4">
               <div className="relative w-full h-full max-h-[250px] flex items-center justify-center">
-                <YellowCircleGraphic className="w-[85%] h-[85%] max-h-[210px]" />
+                <StatsGraphic className="w-[85%] h-[85%] max-h-[210px]" />
               </div>
             </div>
 
             {/* Text Part */}
-            <div className="p-4 pt-6 flex gap-4">
+            <div className="p-4 pt-6 flex flex-col gap-2">
               <div>
                 <h3 className="text-2xl font-medium">₹3000Cr+</h3>
                 <p className="text-base font-medium tracking-tight whitespace-nowrap">Loans Disbursed</p>
               </div>
-              <p className="text-[14px] text-[#828282] flex-1 leading-tight tracking-tight">
+              <p className="text-[14px] text-[#828282] leading-tight tracking-tight">
                 Successfully facilitated loan disbursements worth over ₹3000 crore across diverse financial needs.
               </p>
             </div>
@@ -75,7 +75,7 @@ export default function AboutStatsSection() {
             {/* Image Part Card */}
             <div className="bg-white rounded-[16px] flex-1 relative flex flex-col items-center justify-center p-4">
               <div className="relative w-40 h-40 mb-4">
-                <CircularProgress value={78} size={160} strokeWidth={12}>
+                <CircularProgress value={90} size={160} strokeWidth={12}>
                   <span className="text-3xl font-bold text-dark-900">4.9/5</span>
                 </CircularProgress>
               </div>

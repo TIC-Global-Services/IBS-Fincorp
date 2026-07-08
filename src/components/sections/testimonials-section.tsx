@@ -101,29 +101,29 @@ const reviewsRight = [
 ];
 
 const ReviewCard = ({ review }: { review: any }) => (
-  <div className="relative overflow-hidden bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl md:rounded-[2rem] p-4 md:p-8 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] w-[165px] sm:w-[220px] md:w-full md:max-w-[480px] pointer-events-auto">
+  <div className="relative overflow-hidden bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl lg:rounded-[2rem] p-4 lg:p-8 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] w-[165px] sm:w-[220px] md:w-[300px] lg:w-full lg:max-w-[480px] pointer-events-auto">
 
     {/* Top Left Dark Vignette */}
     <div className="absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-transparent pointer-events-none opacity-60"></div>
 
     <div className="relative z-10">
-      <div className="text-gold-500 text-[10px] md:text-lg mb-2 md:mb-6 tracking-widest">★★★★★</div>
-      <p className="text-dark-900 leading-snug md:leading-relaxed mb-4 md:mb-8 font-medium text-[10px] sm:text-xs md:text-base line-clamp-4 md:line-clamp-none">
+      <div className="text-gold-500 text-[10px] lg:text-lg mb-2 lg:mb-6 tracking-widest">★★★★★</div>
+      <p className="text-dark-900 leading-snug lg:leading-relaxed mb-4 lg:mb-8 font-medium text-[10px] sm:text-xs lg:text-base line-clamp-4 lg:line-clamp-none">
         "{review.text}"
       </p>
-      <div className="flex items-center gap-2 md:gap-4">
+      <div className="flex items-center gap-2 lg:gap-4">
         {review.image ? (
-          <div className="relative w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden shrink-0 border border-white/20">
-            <Image src={review.image} alt={review.name} fill className="object-cover" />
+          <div className="relative w-8 h-8 lg:w-12 lg:h-12 rounded-full overflow-hidden shrink-0 border border-white/20">
+            <Image src={review.image} alt={review.name} fill sizes="(max-width: 768px) 32px, 48px" className="object-cover" />
           </div>
         ) : (
-          <div className="w-8 h-8 md:w-12 md:h-12 rounded-full bg-[#1D1E1C] flex items-center justify-center text-gold-500 font-bold text-xs md:text-lg shrink-0">
+          <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-[#1D1E1C] flex items-center justify-center text-gold-500 font-bold text-xs lg:text-lg shrink-0">
             {review.initial}
           </div>
         )}
         <div className="min-w-0">
-          <h4 className="font-bold text-dark-900 text-[10px] md:text-sm truncate">{review.name}</h4>
-          <p className="text-[8px] md:text-xs text-[#828282] truncate">{review.role}</p>
+          <h4 className="font-bold text-dark-900 text-[10px] lg:text-sm truncate">{review.name}</h4>
+          <p className="text-[8px] lg:text-xs text-[#828282] truncate">{review.role}</p>
         </div>
       </div>
     </div>
@@ -135,7 +135,7 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     let ctx = gsap.context(() => {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
+      const isMobile = window.matchMedia("(max-width: 1024px)").matches;
       const staggerDelay = isMobile ? 0.4 : 0.6;
       const startY = isMobile ? "80vh" : "120vh";
       const endY = isMobile ? "-80vh" : "-120vh";
@@ -194,7 +194,7 @@ export default function TestimonialsSection() {
             <TextBlurReveal
               as="h2"
               text="Trusted By Prime Borrowers"
-              className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-dark-900 mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-dark-900 mb-4"
             />
             <TextBlurReveal
               as="p"
@@ -211,7 +211,7 @@ export default function TestimonialsSection() {
           {/* Left Column Area */}
           <div className="flex w-1/2 relative h-full">
             {reviewsLeft.map((review, i) => (
-              <div key={`left-${i}`} className="card-left absolute inset-0 flex items-center justify-end pr-1 md:pr-12 lg:pr-24 -mt-[15vh] md:-mt-[25vh] pointer-events-none">
+              <div key={`left-${i}`} className="card-left absolute inset-0 flex items-center justify-end pr-2 md:pr-16 lg:pr-24 -mt-[10vh] lg:-mt-[25vh] pointer-events-none">
                 <ReviewCard review={review} />
               </div>
             ))}
@@ -220,7 +220,7 @@ export default function TestimonialsSection() {
           {/* Right Column Area */}
           <div className="flex w-1/2 relative h-full">
             {reviewsRight.map((review, i) => (
-              <div key={`right-${i}`} className="card-right absolute inset-0 flex items-center justify-start pl-1 md:pl-12 lg:pl-24 mt-[15vh] md:mt-[25vh] pointer-events-none">
+              <div key={`right-${i}`} className="card-right absolute inset-0 flex items-center justify-start pl-2 md:pl-16 lg:pl-24 mt-[10vh] lg:mt-[25vh] pointer-events-none">
                 <ReviewCard review={review} />
               </div>
             ))}

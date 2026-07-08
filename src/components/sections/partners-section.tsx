@@ -46,7 +46,7 @@ export default function PartnersSection() {
             <div key={`${setIdx}-${idx}`} className="bg-white border border-gray-100 rounded-[2rem] p-5 md:p-6 w-24 h-24 md:w-32 md:h-32 flex-shrink-0 flex items-center justify-center shadow-sm relative overflow-hidden">
               {partner.logo ? (
                 <div className="relative w-full h-full rounded-xl overflow-hidden">
-                  <Image src={partner.logo} alt={partner.name} fill className="object-contain" />
+                  <Image src={partner.logo} alt={partner.name} fill sizes="(max-width: 768px) 96px, 128px" className="object-contain" />
                 </div>
               ) : (
                 <span className="font-bold text-[#828282] text-xs text-center leading-tight">{partner.name}</span>

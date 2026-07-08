@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 
@@ -68,6 +68,30 @@ export default function ComparisonAppSection() {
     }
   };
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(err => console.log("Play failed: ", err));
+        } else {
+          video.pause();
+          video.muted = true;
+          setIsMuted(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.unobserve(video);
+    };
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start 80%", "end 50%"]
@@ -84,14 +108,14 @@ export default function ComparisonAppSection() {
       <div className="container mx-auto px-6 md:px-12 relative z-10">
 
         {/* App Showcase with Floating Cards */}
-        <div className="relative flex flex-col md:flex-row items-center justify-center min-h-[700px] mb-32 mt-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-12 items-center justify-items-center w-full max-w-6xl mx-auto mb-32 mt-10 px-4">
 
           {/* Left Cards */}
-          <div className="md:absolute left-0 top-1/4 flex flex-col gap-8 md:gap-14 z-20 w-full md:w-auto px-4 mb-12 md:mb-0 md:-translate-y-15">
-            <div className="flex flex-col items-end text-right max-w-[320px]">
+          <div className="flex flex-col gap-8 lg:gap-14 z-20 w-full max-w-xl lg:max-w-[320px] items-end text-right translate-x-4 md:translate-x-12 lg:translate-x-0 lg:-translate-y-15">
+            <div className="flex flex-col items-end text-right w-full max-w-xl lg:max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
                 <div className="relative w-13 h-13">
-                  <Image src="/assets/higherloan.png" alt="Higher Loan Icon" fill className="object-contain" />
+                  <Image src="/assets/higherloan.png" alt="Higher Loan Icon" fill sizes="52px" className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-xl md:text-2xl mb-2">Higher Loan Amounts</h3>
@@ -100,10 +124,10 @@ export default function ComparisonAppSection() {
               </p>
             </div>
 
-            <div className="flex flex-col items-end text-right max-w-[320px]">
+            <div className="flex flex-col items-end text-right w-full max-w-xl lg:max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
                 <div className="relative w-13 h-13">
-                  <Image src="/assets/flexible.png" alt="Flexible Repayment Icon" fill className="object-contain" />
+                  <Image src="/assets/flexible.png" alt="Flexible Repayment Icon" fill sizes="52px" className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-xl md:text-2xl mb-2">Flexible Repayment Tenures</h3>
@@ -114,30 +138,30 @@ export default function ComparisonAppSection() {
           </div>
 
           {/* Center Phone Mockup */}
-          <div className="relative z-0">
+          <div className="relative z-0 flex justify-center w-full">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gold-500/20 blur-[100px] rounded-full"></div>
 
             {/* Video container with sound toggle */}
-            <div 
+            <div
               onClick={() => toggleMute()}
-              className="w-[280px] h-[570px] relative z-10 rounded-3xl overflow-hidden hover:scale-105 transition-transform duration-500 flex items-center justify-center cursor-pointer group"
+              className="w-[300px] h-[570px] relative z-10 rounded-[48px] overflow-hidden hover:scale-105 transition-transform duration-500 flex items-center justify-center cursor-pointer group"
+
             >
               <video
                 ref={videoRef}
-                src="/assets/mobv-processed.mp4"
+                src="/assets/mobvideolat-processed.mp4"
                 autoPlay
                 loop
                 muted={isMuted}
                 playsInline
                 className="w-full h-full object-cover relative z-10"
-                style={{ filter: "url(#chroma-key-green)" }}
               />
 
               {/* Sound status indicator overlay */}
               <button
                 onClick={(e) => toggleMute(e)}
-                className="absolute bottom-4 right-4 z-30 p-2.5 bg-black/60 hover:bg-black/80 hover:scale-110 text-white rounded-full transition-all backdrop-blur-xs flex items-center justify-center border border-white/10 shadow-lg"
+                className="absolute bottom-6 right-6 z-30 p-2.5 bg-black/60 hover:bg-black/80 hover:scale-110 text-white rounded-full transition-all backdrop-blur-xs flex items-center justify-center border border-white/10 shadow-lg"
                 aria-label={isMuted ? "Unmute video" : "Mute video"}
               >
                 {isMuted ? (
@@ -158,11 +182,11 @@ export default function ComparisonAppSection() {
           </div>
 
           {/* Right Cards */}
-          <div className="md:absolute right-0 top-1/4 flex flex-col gap-10 md:gap-14 z-20 w-full md:w-auto px-4 mt-12 md:mt-0 md:translate-y-5">
-            <div className="flex flex-col items-start text-left max-w-[320px]">
+          <div className="flex flex-col gap-10 lg:gap-14 z-20 w-full max-w-xl lg:max-w-[320px] items-start text-left -translate-x-4 md:-translate-x-12 lg:translate-x-0 lg:translate-y-5">
+            <div className="flex flex-col items-start text-left w-full max-w-xl lg:max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
                 <div className="relative w-13 h-13">
-                  <Image src="/assets/doorstep.png" alt="Doorstep Assistance Icon" fill className="object-contain" />
+                  <Image src="/assets/doorstep.png" alt="Doorstep Assistance Icon" fill sizes="52px" className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-xl md:text-2xl mb-2">Doorstep Assistance</h3>
@@ -171,10 +195,10 @@ export default function ComparisonAppSection() {
               </p>
             </div>
 
-            <div className="flex flex-col items-start text-left max-w-[320px] ">
+            <div className="flex flex-col items-start text-left w-full max-w-xl lg:max-w-[320px]">
               <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl border border-gray-100 mb-4">
                 <div className="relative w-13 h-13">
-                  <Image src="/assets/trust.png" alt="Trusted Partner Icon" fill className="object-contain" />
+                  <Image src="/assets/trust.png" alt="Trusted Partner Icon" fill sizes="52px" className="object-contain" />
                 </div>
               </div>
               <h3 className="font-semibold text-xl md:text-2xl mb-2">Trusted & Reliable Partner</h3>
@@ -352,13 +376,10 @@ export default function ComparisonAppSection() {
       {/* SVG Chroma Key Filter for Green Screen */}
       <svg className="absolute w-0 h-0 pointer-events-none" aria-hidden="true">
         <defs>
-          <filter id="chroma-key-green" colorInterpolationFilters="sRGB">
+          <filter id="chroma-key-green" colorInterpolationFilters="sRGB" x="-20%" y="-20%" width="140%" height="140%">
             <feColorMatrix
               type="matrix"
-              values="1 0 0 0 0
-                      0 1 0 0 0
-                      0 0 1 0 0
-                      2.2 -4.0 2.2 1.0 -0.05"
+              values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 2.5 -4.0 2.5 1.0 -0.05"
             />
           </filter>
         </defs>
