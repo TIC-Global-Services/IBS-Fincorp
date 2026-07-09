@@ -82,7 +82,7 @@ export function LeadPopup() {
           animate={{ opacity: 1, y: 0, x: translateX }}
           exit={{ opacity: 0, y: 50, x: translateX }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed bottom-6 left-4 md:left-1/2 z-40 w-[calc(96vw-6rem)] md:w-[calc(100vw-2rem)] max-w-4xl bg-black/35 backdrop-blur-sm border border-white/10 rounded-2xl p-5 md:py-3.5 md:px-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white text-left flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6"
+          className="fixed bottom-6 left-4 md:left-1/2 z-40 w-[calc(96vw-6rem)] md:w-[calc(75vw-2rem)] max-w-3xl bg-black/35 backdrop-blur-sm border border-white/10 rounded-2xl p-5 md:py-3.5 md:px-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white text-left flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6"
         >
           {/* Close button (Absolute on mobile, Relative on desktop) */}
           <button

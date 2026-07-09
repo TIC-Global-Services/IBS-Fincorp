@@ -24,7 +24,7 @@ export default function AboutStatsSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.9fr_1fr] gap-6">
 
           {/* Card 1: Loans Disbursed */}
-          <div className="bg-[#F7F7F7] text-dark-900 rounded-[16px] p-2 flex flex-col h-[450px] shadow-sm border border-gray-100">
+          <div className="bg-[#F7F7F7] text-dark-900 rounded-[16px] p-2 flex flex-col h-[500px] md:h-[450px] shadow-sm border border-gray-100">
             {/* Image Part Card */}
             <div className="bg-dark-700 rounded-[16px] flex-1 relative flex items-center justify-center p-4">
               <div className="relative w-full h-full max-h-[300px] flex items-center justify-center">

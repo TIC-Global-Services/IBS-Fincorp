@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-transparent pt-12 pb-12 px-6 md:px-12 relative overflow-hidden">
       <div className="container mx-auto">
         {/* Regulatory Disclosure */}
-        <div className="relative overflow-hidden mb-8 max-w-7xl mx-auto bg-white/20 backdrop-blur-md border border-white/20 rounded-[32px] shadow-xl p-6 text-center">
+        <div className="relative overflow-hidden mb-8 max-w-7xl mx-auto bg-white/10 backdrop-blur-md border border-white/20 rounded-[32px] shadow-xl p-6 text-center">
           <h2 className="text-xl md:text-[42px] font-medium mb-4 tracking-tight text-dark-900">Regulatory & Compliance Disclosure</h2>
           <p className="text-xs md:text-lg max-w-4xl mx-auto leading-tight tracking-tight text-dark-900">
             IBSFINCORP, a brand of INCETTO BUSINESS SOLUTIONS PRIVATE LIMITED is a strategic loan consulting firm and Corporate DSA. We are not a Bank or NBFC. Loans are sanctioned and disbursed by RBI-regulated lending institutions subject to their eligibility criteria and policies.
@@ -15,7 +15,7 @@ export default function Footer() {
         </div>
 
         {/* Main Footer Content wrapped in Glassmorphism Block */}
-        <div className="relative overflow-hidden max-w-7xl mx-auto bg-white/20 backdrop-blur-xl border border-white/20 rounded-[40px] shadow-2xl text-white p-10">
+        <div className="relative overflow-hidden max-w-7xl mx-auto bg-white/10 backdrop-blur-xl border border-white/20 rounded-[40px] shadow-2xl text-white p-5">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
             {/* Logo & Description */}
             <div className="lg:col-span-4 text-center md:text-left">
@@ -30,40 +30,40 @@ export default function Footer() {
             {/* LOCATIONS */}
             <div className="lg:col-span-3">
               <h3 className="font-semibold mb-6 tracking-tight text-white text-center md:text-left text-sm md:text-base">LOCATIONS</h3>
-              <div className="text-xs sm:text-sm tracking-tight grid grid-cols-2 md:grid-cols-1 gap-6 text-center md:text-left">
+              <div className="text-xs sm:text-sm tracking-tight grid grid-cols-2 md:grid-cols-1 gap-6 text-left md:text-left">
                 <div>
-                  <p className="flex items-start justify-center md:justify-start gap-1.5 text-gold-500 font-semibold mb-2 leading-tight">
+                  <p className="inline-flex items-start text-left text-dark-900 gap-1.5 font-semibold mb-2 leading-tight">
                     <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
-                    REGISTERED OFFICE - CHENNAI
+                    <span>REGISTERED OFFICE - CHENNAI</span>
                   </p>
-                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs mx-auto md:mx-0">
                     3rd Floor, Gulecha Towers, No. 158, Arcot Rd, Ottagapalayam, Somasundara Bharathi Nagar, Vadapalani, Chennai, Greater Chennai, Tamil Nadu 600026
                   </span>
                 </div>
                 <div>
-                  <p className="flex items-start justify-center md:justify-start gap-1.5 text-gold-500 font-semibold mb-2 leading-tight">
-                    <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0" />
-                    BRANCH OFFICE - BANGALORE
+                  <p className="inline-flex items-start text-left text-dark-900 gap-1.5 font-semibold mb-2 leading-tight">
+                    <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
+                    <span>BRANCH OFFICE - BANGALORE</span>
                   </p>
-                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs mx-auto md:mx-0">
                     756, 10th Main Rd, 4th Block, Jayanagar, Bengaluru, Karnataka 560011
                   </span>
                 </div>
                 <div>
-                  <p className="flex items-start justify-center md:justify-start gap-1.5 text-gold-500 font-semibold mb-2 leading-tight">
+                  <p className="inline-flex items-start text-left text-dark-900 gap-1.5 font-semibold mb-2 leading-tight">
                     <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
-                    MADURAI OFFICE
+                    <span>MADURAI OFFICE</span>
                   </p>
-                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs mx-auto md:mx-0">
                     No 39A, Bizzbay CoWork Space, 2nd Floor, Kalasekar Tower, Sokalinga Nagar Main Road, Bypass Road, Madurai, Tamil Nadu 625016
                   </span>
                 </div>
                 <div>
-                  <p className="flex items-start justify-center md:justify-start gap-1.5 text-gold-500 font-semibold mb-2 leading-tight">
+                  <p className="inline-flex items-start text-left text-dark-900 gap-1.5 font-semibold mb-2 leading-tight">
                     <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
-                    COIMBATORE OFFICE
+                    <span>COIMBATORE OFFICE</span>
                   </p>
-                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs mx-auto md:mx-0">
                     9, Betaspace, 35, Desabandhu St, Ram Nagar, Coimbatore, Tamil Nadu 641009
                   </span>
                 </div>
@@ -101,10 +101,10 @@ export default function Footer() {
                 </li>
               </ul>
               <div className="flex justify-center md:justify-start">
-                <a 
-                  href="https://wa.link/xpwwox" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://wa.link/xpwwox"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center bg-black border border-white/10 text-white px-8 py-2.5 rounded-full font-medium text-xs md:text-sm hover:bg-gold-500 hover:text-black transition-all w-fit shadow-lg cursor-pointer"
                 >
                   Chat On WhatsApp
