@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Image from "next/image";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
 import { motion, useMotionValue, useTransform, animate, PanInfo } from "framer-motion";
+import type { Reason, ReasonWithIndex, SwipeCardProps } from "@/types/reasons";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
@@ -11,32 +12,30 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const SwipeCard = ({ reason, isTop, index, totalCards, setCards, originalIndex }: any) => {
+const SwipeCard = ({ reason, isTop, index, totalCards, setCards, originalIndex }: SwipeCardProps) => {
   const x = useMotionValue(0);
   const rotateDrag = useTransform(x, [-200, 200], [-10, 10]);
   const opacityDrag = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
 
-  const handleDragEnd = async (event: any, info: PanInfo) => {
+  const handleDragEnd = async (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const threshold = 80;
+    const windowWidth = window.innerWidth;
     if (info.offset.x > threshold) {
-      // Swipe Right
-      await animate(x, window.innerWidth, { duration: 0.3 });
+      await animate(x, windowWidth, { duration: 0.3 });
       moveToBack();
     } else if (info.offset.x < -threshold) {
-      // Swipe Left
-      await animate(x, -window.innerWidth, { duration: 0.3 });
+      await animate(x, -windowWidth, { duration: 0.3 });
       moveToBack();
     }
   };
 
   const moveToBack = () => {
-    setCards((prev: any[]) => {
+    setCards((prev: ReasonWithIndex[]) => {
       const newArr = [...prev];
       const card = newArr.pop();
-      newArr.unshift(card);
+      if (card) newArr.unshift(card);
       return newArr;
     });
-    // Instantly reset position before it re-renders at the back
     x.set(0);
   };
 
@@ -85,7 +84,7 @@ const SwipeCard = ({ reason, isTop, index, totalCards, setCards, originalIndex }
   );
 };
 
-const MobileSwipeDeck = ({ reasons }: { reasons: any[] }) => {
+const MobileSwipeDeck = ({ reasons }: { reasons: Reason[] }) => {
   const [cards, setCards] = useState(() =>
     reasons.map((r, i) => ({ ...r, originalIndex: i })).reverse()
   );

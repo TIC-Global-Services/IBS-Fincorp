@@ -22,9 +22,7 @@ export function CircularProgress({
   const targetLen = (value / 100) * C;
   const [trigger, setTrigger] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  
-  const rawId = useId();
-  const uid = `cp-${rawId.replace(/:/g, "")}`;
+  const uid = useId();
 
   useEffect(() => {
     const el = ref.current;

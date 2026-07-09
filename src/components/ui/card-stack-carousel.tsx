@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-const VIDEOS = [
-  "/assets/herocarousel/video1.mp4",
-  "/assets/herocarousel/video2.mp4",
-  "/assets/herocarousel/video3.mp4",
-  "/assets/herocarousel/video4.mp4",
-];
+import { HERO_VIDEOS } from "@/constants/media";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 export default function CardStackCarousel() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const VIDEOS = [...HERO_VIDEOS];
   const [cards, setCards] = useState(VIDEOS);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
@@ -49,38 +46,27 @@ export default function CardStackCarousel() {
     }
   }, [cards, isMuted]);
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          videoRefs.current.forEach((video, src) => {
-            if (src === cards[0]) {
-              video.muted = isMuted;
-              video.play().catch(() => {});
-            } else {
-              video.muted = true;
-              video.play().catch(() => {});
-            }
-          });
+  useIntersectionObserver(
+    containerRef,
+    useCallback(() => {
+      videoRefs.current.forEach((video, src) => {
+        if (src === cards[0]) {
+          video.muted = isMuted;
+          video.play().catch(() => {});
         } else {
-          videoRefs.current.forEach((video) => {
-            video.pause();
-            video.muted = true;
-          });
+          video.muted = true;
+          video.play().catch(() => {});
         }
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(container);
-
-    return () => {
-      observer.unobserve(container);
-    };
-  }, [cards, isMuted]);
+      });
+    }, [cards, isMuted]),
+    useCallback(() => {
+      videoRefs.current.forEach((video) => {
+        video.pause();
+        video.muted = true;
+      });
+    }, []),
+    { threshold: 0.05 }
+  );
 
   return (
     <div ref={containerRef} className="relative w-[280px] h-[380px] sm:w-[320px] sm:h-[450px]">

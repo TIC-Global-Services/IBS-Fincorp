@@ -5,6 +5,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
+import type { Review } from "@/types/reasons";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -100,7 +101,7 @@ const reviewsRight = [
   }
 ];
 
-const ReviewCard = ({ review }: { review: any }) => (
+const ReviewCard = ({ review }: { review: Review }) => (
   <div className="relative overflow-hidden bg-white/10 backdrop-blur-xs border border-white/20 rounded-2xl lg:rounded-[2rem] p-4 lg:p-8 shadow-[0_15px_40px_-15px_rgba(0,0,0,0.1)] w-[270px] sm:w-[360px] md:w-[460px] lg:w-full lg:max-w-[480px] pointer-events-auto">
 
     {/* Top Left Dark Vignette */}
@@ -117,7 +118,7 @@ const ReviewCard = ({ review }: { review: any }) => (
             <Image src={review.image} alt={review.name} fill sizes="(max-width: 768px) 32px, 48px" className="object-cover" />
           </div>
         ) : (
-          <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-[#1D1E1C] flex items-center justify-center text-gold-500 font-bold text-xs lg:text-lg shrink-0">
+          <div className="w-8 h-8 lg:w-12 lg:h-12 rounded-full bg-dark-700 flex items-center justify-center text-gold-500 font-bold text-xs lg:text-lg shrink-0">
             {review.initial}
           </div>
         )}

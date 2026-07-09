@@ -1,38 +1,10 @@
 import Image from "next/image";
 import { TextBlurReveal } from "../ui/text-blur-reveal";
+import { PARTNERS } from "@/constants/partners";
+import type { Partner } from "@/constants/partners";
 
 export default function PartnersSection() {
-  type Partner = { name: string; logo: string };
-
-  const partners: Partner[] = [
-    { name: "ICICI Bank", logo: "/assets/banks/icici.webp" },
-    { name: "Kotak", logo: "/assets/banks/kotak.webp" },
-    { name: "Small Finance Bank", logo: "/assets/banks/sf.webp" },
-    { name: "HDFC BANK", logo: "/assets/banks/hdfc.webp" },
-    { name: "AXIS BANK", logo: "/assets/banks/axisbank.webp" },
-    { name: "Godrej Capital", logo: "/assets/banks/godrej.webp" },
-    { name: "FEDERAL BANK", logo: "/assets/banks/federal.webp" },
-    { name: "IOB Bank", logo: "/assets/banks/iob.webp" },
-    { name: "BOB Bank", logo: "/assets/banks/bob.webp" },
-    { name: "IndusInd Bank", logo: "/assets/banks/indusind.webp" },
-    { name: "Deutsche Bank", logo: "/assets/banks/deutsche.webp" },
-    { name: "Axis Finance", logo: "/assets/banks/axisfin.webp" },
-    { name: "TATA CAPITAL", logo: "/assets/banks/tatacapital.webp" },
-    { name: "Kotak Prime", logo: "/assets/banks/kotak.webp" },
-    { name: "Poonawalla", logo: "/assets/banks/poonawalla.webp" },
-    { name: "Godrej Capital", logo: "/assets/banks/godrej.webp" },
-    { name: "Cholamandalam", logo: "/assets/banks/cholamandalam.webp" },
-    { name: "Aditya Birla Capital", logo: "/assets/banks/adityabirla.webp" },
-    { name: "Bank of Baroda", logo: "/assets/banks/bob.webp" },
-    { name: "IndusInd Bank", logo: "/assets/banks/indusind.webp" },
-    { name: "Deutsche Bank", logo: "/assets/banks/deutsche.webp" },
-    { name: "Axis Finance", logo: "/assets/banks/axisfin.webp" },
-    { name: "TATA CAPITAL", logo: "/assets/banks/tatacapital.webp" },
-    { name: "Kotak Prime", logo: "/assets/banks/kotakprime.webp" },
-    { name: "Piramal", logo: "/assets/banks/piramal.webp" },
-    { name: "SMFG", logo: "/assets/banks/smfg.webp" },
-    { name: "BAJAJ FINSERV", logo: "/assets/banks/bajajfin.webp" },
-  ];
+  const partners: Partner[] = PARTNERS;
 
   const row1 = [...partners];
   const row2 = [...partners].reverse();
@@ -78,13 +50,7 @@ export default function PartnersSection() {
       </div>
 
       {/* Scrolling Marquees */}
-      <div
-        className="relative w-full flex flex-col gap-6 pb-4 md:pb-12"
-        style={{
-          maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-          WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
-        }}
-      >
+      <div className="relative w-full flex flex-col gap-6 pb-4 md:pb-12 marquee-mask-edge">
         {renderRow(row1, "left")}
         {renderRow(row2, "right")}
         {renderRow(row3, "left")}

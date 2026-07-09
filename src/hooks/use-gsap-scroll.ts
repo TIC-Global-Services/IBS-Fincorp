@@ -9,8 +9,8 @@ export function useGsapScroll() {
     gsap.registerPlugin(ScrollTrigger);
 
     // Simple fade up animation for sections
-    const sections = gsap.utils.toArray("section");
-    sections.forEach((section: any) => {
+    const sections = gsap.utils.toArray<HTMLElement>("section");
+    sections.forEach((section) => {
       gsap.fromTo(
         section,
         { opacity: 0, y: 50 },

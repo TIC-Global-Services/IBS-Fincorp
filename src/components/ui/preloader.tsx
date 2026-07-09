@@ -8,7 +8,6 @@ export function Preloader() {
   const [isZooming, setIsZooming] = useState(false);
 
   useEffect(() => {
-    // Force scroll to top on reload to prevent browser scroll restoration
     if (typeof window !== "undefined") {
       if ("scrollRestoration" in window.history) {
         window.history.scrollRestoration = "manual";
@@ -16,15 +15,16 @@ export function Preloader() {
       window.scrollTo(0, 0);
     }
 
-    // Start zoom at 4.6s
+    const ZOOM_DELAY = 4600;
+    const UNMOUNT_DELAY = 7200;
+
     const zoomTimer = setTimeout(() => {
       setIsZooming(true);
-    }, 4600);
+    }, ZOOM_DELAY);
 
-    // Unmount at 7.2s
     const unmountTimer = setTimeout(() => {
       setIsVisible(false);
-    }, 7200); 
+    }, UNMOUNT_DELAY);
 
     return () => {
       clearTimeout(zoomTimer);

@@ -36,7 +36,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground overflow-x-hidden">
         <Preloader />
         {children}
-        <a href="#" className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 hover:scale-110 transition-transform duration-300">
+        <a href="https://wa.link/xpwwox" target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 hover:scale-110 transition-transform duration-300">
           <Image src="/assets/whatsapp-icon.png" alt="Contact Us" width={60} height={60} className="drop-shadow-2xl rounded-full" />
         </a>
       </body>

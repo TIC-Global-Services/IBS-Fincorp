@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-transparent pt-12 pb-12 px-6 md:px-12 relative overflow-hidden">
       <div className="container mx-auto">
         {/* Regulatory Disclosure */}
-        <div className="bg-white/20 rounded-[2rem] p-6 mb-8 text-center max-w-7xl mx-auto backdrop-blur-md shadow-xl">
+        <div className="relative overflow-hidden mb-8 max-w-7xl mx-auto bg-white/20 backdrop-blur-md border border-white/20 rounded-[32px] shadow-xl p-6 text-center">
           <h2 className="text-xl md:text-[42px] font-medium mb-4 tracking-tight text-dark-900">Regulatory & Compliance Disclosure</h2>
           <p className="text-xs md:text-lg max-w-4xl mx-auto leading-tight tracking-tight text-dark-900">
             IBSFINCORP, a brand of INCETTO BUSINESS SOLUTIONS PRIVATE LIMITED is a strategic loan consulting firm and Corporate DSA. We are not a Bank or NBFC. Loans are sanctioned and disbursed by RBI-regulated lending institutions subject to their eligibility criteria and policies.
@@ -15,7 +15,7 @@ export default function Footer() {
         </div>
 
         {/* Main Footer Content wrapped in Glassmorphism Block */}
-        <div className="bg-white/20 rounded-[2.5rem] p-10 max-w-7xl mx-auto backdrop-blur-xl shadow-2xl text-white">
+        <div className="relative overflow-hidden max-w-7xl mx-auto bg-white/20 backdrop-blur-xl border border-white/20 rounded-[40px] shadow-2xl text-white p-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-12">
             {/* Logo & Description */}
             <div className="lg:col-span-4 text-center md:text-left">
@@ -30,14 +30,14 @@ export default function Footer() {
             {/* LOCATIONS */}
             <div className="lg:col-span-3">
               <h3 className="font-semibold mb-6 tracking-tight text-white text-center md:text-left text-sm md:text-base">LOCATIONS</h3>
-              <div className="text-xs sm:text-sm tracking-tight grid grid-cols-2 md:grid-cols-1 gap-6 md:gap-6 text-center md:text-left">
+              <div className="text-xs sm:text-sm tracking-tight grid grid-cols-2 md:grid-cols-1 gap-6 text-center md:text-left">
                 <div>
                   <p className="flex items-start justify-center md:justify-start gap-1.5 text-gold-500 font-semibold mb-2 leading-tight">
                     <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
                     REGISTERED OFFICE - CHENNAI
                   </p>
-                  <span className="text-white leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
-                    No. 158, 2nd Floor, Gulecha Towers, Arcot Road, Vadapalani, Chennai 600026
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                    3rd Floor, Gulecha Towers, No. 158, Arcot Rd, Ottagapalayam, Somasundara Bharathi Nagar, Vadapalani, Chennai, Greater Chennai, Tamil Nadu 600026
                   </span>
                 </div>
                 <div>
@@ -45,8 +45,26 @@ export default function Footer() {
                     <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0" />
                     BRANCH OFFICE - BANGALORE
                   </p>
-                  <span className="text-white leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
-                    No. 756, 10th Main Road, 33rd Cross, 4th Block, Jayanagar, Bangalore 560011
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                    756, 10th Main Rd, 4th Block, Jayanagar, Bengaluru, Karnataka 560011
+                  </span>
+                </div>
+                <div>
+                  <p className="flex items-start justify-center md:justify-start gap-1.5 text-gold-500 font-semibold mb-2 leading-tight">
+                    <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
+                    MADURAI OFFICE
+                  </p>
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                    No 39A, Bizzbay CoWork Space, 2nd Floor, Kalasekar Tower, Sokalinga Nagar Main Road, Bypass Road, Madurai, Tamil Nadu 625016
+                  </span>
+                </div>
+                <div>
+                  <p className="flex items-start justify-center md:justify-start gap-1.5 text-gold-500 font-semibold mb-2 leading-tight">
+                    <Image src="/assets/location.svg" alt="Location" width={14} height={14} className="object-contain shrink-0 mt-0.5" />
+                    COIMBATORE OFFICE
+                  </p>
+                  <span className="text-white/80 leading-relaxed text-[11px] sm:text-sm block px-1 max-w-xs">
+                    9, Betaspace, 35, Desabandhu St, Ram Nagar, Coimbatore, Tamil Nadu 641009
                   </span>
                 </div>
               </div>
@@ -71,11 +89,11 @@ export default function Footer() {
               <ul className="text-xs sm:text-sm tracking-tight space-y-3 mb-6 font-normal">
                 <li className="flex items-center justify-center md:justify-start gap-2 text-white/80">
                   <svg className="w-4 h-4 text-gold-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                  +91 XXXXX XXXXX
+                  <a href="tel:+919962299260" className="hover:text-gold-500 transition-colors">+91 9962299260</a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start gap-2 text-white/80">
                   <svg className="w-4 h-4 text-gold-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                  Contact@ibsfincorp.Com
+                  <a href="mailto:contact@ibsfincorp.com" className="hover:text-gold-500 transition-colors">contact@ibsfincorp.com</a>
                 </li>
                 <li className="flex items-center justify-center md:justify-start gap-2 text-white/80">
                   <svg className="w-4 h-4 text-gold-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
@@ -83,16 +101,21 @@ export default function Footer() {
                 </li>
               </ul>
               <div className="flex justify-center md:justify-start">
-                <button className="bg-black border border-white/10 text-white px-8 py-2.5 rounded-full font-medium text-xs md:text-sm hover:bg-gold-500 hover:text-black transition-all w-fit shadow-lg cursor-pointer">
+                <a 
+                  href="https://wa.link/xpwwox" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="inline-flex items-center justify-center bg-black border border-white/10 text-white px-8 py-2.5 rounded-full font-medium text-xs md:text-sm hover:bg-gold-500 hover:text-black transition-all w-fit shadow-lg cursor-pointer"
+                >
                   Chat On WhatsApp
-                </button>
+                </a>
               </div>
             </div>
           </div>
 
           <div className="border-t border-white/20 pt-6 flex flex-col md:flex-row items-center justify-center md:justify-between text-center text-xs md:text-sm font-normal tracking-tight space-y-1">
             <p>© 2026 IBSFINCORP. All Rights Reserved.</p>
-            <p className="text-white/60" onClick={() => window.open('https://www.theinternetcompany.one', '_blank', 'noopener,noreferrer')} style={{ cursor: 'pointer' }}>Designed & Developed By TIC Global Services</p>
+            <a href="https://www.theinternetcompany.one" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white/80 transition-colors">Designed & Developed By TIC Global Services</a>
           </div>
           <div className="border-t border-white/20 mt-6 pt-6">
             <p className="text-[10px] md:text-xs text-center max-w-6xl leading-relaxed tracking-tight font-normal text-white/50">

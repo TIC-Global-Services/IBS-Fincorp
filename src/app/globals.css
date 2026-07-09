@@ -8,12 +8,13 @@
   --color-gold-500: #e6b800;
   --color-gold-600: #b38f00;
 
+  --color-gold-350: #FFBB00;
+  --color-dark-700: #1D1E1C;
   --color-dark-800: #1a1a1a;
   --color-dark-900: #121212;
 
   --font-sans: var(--font-inter-tight);
   --font-secondary: var(--font-plus-jakarta-sans);
-  --font-manrope: var(--font-manrope);
   --font-Manrope: var(--font-manrope);
 }
 
@@ -224,6 +225,11 @@ body {
 
 .animate-float-down-3 {
   animation: float-down-3 9s ease-in-out infinite;
+}
+
+.marquee-mask-edge {
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
 /* Force pointer cursor on all buttons, links, and clickable inputs */

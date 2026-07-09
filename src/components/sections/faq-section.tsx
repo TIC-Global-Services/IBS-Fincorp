@@ -9,29 +9,30 @@ const faqs = [
     answer: "No. IBSFINCORP Is A Strategic Loan Consulting And Facilitation Service Provider (Corporate DSA). All Loan Sanctions Are Made By Regulated Banks And NBFCs Based On Their Eligibility Criteria And Policies."
   },
   {
-    question: "Can You Guarantee Loan Approval?",
-    answer: "Loan Approval, Interest Rates, And Terms Are Determined Solely By The Respective Lender. IBSFINCORP Helps You Present The Strongest Possible Application To The Most Suitable Lender For Your Profile."
-  },
-  {
-    question: "What Is The Minimum Loan Amount You Handle?",
-    answer: "We Specialise In High-Value Secured, Property-Backed Funding Mandates Above ₹50 Lakhs To Multi-Crore Levels"
-  },
-  {
-    question: "Which Cities Do You Serve?",
-    answer: "Primary Focus On Chennai, Coimbatore, Madurai, Salem (Tamil Nadu), Bangalore, Mysore (Karnataka), And Pondicherry. Support Also Available For Other Major Indian Cities Subject To Eligibility And Lender Coverage."
-  },
-  {
-    question: "What Documents Do I Need To Get Started?",
-    answer: "Our Team Guides You Through The Complete Documentation Requirements Based On Your Loan Type And Selected Lender. We Provide Doorstep Assistance Throughout The Documentation Process."
+    question: "Does IBSFINCORP Facilitate Bank-To-Bank Loan Transfers?",
+    answer: "Yes. IBSFINCORP Supports Balance Transfer Of Eligible High-Value Secured Loans Between Banks And NBFCs To Help Clients Explore More Suitable Funding Terms And Structures."
   },
   {
     question: "Does IBSFINCORP Charge Any Service Fees?",
     answer: "No. IBSFINCORP Does Not Charge Clients For Premium Consultation Or Support Services. We Work In Association With Leading Banks And NBFCs To Facilitate Suitable Funding Solutions."
   },
   {
-    question: "Does IBSFINCORP Facilitate Bank-To-Bank Loan Transfers?",
-    answer: "Yes. IBSFINCORP Supports Balance Transfer Of Eligible High-Value Secured Loans Between Banks And NBFCs To Help Clients Explore More Suitable Funding Terms And Structures."
-  }
+    question: "Which Cities Do You Serve?",
+    answer: "Primary Focus On Chennai, Coimbatore, Madurai, Salem (Tamil Nadu), Bangalore, Mysore (Karnataka), And Pondicherry. Support Also Available For Other Major Indian Cities Subject To Eligibility And Lender Coverage."
+  },
+  {
+    question: "What Is The Minimum Loan Amount You Handle?",
+    answer: "We Specialise In High-Value Secured, Property-Backed Funding Mandates Above ₹50 Lakhs To Multi-Crore Levels"
+  },
+  {
+    question: "What Documents Do I Need To Get Started?",
+    answer: "Our Team Guides You Through The Complete Documentation Requirements Based On Your Loan Type And Selected Lender. We Provide Doorstep Assistance Throughout The Documentation Process."
+  },
+  {
+    question: "Can You Guarantee Loan Approval?",
+    answer: "Loan Approval, Interest Rates, And Terms Are Determined Solely By The Respective Lender. IBSFINCORP Helps You Present The Strongest Possible Application To The Most Suitable Lender For Your Profile."
+  },
+
 ];
 
 export default function FaqSection() {
@@ -74,7 +75,7 @@ export default function FaqSection() {
                     <span className="font-semibold text-[15px] md:text-base text-dark-900 pr-4 group-hover:text-gold-500 transition-colors duration-300">
                       {faq.question}
                     </span>
-                    <div className="text-gray-400 shrink-0 ml-2 group-hover:text-gold-500 transition-colors duration-300">
+                    <div className="text-[#4D585F] shrink-0 ml-2 group-hover:text-gold-500 transition-colors duration-300">
                       <svg
                         width="18"
                         height="18"
@@ -84,7 +85,7 @@ export default function FaqSection() {
                         strokeWidth="2.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className={`transform transition-transform duration-350 ${isOpen ? 'rotate-180 text-gold-500' : 'rotate-0'}`}
+                        className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180 text-gold-500' : 'rotate-0'}`}
                       >
                         <polyline points="6 9 12 15 18 9"></polyline>
                       </svg>
@@ -94,7 +95,7 @@ export default function FaqSection() {
                     className={`px-6 overflow-hidden transition-all duration-500 ${isOpen ? "max-h-[250px] pb-6 opacity-100" : "max-h-0 opacity-0 pointer-events-none"
                       }`}
                   >
-                    <p className="text-[#828282] leading-tight tracking-tight text-sm">{faq.answer}</p>
+                    <p className="text-[#4D585F] leading-tight tracking-tight text-sm">{faq.answer}</p>
                   </div>
                 </div>
               );

@@ -11,12 +11,14 @@ import LocationsSection from "@/components/sections/locations-section";
 import CtaSection from "@/components/sections/cta-section";
 import FaqSection from "@/components/sections/faq-section";
 import { ConsultationModal } from "@/components/ui/consultation-modal";
+import { LeadPopup } from "@/components/ui/lead-popup";
 
 export default function Home() {
   return (
     <>
       <Header />
       <ConsultationModal />
+      <LeadPopup />
       <main className="flex-1 overflow-x-hidden">
         <HeroSection />
         <AboutStatsSection />

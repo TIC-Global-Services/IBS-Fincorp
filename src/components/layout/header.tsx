@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, CloseIcon } from "@/components/ui/icons";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -66,12 +67,9 @@ export default function Header() {
 
           {/* Desktop CTA & Mobile Hamburger */}
           <div className="flex justify-end items-center">
-            <button className="hidden lg:flex bg-white text-[#1D1E1C] px-6 py-2 rounded-full font-medium text-sm hover:bg-gold-400 transition-colors items-center gap-2 whitespace-nowrap shadow-md">
+            <button className="hidden lg:flex bg-white text-dark-700 px-6 py-2 rounded-full font-medium text-sm hover:bg-gold-400 transition-colors items-center gap-2 whitespace-nowrap shadow-md">
               Contact Us
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3">
-                <line x1="7" y1="17" x2="17" y2="7"></line>
-                <polyline points="7 7 17 7 17 17"></polyline>
-              </svg>
+              <ArrowUpRight className="w-3 h-3" />
             </button>
 
             {/* Hamburger Icon */}
@@ -105,10 +103,7 @@ export default function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Close Menu"
             >
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
+              <CloseIcon width={28} height={28} />
             </button>
 
             <motion.nav 
@@ -139,12 +134,9 @@ export default function Header() {
                 <Link href="#faq" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium text-white hover:text-gold-400">FAQ</Link>
               </motion.div>
               <motion.div variants={itemVariants} className="mt-2">
-                <button className="bg-white text-[#1D1E1C] px-8 py-3 rounded-full font-medium hover:bg-gold-400 transition-colors flex items-center gap-2 shadow-md">
+                <button onClick={() => setIsMobileMenuOpen(false)} className="bg-white text-dark-700 px-8 py-3 rounded-full font-medium hover:bg-gold-400 transition-colors flex items-center gap-2 shadow-md">
                   Contact Us
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
+                  <ArrowUpRight className="w-4 h-4" />
                 </button>
               </motion.div>
             </motion.nav>

@@ -1,22 +1,42 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import {
   motion,
   useMotionValue,
   useTransform,
   animate,
 } from "framer-motion";
+import { HERO_VIDEOS } from "@/constants/media";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
-const baseImages = [
-  "/assets/herocarousel/video1.mp4",
-  "/assets/herocarousel/video2.mp4",
-  "/assets/herocarousel/video3.mp4",
-  "/assets/herocarousel/video4.mp4",
-];
+const baseImages = [...HERO_VIDEOS];
 
 // Duplicate to make 15 faces (3 sets) for the perfect curve
 const IMAGES = [...baseImages, ...baseImages, ...baseImages];
+
+const CUSTOMERS = [
+  {
+    name: "Mr. Sampath Raman",
+    role: "Founder & CMD",
+    company: "DPK Generators Pvt LTD"
+  },
+  {
+    name: "Mr. Seshgiri Darshan",
+    role: "Management Trustee",
+    company: "SaS Charitable Trust"
+  },
+  {
+    name: "Dr. R Pruthviraj",
+    role: "Principal & Professor in Physiotherapy",
+    company: "Reputed College in Bangalore"
+  },
+  {
+    name: "Mr. Suresh Binani",
+    role: "General Secretary",
+    company: "Milestones Institute of Pharmaceutical Sciences"
+  }
+];
 
 export default function Carousel3D() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -53,10 +73,6 @@ export default function Carousel3D() {
   );
 
   useEffect(() => {
-    rotation.set(0);
-  }, [rotation]);
-
-  useEffect(() => {
     const unsubscribe = rotation.on("change", (latest) => {
       const currentStep = Math.round(-latest / angleStep);
       const activeIndex = ((currentStep % faceCount) + faceCount) % faceCount;
@@ -78,7 +94,7 @@ export default function Carousel3D() {
     const video = videoRefs.current[currentIndex];
     if (video) {
       video.currentTime = 0;
-      video.play().catch(() => {});
+      video.play().catch(() => { });
     }
   }, [currentIndex]);
 
@@ -89,7 +105,7 @@ export default function Carousel3D() {
       if (i === activeAudioIndex) {
         video.muted = false;
         video.currentTime = 0; // restart unmuted video from beginning
-        video.play().catch(() => {});
+        video.play().catch(() => { });
       } else {
         video.muted = true;
       }
@@ -103,53 +119,41 @@ export default function Carousel3D() {
     }
   }, [isAutoScrolling]);
 
-  // Pause/mute videos when scrolled out of view, play when visible
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          videoRefs.current.forEach((video, i) => {
-            if (!video) return;
-            if (i === activeAudioIndex) {
-              video.muted = false;
-              video.play().catch(() => {});
-            } else {
-              video.muted = true;
-              video.play().catch(() => {});
-            }
-          });
+  useIntersectionObserver(
+    containerRef,
+    useCallback(() => {
+      videoRefs.current.forEach((video, i) => {
+        if (!video) return;
+        if (i === activeAudioIndex) {
+          video.muted = false;
+          video.play().catch(() => { });
         } else {
-          videoRefs.current.forEach((video) => {
-            if (video) {
-              video.pause();
-              video.muted = true;
-            }
-          });
-          setActiveAudioIndex(null);
-          setIsAutoScrolling(true);
+          video.muted = true;
+          video.play().catch(() => { });
         }
-      },
-      { threshold: 0.05 }
-    );
-
-    observer.observe(container);
-
-    return () => {
-      observer.unobserve(container);
-    };
-  }, [activeAudioIndex]);
+      });
+    }, [activeAudioIndex]),
+    useCallback(() => {
+      videoRefs.current.forEach((video) => {
+        if (video) {
+          video.pause();
+          video.muted = true;
+        }
+      });
+      setActiveAudioIndex(null);
+      setIsAutoScrolling(true);
+    }, []),
+    { threshold: 0.05 }
+  );
 
   const handleCardClick = (index: number) => {
     const currentAngle = rotation.get();
     const snappedAngle = Math.round(currentAngle / angleStep) * angleStep;
-    
+
     // Calculate the shortest path step rotation
     const currentStep = Math.round(-snappedAngle / angleStep);
     const diff = ((index - (currentStep % faceCount)) + faceCount) % faceCount;
-    
+
     let stepsToRotate = diff;
     if (diff > faceCount / 2) {
       stepsToRotate = diff - faceCount;
@@ -181,7 +185,7 @@ export default function Carousel3D() {
       if (autoPlayTimeoutRef.current) {
         clearTimeout(autoPlayTimeoutRef.current);
       }
-      
+
       const controls = animate(rotation, targetAngle, {
         duration: 0.8,
         ease: "easeInOut",
@@ -276,6 +280,19 @@ export default function Carousel3D() {
                     onEnded={() => handleVideoEnded(i)}
                     className="pointer-events-none object-cover select-none w-full h-full absolute inset-0"
                   />
+
+                  {/* Customer Info Overlay */}
+                  <div className="absolute top-0 left-0 right-0 p-5 md:p-7 bg-gradient-to-b from-black/85 via-black/45 to-transparent text-white z-10 text-left pointer-events-none">
+                    <h3 className="font-semibold text-[15px] sm:text-base md:text-lg tracking-tight text-gold-500">
+                      {CUSTOMERS[i % baseImages.length].name}
+                    </h3>
+                    <p className="text-[11px] sm:text-xs md:text-sm text-white/95 font-normal leading-normal">
+                      {CUSTOMERS[i % baseImages.length].role}
+                    </p>
+                    <p className="text-[10px] sm:text-[11px] md:text-xs font-semibold tracking-wide">
+                      {CUSTOMERS[i % baseImages.length].company}
+                    </p>
+                  </div>
 
                   {/* Speaker Overlay Indicator for the active centered card */}
                   {isActiveCard && (

@@ -5,34 +5,34 @@ import { motion, AnimatePresence } from "framer-motion";
 import { TextBlurReveal } from "../ui/text-blur-reveal";
 
 export default function LocationsSection() {
-  const [activeLocation, setActiveLocation] = useState<string>("default");
+  const [activeLocation, setActiveLocation] = useState<string>("chennai");
 
   const locationMap: Record<string, { url: string; label: string; address: string }> = {
-    default: {
-      url: "https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4013444.7570415395!2d78.6568942!3d10.8271225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin",
-      label: "COVERAGE REGION",
-      address: "Serving prime borrowers across South India including Tamil Nadu, Karnataka, and Pondicherry.",
-    },
-    tamilnadu: {
-      url: "https://maps.google.com/maps?q=13.049196,80.2096155&z=16&output=embed",
+    chennai: {
+      url: "https://maps.google.com/maps?q=3rd+Floor,+Gulecha+Towers,+No.+158,+Arcot+Rd,+Ottagapalayam,+Somasundara+Bharathi+Nagar,+Vadapalani,+Chennai,+Greater+Chennai,+Tamil+Nadu+600026&z=16&output=embed",
       label: "REGISTERED OFFICE - CHENNAI",
-      address: "No. 158, 2nd Floor, Gulecha Towers, Arcot Road, Vadapalani, Chennai 600026",
+      address: "3rd Floor, Gulecha Towers, No. 158, Arcot Rd, Ottagapalayam, Somasundara Bharathi Nagar, Vadapalani, Chennai, Greater Chennai, Tamil Nadu 600026",
     },
-    karnataka: {
-      url: "https://maps.google.com/maps?q=12.9236239,77.5802283&z=16&output=embed",
+    bangalore: {
+      url: "https://maps.google.com/maps?q=756,+10th+Main+Rd,+4th+Block,+Jayanagar,+Bengaluru,+Karnataka+560011&z=16&output=embed",
       label: "BRANCH OFFICE - BANGALORE",
-      address: "No. 756, 10th Main Road, 33rd Cross, 4th Block, Jayanagar, Bangalore 560011",
+      address: "756, 10th Main Rd, 4th Block, Jayanagar, Bengaluru, Karnataka 560011",
     },
-    pondicherry: {
-      url: "https://maps.google.com/maps?q=11.9416,79.8083&z=14&output=embed",
-      label: "PONDICHERRY OFFICE",
-      address: "Puducherry, India",
+    madurai: {
+      url: "https://maps.google.com/maps?q=No+39A,+Bizzbay+CoWork+Space,+2nd+Floor,+Kalasekar+Tower,+Sokalinga+Nagar+Main+Road,+Bypass+Road,+Madurai,+Tamil+Nadu+625016&z=16&output=embed",
+      label: "MADURAI OFFICE",
+      address: "No 39A, Bizzbay CoWork Space, 2nd Floor, Kalasekar Tower, Sokalinga Nagar Main Road, Bypass Road, Madurai, Tamil Nadu 625016",
+    },
+    coimbatore: {
+      url: "https://maps.google.com/maps?q=9,+Betaspace,+35,+Desabandhu+St,+Ram+Nagar,+Coimbatore,+Tamil+Nadu+641009&z=16&output=embed",
+      label: "COIMBATORE OFFICE",
+      address: "9, Betaspace, 35, Desabandhu St, Ram Nagar, Coimbatore, Tamil Nadu 641009",
     },
   };
 
   return (
     <section id="locations" className="py-10 bg-white text-dark-900 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-12">
+      <div className="container mx-auto px-6 md:px-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <TextBlurReveal
@@ -70,7 +70,7 @@ export default function LocationsSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#1D1E1C]/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl text-left text-white"
+                className="bg-dark-700/90 backdrop-blur-md rounded-2xl p-4 border border-white/10 shadow-2xl text-left text-white"
               >
                 <p className="text-gold-500 font-semibold text-xs tracking-wider mb-1">
                   {locationMap[activeLocation].label}
@@ -87,92 +87,94 @@ export default function LocationsSection() {
         </div>
 
         {/* Location Points - Desktop View */}
-        <div className="hidden md:flex max-w-5xl mx-auto flex-row justify-between gap-4 px-4">
-          <div 
-            className="flex gap-4 items-start cursor-pointer group" 
-            onClick={() => setActiveLocation("tamilnadu")}
+        <div className="hidden md:flex max-w-5xl mx-auto flex-row justify-center gap-12 lg:gap-20 px-4">
+          <div
+            className="flex gap-4 items-start cursor-pointer group"
+            role="button" tabIndex={0}
+            onClick={() => setActiveLocation("chennai")}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("chennai"); } }}
           >
-            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "tamilnadu" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "chennai" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
             <div>
-              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "tamilnadu" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Tamil Nadu</h4>
-              <p className="text-xs text-[#828282] tracking-tight">Chennai · Coimbatore · Madurai · Salem</p>
+              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "chennai" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Chennai</h4>
+              <p className="text-xs text-[#828282] tracking-tight">Registered Office</p>
             </div>
           </div>
 
-          <div 
-            className="flex gap-4 items-start cursor-pointer group" 
-            onClick={() => setActiveLocation("karnataka")}
+          <div
+            className="flex gap-4 items-start cursor-pointer group"
+            role="button" tabIndex={0}
+            onClick={() => setActiveLocation("bangalore")}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("bangalore"); } }}
           >
-            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "karnataka" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "bangalore" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
             <div>
-              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "karnataka" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Karnataka</h4>
-              <p className="text-xs text-[#828282] tracking-tight">Bangalore · Mysore</p>
+              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "bangalore" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Bangalore</h4>
+              <p className="text-xs text-[#828282] tracking-tight">Branch Office</p>
             </div>
           </div>
 
-          <div 
-            className="flex gap-4 items-start cursor-pointer group" 
-            onClick={() => setActiveLocation("pondicherry")}
+          <div
+            className="flex gap-4 items-start cursor-pointer group"
+            role="button" tabIndex={0}
+            onClick={() => setActiveLocation("madurai")}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("madurai"); } }}
           >
-            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "pondicherry" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "madurai" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
             <div>
-              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "pondicherry" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Pondicherry (UT)</h4>
-              <p className="text-xs text-[#828282] tracking-tight">Puducherry</p>
+              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "madurai" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Madurai</h4>
+              <p className="text-xs text-[#828282] tracking-tight">Madurai Office</p>
             </div>
           </div>
 
-          <div 
-            className="flex gap-4 items-start cursor-pointer group" 
-            onClick={() => setActiveLocation("default")}
+          <div
+            className="flex gap-4 items-start cursor-pointer group"
+            role="button" tabIndex={0}
+            onClick={() => setActiveLocation("coimbatore")}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("coimbatore"); } }}
           >
-            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "default" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+            <div className={`w-3 h-3 rounded-full mt-1.5 transition-all duration-300 ${activeLocation === "coimbatore" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
             <div>
-              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "default" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Other Cities</h4>
-              <p className="text-xs text-[#828282] tracking-tight">Subject To Coverage</p>
+              <h4 className={`font-semibold text-lg mb-1 transition-colors duration-300 ${activeLocation === "coimbatore" ? "text-gold-500" : "text-dark-900 group-hover:text-gold-500"}`}>Coimbatore</h4>
+              <p className="text-xs text-[#828282] tracking-tight">Coimbatore Office</p>
             </div>
           </div>
         </div>
 
         {/* Location Points - Mobile Marquee View */}
-        <div
-          className="md:hidden relative w-full flex overflow-hidden py-2"
-          style={{
-            maskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
-            WebkitMaskImage: "linear-gradient(to right, transparent, black 15%, black 85%, transparent)"
-          }}
-        >
+        <div className="md:hidden relative w-full flex overflow-hidden py-2 marquee-mask-edge">
           <div className="flex w-max animate-scroll-left hover:pause-animation gap-12">
             {[...Array(2)].map((_, setIdx) => (
               <div key={setIdx} className="flex gap-12 flex-shrink-0 items-center">
-                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" onClick={() => setActiveLocation("tamilnadu")}>
-                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "tamilnadu" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" role="button" tabIndex={0} onClick={() => setActiveLocation("chennai")} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("chennai"); } }}>
+                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "chennai" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
                   <div className="text-left">
-                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "tamilnadu" ? "text-gold-500" : "text-dark-900"}`}>Tamil Nadu</h4>
-                    <p className="text-xs text-[#828282] whitespace-nowrap">Chennai · Coimbatore · Madurai · Salem</p>
+                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "chennai" ? "text-gold-500" : "text-dark-900"}`}>Chennai</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Registered Office</p>
                   </div>
                 </div>
 
-                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" onClick={() => setActiveLocation("karnataka")}>
-                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "karnataka" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" role="button" tabIndex={0} onClick={() => setActiveLocation("bangalore")} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("bangalore"); } }}>
+                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "bangalore" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
                   <div className="text-left">
-                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "karnataka" ? "text-gold-500" : "text-dark-900"}`}>Karnataka</h4>
-                    <p className="text-xs text-[#828282] whitespace-nowrap">Bangalore · Mysore</p>
+                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "bangalore" ? "text-gold-500" : "text-dark-900"}`}>Bangalore</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Branch Office</p>
                   </div>
                 </div>
 
-                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" onClick={() => setActiveLocation("pondicherry")}>
-                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "pondicherry" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" role="button" tabIndex={0} onClick={() => setActiveLocation("madurai")} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("madurai"); } }}>
+                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "madurai" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
                   <div className="text-left">
-                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "pondicherry" ? "text-gold-500" : "text-dark-900"}`}>Pondicherry (UT)</h4>
-                    <p className="text-xs text-[#828282] whitespace-nowrap">Puducherry</p>
+                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "madurai" ? "text-gold-500" : "text-dark-900"}`}>Madurai</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Madurai Office</p>
                   </div>
                 </div>
 
-                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" onClick={() => setActiveLocation("default")}>
-                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "default" ? "bg-[#FFBB00] ring-4 ring-[#FFBB00]/30 scale-125" : "bg-[#FFBB00]/40"}`}></div>
+                <div className="flex gap-3 items-center flex-shrink-0 cursor-pointer" role="button" tabIndex={0} onClick={() => setActiveLocation("coimbatore")} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActiveLocation("coimbatore"); } }}>
+                  <div className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${activeLocation === "coimbatore" ? "bg-gold-350 ring-4 ring-gold-350/30 scale-125" : "bg-gold-350/40"}`}></div>
                   <div className="text-left">
-                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "default" ? "text-gold-500" : "text-dark-900"}`}>Other Cities</h4>
-                    <p className="text-xs text-[#828282] whitespace-nowrap">Subject To Coverage</p>
+                    <h4 className={`font-medium text-[15px] mb-0.5 leading-tight transition-colors duration-300 ${activeLocation === "coimbatore" ? "text-gold-500" : "text-dark-900"}`}>Coimbatore</h4>
+                    <p className="text-xs text-[#828282] whitespace-nowrap">Coimbatore Office</p>
                   </div>
                 </div>
               </div>

@@ -16,7 +16,7 @@ export default function AboutStatsSection() {
           <TextBlurReveal
             as="h2"
             text="Empowering Businesses & Professionals with Intelligent Funding Solutions that Drive Growth, Liquidity, and Financial Success through Strategic Loan Against Property Solutions."
-            className="text-xl md:text-5xl font-medium leading-tighter tracking-tight"
+            className="text-xl md:text-5xl font-medium leading-[1] tracking-tight"
           />
         </div>
 
@@ -26,20 +26,20 @@ export default function AboutStatsSection() {
           {/* Card 1: Loans Disbursed */}
           <div className="bg-[#F7F7F7] text-dark-900 rounded-[16px] p-2 flex flex-col h-[450px] shadow-sm border border-gray-100">
             {/* Image Part Card */}
-            <div className="bg-[#1D1E1C] rounded-[16px] flex-1 relative flex items-center justify-center p-4">
-              <div className="relative w-full h-full max-h-[250px] flex items-center justify-center">
-                <StatsGraphic className="w-[85%] h-[85%] max-h-[210px]" />
+            <div className="bg-dark-700 rounded-[16px] flex-1 relative flex items-center justify-center p-4">
+              <div className="relative w-full h-full max-h-[300px] flex items-center justify-center">
+                <StatsGraphic className="w-[95%] h-[95%] max-h-[310px]" />
               </div>
             </div>
 
             {/* Text Part */}
-            <div className="p-4 pt-6 flex flex-col gap-2">
-              <div>
+            <div className="p-4 pt-6 flex flex-col xl:flex-row justify-between items-start gap-2 xl:gap-6">
+              <div className="shrink-0">
                 <h3 className="text-2xl font-medium">₹3000Cr+</h3>
                 <p className="text-base font-medium tracking-tight whitespace-nowrap">Loans Disbursed</p>
               </div>
-              <p className="text-[14px] text-[#828282] leading-tight tracking-tight">
-                Successfully facilitated loan disbursements worth over ₹3000 crore across diverse financial needs.
+              <p className="text-[14px] text-[#828282] leading-normal tracking-tight xl:mt-1">
+                Successfully facilitated loan disbursements worth over ₹3000   crore across diverse financial needs.
               </p>
             </div>
           </div>
@@ -49,7 +49,7 @@ export default function AboutStatsSection() {
 
             {/* Top Center Card */}
             <div className="bg-[#F7F7F7] rounded-[16px] p-2 flex-1 flex flex-col shadow-sm border border-gray-100">
-              <div className="bg-[#1D1E1C] text-white rounded-[12px] p-6 lg:p-8 flex-1 flex flex-col">
+              <div className="bg-dark-700 text-white rounded-[12px] p-6 lg:p-8 flex-1 flex flex-col">
                 <div className="flex items-start gap-4">
                   <h3 className="text-5xl font-medium">50<span className="text-4xl">+</span></h3>
                   <p className="text-2xl font-normal max-w-[150px] leading-tight">Bank & NBFC Partners</p>
@@ -62,7 +62,7 @@ export default function AboutStatsSection() {
 
             {/* Bottom Center Card */}
             <div className="bg-[#F7F7F7] rounded-[16px] p-2 h-32 flex flex-col shadow-sm border border-gray-100">
-              <div className="bg-[#1D1E1C] text-white rounded-[12px] px-6 lg:px-8 flex-1 flex items-center justify-between h-full gap-4">
+              <div className="bg-dark-700 text-white rounded-[12px] px-6 lg:px-8 flex-1 flex items-center justify-between h-full gap-4">
                 <h3 className="text-5xl font-medium">100<span className="text-4xl">%</span></h3>
                 <p className="text-xl lg:text-2xl font-medium text-left leading-tight min-w-[140px]">Commission Free</p>
               </div>
@@ -80,7 +80,7 @@ export default function AboutStatsSection() {
                 </CircularProgress>
               </div>
               <p className="font-medium text-center text-xl tracking-tight">Based On 1000+ Verified Client Reviews</p>
-              <div className="flex gap-1 text-[#FFBB00] mt-2 text-xl">
+              <div className="flex gap-1 text-gold-350 mt-2 text-xl">
                 ★ ★ ★ ★ ★
               </div>
             </div>

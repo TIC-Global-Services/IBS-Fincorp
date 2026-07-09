@@ -1,134 +1,190 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
 
-const barsVariants = {
-  hidden: { height: 0, y: 369 },
-  visible: {
-    height: 140,
-    y: 229,
-    transition: {
-      duration: 1.2,
-      ease: [0.2, 0.7, 0.3, 1] as const, // cubic-bezier(.2,.7,.3,1)
-    },
-  },
-};
+interface Blob {
+  x: number;
+  y: number;
+  r: number;
+}
 
-const arrowVariants = {
-  hidden: { width: 0 },
-  visible: {
-    width: 380,
-    transition: {
-      duration: 1.2,
-      delay: 0.8, // Delay of 0.8s for smooth overlap
-      ease: [0.4, 0, 0.2, 1] as const, // cubic-bezier(.4,0,.2,1)
-    },
-  },
-};
+const CX = 300;
+const CY = 300;
+const MAX_GEN = 7;          // 1 -> 128 blobs
+const GEN_MS = 550;         // duration of each split
+const TOTAL_MS = MAX_GEN * GEN_MS;
+const TARGET_COUNT = 3000;
 
-const labelZeroVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "linear" as const,
-    },
-  },
-};
+const OUTER_R = 240;
+const PACK_FACTOR = 0.95;
+const GAP_SCALE = 0.8;
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 
-const labelTopVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      delay: 1.6, // delay until graphic finishes loading
-      ease: "linear" as const,
-    },
-  },
-};
+function easeInOutCubic(t: number) {
+  return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
+}
+
+function buildGeneration(N: number, rotationOffset: number): Blob[] {
+  const r0 = OUTER_R * PACK_FACTOR;
+  const rPack = r0 / Math.sqrt(N);
+  const rDraw = rPack * GAP_SCALE;
+  if (N === 1) {
+    return [{ x: CX, y: CY, r: rDraw }];
+  }
+  const placeR = OUTER_R - rPack;
+  const blobs: Blob[] = [];
+  for (let i = 0; i < N; i++) {
+    const d = placeR * Math.sqrt((i + 0.5) / N);
+    const theta = i * GOLDEN_ANGLE + rotationOffset;
+    blobs.push({
+      x: CX + d * Math.cos(theta),
+      y: CY + d * Math.sin(theta),
+      r: rDraw,
+    });
+  }
+  return blobs;
+}
+
+function buildGenerations(): Blob[][] {
+  const rotationOffset = Math.random() * Math.PI * 2;
+  const gens: Blob[][] = [];
+  for (let g = 0; g <= MAX_GEN; g++) {
+    gens.push(buildGeneration(Math.pow(2, g), rotationOffset));
+  }
+  return gens;
+}
 
 export default function StatsGraphic({ className = "" }: { className?: string }) {
+  const containerRef = useRef<SVGSVGElement | null>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [blobs, setBlobs] = useState<Blob[]>([]);
+  const [count, setCount] = useState<number>(0);
+  const animationRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
+
+  const gensRef = useRef<Blob[][]>([]);
+  if (gensRef.current.length === 0) {
+    gensRef.current = buildGenerations();
+  }
+
+  // Trigger animation once element is visible
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+        }
+      },
+      { threshold: 0.1, rootMargin: "-50px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) {
+      if (gensRef.current.length > 0) {
+        setBlobs(gensRef.current[0]);
+      }
+      setCount(0);
+      return;
+    }
+
+    const gens = gensRef.current;
+    startTimeRef.current = null;
+
+    const frame = (now: number) => {
+      if (startTimeRef.current === null) {
+        startTimeRef.current = now;
+      }
+      const elapsed = now - startTimeRef.current;
+
+      if (elapsed >= TOTAL_MS) {
+        setBlobs(gens[MAX_GEN]);
+        setCount(TARGET_COUNT);
+        return;
+      }
+
+      setCount(Math.floor((elapsed / TOTAL_MS) * TARGET_COUNT));
+
+      const genIndex = Math.floor(elapsed / GEN_MS);
+      const local = (elapsed % GEN_MS) / GEN_MS;
+      const t = easeInOutCubic(local);
+      const parents = gens[genIndex];
+      const children = gens[genIndex + 1];
+
+      const nextBlobs: Blob[] = [];
+      for (let i = 0; i < parents.length; i++) {
+        const p = parents[i];
+        const c1 = children[i * 2];
+        const c2 = children[i * 2 + 1];
+        nextBlobs.push({
+          x: lerp(p.x, c1.x, t),
+          y: lerp(p.y, c1.y, t),
+          r: lerp(p.r, c1.r, t),
+        });
+        nextBlobs.push({
+          x: lerp(p.x, c2.x, t),
+          y: lerp(p.y, c2.y, t),
+          r: lerp(p.r, c2.r, t),
+        });
+      }
+
+      setBlobs(nextBlobs);
+      animationRef.current = requestAnimationFrame(frame);
+    };
+
+    animationRef.current = requestAnimationFrame(frame);
+
+    return () => {
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isInView]);
+
   return (
-    <motion.svg
+    <svg
+      ref={containerRef}
+      id="stage"
+      viewBox="0 0 600 600"
       className={className}
       width="100%"
       height="100%"
-      viewBox="0 0 299 250"
       preserveAspectRatio="xMidYMid meet"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, margin: "-50px" }}
     >
-      <defs>
-        <clipPath id="barsClip">
-          {/* Animate height and y of this rect */}
-          <motion.rect
-            id="barsClipRect"
-            x="-50"
-            width="800"
-            variants={barsVariants}
+      <g id="blobGroup">
+        {blobs.map((b, idx) => (
+          <circle
+            key={idx}
+            cx={b.x.toFixed(1)}
+            cy={b.y.toFixed(1)}
+            r={Math.max(b.r, 0.5).toFixed(1)}
+            fill="#FFBB00"
           />
-        </clipPath>
-        
-        <clipPath id="arrowClip" clipPathUnits="userSpaceOnUse">
-          {/* Animate width of this rect */}
-          <motion.rect
-            id="arrowClipRect"
-            x="0"
-            y="-110"
-            height="220"
-            transform="translate(85,328) rotate(-40.14)"
-            variants={arrowVariants}
-          />
-        </clipPath>
-      </defs>
-
-      <g transform="matrix(1,0,0,1,-425.16283,-534.239014)">
-        <g transform="matrix(1,0,0,1,354,415)">
-          {/* Bars Path */}
-          <path
-            id="barsPath"
-            clipPath="url(#barsClip)"
-            d="M176.5,317.036C184.498,316.565 190.666,316.525 190.868,321.451C192.003,349.172 189.865,361.203 192.534,361.279C202.787,361.57 205.659,361.541 205.961,359.58C206.976,353.001 203.845,295.079 207.389,291.396C209.009,289.713 210.089,288.591 236.507,289.253C243.881,289.438 242.742,293.174 242.735,338.5C242.732,356.367 242.087,361.29 244.515,361.321C255.401,361.463 255.655,361.897 256.127,361.097C258.33,357.358 255.47,356.918 256.955,311.507C257.284,301.448 255.91,301.506 256.618,286.505C257.899,259.347 252.027,250.364 267.5,250.3C282.379,250.239 294.657,248.944 294.708,257.496C294.802,273.108 294.719,347.66 294.71,355.5C294.709,355.963 294.704,360.688 295.602,361.221C295.644,361.246 307.09,361.848 307.661,360.624C309.125,357.483 306.672,201.81 308.901,198.821C310.371,196.85 311.452,195.401 339.514,196.174C345.665,196.344 345.764,201.778 345.777,202.489C346.217,226.529 345.102,361.925 346.398,362.624C349.174,364.123 349.483,362.297 360.422,364.783C366.344,366.129 373.422,365.845 367.648,367.713C363.552,369.038 363.406,368.712 113.501,368.779C109.597,368.78 60.141,369.546 73.422,365.332C74.996,364.832 76.02,365.676 85.511,363.541C87.376,363.121 99.854,363.277 99.968,360.586C100.67,343.863 95.701,336.27 110.5,336.183C131.054,336.061 136.745,335.068 138.461,341.513C139.156,344.121 137.853,360.175 139.6,361.222C139.819,361.354 151.619,361.458 152.259,361.097C155.117,359.483 149.707,321.699 155.675,317.796C159.38,315.373 175.3,316.947 176.5,317.036Z"
-            style={{ fill: "#FFBB00", fillOpacity: 0.99 }}
-          />
-          {/* Arrow Path */}
-          <path
-            id="arrowPath"
-            clipPath="url(#arrowClip)"
-            d="M117.426,312.055C168.272,292.497 200.957,277.634 252.412,226.413C279.538,199.409 301.204,162.89 302.03,159.363C303.046,155.025 275.774,153.207 288.262,145.131C329.958,118.162 331.016,118.221 333.319,119.8C336.4,121.914 334.341,150.647 334.924,170.614C334.962,171.919 333.049,176.332 319.371,165.675C316.252,163.245 316.345,166.374 305.138,184.216C300.496,191.607 300.895,191.843 300.394,192.411C285.6,209.213 262.332,247.046 201.204,285.11C160.18,310.654 109.645,323.939 88.551,327.758C81.195,329.09 80.828,321.521 87.459,320.278C93.079,319.224 116.924,312.165 117.426,312.055Z"
-            style={{ fill: "#FFBB00", fillOpacity: 0.99 }}
-          />
-        </g>
+        ))}
       </g>
-
-      <motion.text
-        id="labelZero"
-        x="8"
-        y="233"
-        fontFamily="Inter, sans-serif"
-        fontSize="24"
+      <text
+        id="counter"
+        x="300"
+        y="330"
+        textAnchor="middle"
+        fontSize="80"
         fontWeight="700"
-        fill="#FFBB00"
-        variants={labelZeroVariants}
+        fill="#FFFFFF"
+        fontFamily="'Helvetica Neue', Arial, sans-serif"
+        style={{ filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.7))" }}
       >
-        0
-      </motion.text>
-      <motion.text
-        id="labelTop"
-        x="240"
-        y="85"
-        fontFamily="Inter, sans-serif"
-        fontSize="24"
-        fontWeight="700"
-        fill="#FFBB00"
-        variants={labelTopVariants}
-      >
-        3000
-      </motion.text>
-    </motion.svg>
+        ₹{count}Cr
+      </text>
+    </svg>
   );
 }

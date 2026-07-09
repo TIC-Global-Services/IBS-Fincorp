@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { TextBlurReveal } from "@/components/ui/text-blur-reveal";
+import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
 
 const AnimatedTick = ({ idx }: { idx: number }) => (
   <svg
@@ -63,34 +64,23 @@ export default function ComparisonAppSection() {
       videoRef.current.muted = nextMuted;
       setIsMuted(nextMuted);
       if (videoRef.current.paused) {
-        videoRef.current.play().catch(err => console.log("Play failed: ", err));
+        videoRef.current.play().catch(() => {});
       }
     }
   };
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          video.play().catch(err => console.log("Play failed: ", err));
-        } else {
-          video.pause();
-          video.muted = true;
-          setIsMuted(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(video);
-
-    return () => {
-      observer.unobserve(video);
-    };
-  }, []);
+  useIntersectionObserver(
+    videoRef,
+    () => { videoRef.current?.play().catch(() => {}); },
+    () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.muted = true;
+        setIsMuted(true);
+      }
+    },
+    { threshold: 0.1 }
+  );
 
   const { scrollYProgress } = useScroll({
     target: timelineRef,
@@ -131,7 +121,7 @@ export default function ComparisonAppSection() {
                 </div>
               </div>
               <h3 className="font-semibold text-xl md:text-2xl mb-2">Flexible Repayment Tenures</h3>
-              <p className="text-sm leading-tigth font-Manrope">
+              <p className="text-sm leading-tight font-Manrope">
                 Choose customized repayment plans that align with your financial goals and cash flow.
               </p>
             </div>
