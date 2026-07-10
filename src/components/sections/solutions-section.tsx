@@ -23,7 +23,7 @@ const SUB_CARDS = [
   {
     id: "dropline",
     title: "Dropline OD (DLOD)",
-    icon: "/assets/solutions/dropline.svg",
+    icon: "/assets/solutions/dlod.svg",
     className: "left-[2%] top-[62%] w-[15%] h-[28%]",
     type: "outer",
   },
@@ -51,7 +51,7 @@ const SUB_CARDS = [
   {
     id: "bank2bank",
     title: "Bank-to-Bank Balance Transfer",
-    icon: "/assets/solutions/bank2bank.svg",
+    icon: "/assets/solutions/transfer.svg",
     className: "left-[65%] top-[62%] w-[15%] h-[28%]",
     type: "inner",
   },
@@ -293,7 +293,7 @@ export default function SolutionsSection() {
             {/* Mobile Version */}
             <div className="block md:hidden w-full relative rounded-3xl overflow-hidden bg-gray-100/60 border border-gray-200/80 p-5 shadow-sm flex flex-col gap-6">
               {/* Mobile 4 Cards Grid Top */}
-              <motion.div 
+              <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
@@ -317,7 +317,7 @@ export default function SolutionsSection() {
               </motion.div>
 
               {/* Main LAP Card */}
-              <motion.div 
+              <motion.div
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: false, margin: "-50px" }}
@@ -337,7 +337,7 @@ export default function SolutionsSection() {
               </motion.div>
 
               {/* Mobile 4 Cards Grid Bottom */}
-              <motion.div 
+              <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 whileInView="visible"
