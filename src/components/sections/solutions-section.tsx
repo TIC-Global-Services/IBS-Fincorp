@@ -96,6 +96,15 @@ const verticalLineVariants = {
   }
 };
 
+const mobileCardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" as const }
+  }
+};
+
 export default function SolutionsSection() {
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -253,7 +262,7 @@ export default function SolutionsSection() {
               <div className="absolute inset-0" style={{ zIndex: 10 }}>
                 {/* Center Card */}
                 <div
-                  className="absolute left-[38%] top-[22%] w-[24%] h-[56%] flex flex-col items-center justify-center p-4 bg-white/40 backdrop-blur-xl border border-white/60 rounded-[36px] shadow-[0_15px_45px_rgba(0,0,0,0.03)] text-center select-none"
+                  className="absolute left-[38%] top-[22%] w-[24%] h-[56%] flex flex-col items-center justify-center p-4 bg-white/40 backdrop-blur-xl border border-white/60 rounded-[36px] shadow-[inset_2.5px_2.5px_5px_rgba(0,0,0,0.14),_0_15px_45px_rgba(0,0,0,0.03)] text-center select-none"
                 >
                   <div className="w-[40%] aspect-square mb-4 flex items-center justify-center">
                     <AnimatedHomeIcon width={64} height={64} className="w-full h-full object-contain" color="#1D1E1C" />
@@ -268,7 +277,7 @@ export default function SolutionsSection() {
                   <motion.div
                     key={card.id}
                     variants={card.type === "inner" ? innerCardVariants : outerCardVariants}
-                    className={`absolute flex flex-col items-center justify-center p-2.5 lg:p-4 bg-white/80 backdrop-blur-sm border border-white/60 rounded-[24px] shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(241,196,15,0.15)] hover:scale-[1.03] transition-all duration-300 text-center select-none ${card.className}`}
+                    className={`absolute flex flex-col items-center justify-center p-2.5 lg:p-4 bg-white/80 backdrop-blur-sm border border-white/60 rounded-[24px] shadow-[inset_2.5px_2.5px_5px_rgba(0,0,0,0.14),_0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[inset_2.5px_2.5px_5px_rgba(0,0,0,0.14),_0_8px_30px_rgba(241,196,15,0.15)] hover:scale-[1.03] transition-all duration-300 text-center select-none ${card.className}`}
                   >
                     <div className="w-8 h-8 lg:w-10 lg:h-10 mb-1 lg:mb-2 flex items-center justify-center shrink-0">
                       <Image src={card.icon} alt={card.title} width={40} height={40} className="object-contain" />
@@ -282,27 +291,20 @@ export default function SolutionsSection() {
             </motion.div>
 
             {/* Mobile Version */}
-            <div className="block md:hidden w-full relative rounded-3xl overflow-hidden bg-gray-50/40 border border-gray-200 p-5 shadow-sm flex flex-col gap-6">
-              {/* Glowing aura behind home icon */}
-              <div className="absolute left-1/2 top-12 -translate-x-1/2 w-48 h-48 rounded-full bg-gold-400/20 blur-xl -z-10 animate-pulse" />
-
-              {/* Main LAP Card */}
-              <div className="bg-white/40 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-sm text-center flex flex-col items-center justify-center">
-                <AnimatedHomeIcon width={56} height={56} className="w-14 h-14 shrink-0 mb-3" color="#1D1E1C" />
-                <h3 className="text-lg font-bold leading-tight tracking-tight text-dark-900 mb-1">
-                  Loan Against Property (LAP)
-                </h3>
-                <p className="text-[11px] text-dark-500 tracking-tight max-w-xs leading-normal">
-                  Unlock High-Value Funding Strategically With Your Property.
-                </p>
-              </div>
-
-              {/* Mobile 8 Cards Grid */}
-              <div className="grid grid-cols-2 gap-3.5">
-                {SUB_CARDS.map((card) => (
-                  <div
+            <div className="block md:hidden w-full relative rounded-3xl overflow-hidden bg-gray-100/60 border border-gray-200/80 p-5 shadow-sm flex flex-col gap-6">
+              {/* Mobile 4 Cards Grid Top */}
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, margin: "-50px" }}
+                className="grid grid-cols-2 gap-3.5"
+              >
+                {SUB_CARDS.slice(0, 4).map((card) => (
+                  <motion.div
                     key={card.id}
-                    className="bg-white/80 backdrop-blur-sm border border-white/60 rounded-[20px] p-3 shadow-[0_2px_10px_rgba(0,0,0,0.01)] flex flex-col items-center justify-center text-center aspect-[1.15/1]"
+                    variants={mobileCardVariants}
+                    className="bg-white/80 backdrop-blur-sm border border-white/60 rounded-[20px] p-3 shadow-[inset_2.5px_2.5px_5px_rgba(0,0,0,0.14),_0_2px_10px_rgba(0,0,0,0.01)] flex flex-col items-center justify-center text-center aspect-[1.15/1]"
                   >
                     <div className="w-9 h-9 mb-2 flex items-center justify-center shrink-0">
                       <Image src={card.icon} alt={card.title} width={36} height={36} className="object-contain" />
@@ -310,9 +312,53 @@ export default function SolutionsSection() {
                     <span className="text-[10px] font-semibold leading-tight text-dark-800 tracking-tight">
                       {card.title}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
+
+              {/* Main LAP Card */}
+              <motion.div 
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, margin: "-50px" }}
+                variants={mobileCardVariants}
+                className="relative w-full flex justify-center"
+              >
+                {/* Yellow glow behind the center card */}
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full bg-gold-400/35 blur-2xl animate-pulse pointer-events-none" />
+                <div className="w-[48%] aspect-square bg-white/40 backdrop-blur-xl border border-white/60 rounded-[20px] p-3 shadow-sm text-center flex flex-col items-center justify-center relative z-10">
+                  <div className="w-9 h-9 mb-2 flex items-center justify-center shrink-0">
+                    <AnimatedHomeIcon width={36} height={36} className="w-full h-full object-contain" color="#1D1E1C" />
+                  </div>
+                  <h3 className="text-[10px] font-bold leading-tight tracking-tight text-dark-900 px-1">
+                    Loan Against Property (LAP)
+                  </h3>
+                </div>
+              </motion.div>
+
+              {/* Mobile 4 Cards Grid Bottom */}
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, margin: "-50px" }}
+                className="grid grid-cols-2 gap-3.5"
+              >
+                {SUB_CARDS.slice(4).map((card) => (
+                  <motion.div
+                    key={card.id}
+                    variants={mobileCardVariants}
+                    className="bg-white/80 backdrop-blur-sm border border-white/60 rounded-[20px] p-3 shadow-[inset_2.5px_2.5px_5px_rgba(0,0,0,0.14),_0_2px_10px_rgba(0,0,0,0.01)] flex flex-col items-center justify-center text-center aspect-[1.15/1]"
+                  >
+                    <div className="w-9 h-9 mb-2 flex items-center justify-center shrink-0">
+                      <Image src={card.icon} alt={card.title} width={36} height={36} className="object-contain" />
+                    </div>
+                    <span className="text-[10px] font-semibold leading-tight text-dark-800 tracking-tight">
+                      {card.title}
+                    </span>
+                  </motion.div>
+                ))}
+              </motion.div>
             </div>
           </motion.div>
 
