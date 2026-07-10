@@ -3,24 +3,14 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { openConsultationModal } from "@/components/ui/consultation-modal";
-import { CloseIcon, ArrowUpRight } from "@/components/ui/icons";
+import { ArrowUpRight } from "@/components/ui/icons";
 
 export function LeadPopup() {
   const [isVisible, setIsVisible] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
   const [translateX, setTranslateX] = useState("0%");
 
   useEffect(() => {
-    // Check if dismissed previously in this session
-    const dismissed = sessionStorage.getItem("lead-popup-dismissed");
-    if (dismissed === "true") {
-      setIsDismissed(true);
-      return;
-    }
-
     const handleScroll = () => {
-      if (sessionStorage.getItem("lead-popup-dismissed") === "true") return;
-
       const solutionsEl = document.getElementById("solutions");
       const ctaEl = document.getElementById("cta");
 
@@ -62,17 +52,9 @@ export function LeadPopup() {
     };
   }, []);
 
-  const handleDismiss = () => {
-    setIsDismissed(true);
-    setIsVisible(false);
-    sessionStorage.setItem("lead-popup-dismissed", "true");
-  };
-
   const handleAction = () => {
     openConsultationModal();
   };
-
-  if (isDismissed) return null;
 
   return (
     <AnimatePresence>
@@ -84,21 +66,12 @@ export function LeadPopup() {
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="fixed bottom-6 left-4 md:left-1/2 z-40 w-[calc(96vw-6rem)] md:w-[calc(75vw-2rem)] max-w-3xl bg-black/35 backdrop-blur-sm border border-white/10 rounded-2xl p-5 md:py-3.5 md:px-6 shadow-[0_20px_50px_rgba(0,0,0,0.4)] text-white text-left flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6"
         >
-          {/* Close button (Absolute on mobile, Relative on desktop) */}
-          <button
-            onClick={handleDismiss}
-            className="absolute md:static top-2 right-2.5 text-white/40 hover:text-white transition-colors cursor-pointer md:order-last shrink-0"
-            aria-label="Close popup"
-          >
-            <CloseIcon width={16} height={16} />
-          </button>
-
           {/* Left / Middle content area */}
           <div className="text-center md:text-left w-full md:w-auto md:pr-4 flex-1">
-            <h4 className="text-sm md:text-[15px] font-semibold leading-tight text-gold-500 tracking-tight mb-1">
+            <h4 className="text-xs md:text-[15px] font-semibold leading-tight text-gold-500 tracking-tight mb-1">
               Looking for a High-Value Secured Loan?
             </h4>
-            <p className="text-[11px] md:text-xs text-white/90 leading-normal font-normal">
+            <p className="text-[10px] md:text-xs text-white/90 leading-normal font-normal">
               Compare offers from 50+ premium banks. Speak directly to our loan specialists today.
             </p>
           </div>
