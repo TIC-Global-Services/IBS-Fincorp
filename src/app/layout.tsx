@@ -19,8 +19,44 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "IBSFincorp | High-Value Secured Loans",
+  title: "IBSFincorp | High-Value Secured Loans & Financial Solutions",
   description: "Get the best deal for your high-value secured loan. Premium doorstep experience, fast and transparent process.",
+  keywords: [
+    "Secured Loans",
+    "Loan Against Property",
+    "LAP",
+    "Business Loan",
+    "Home Loan Balance Transfer",
+    "IBSFincorp",
+    "High-Value Loans",
+    "Mortgage Loans",
+    "Finance India"
+  ],
+  alternates: {
+    canonical: "https://www.ibsfincorp.com",
+  },
+  openGraph: {
+    title: "IBSFincorp | High-Value Secured Loans & Financial Solutions",
+    description: "Get the best deal for your high-value secured loan. Premium doorstep experience, fast and transparent process.",
+    url: "https://www.ibsfincorp.com",
+    siteName: "IBSFincorp",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "https://www.ibsfincorp.com/assets/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "IBSFincorp - High-Value Secured Loans",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "IBSFincorp | High-Value Secured Loans & Financial Solutions",
+    description: "Get the best deal for your high-value secured loan.",
+    images: ["https://www.ibsfincorp.com/assets/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({

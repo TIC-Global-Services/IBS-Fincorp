@@ -74,12 +74,12 @@ export default function Footer() {
             <div className="lg:col-span-2">
               <h3 className="font-semibold mb-6 tracking-tight text-white text-center md:text-left text-sm md:text-base">QUICK LINKS</h3>
               <ul className="grid grid-cols-3 md:grid-cols-1 gap-y-1 gap-x-2 md:gap-0 md:space-y-2.5 font-normal text-xs sm:text-sm tracking-tight text-center md:text-left">
-                <li><a href="#services" className="hover:text-gold-500 transition-colors">Services</a></li>
-                <li><a href="#products" className="hover:text-gold-500 transition-colors">Loan Products</a></li>
+                <li><a href="#why-us" className="hover:text-gold-500 transition-colors">Services</a></li>
+                <li><a href="#solutions" className="hover:text-gold-500 transition-colors">Loan Products</a></li>
                 <li><a href="#about" className="hover:text-gold-500 transition-colors">About Us</a></li>
-                <li><a href="#how-it-works" className="hover:text-gold-500 transition-colors">How It Works</a></li>
+                <li><a href="#comparison" className="hover:text-gold-500 transition-colors">How It Works</a></li>
                 <li><a href="#locations" className="hover:text-gold-500 transition-colors">Locations</a></li>
-                <li><a href="#privacy" className="hover:text-gold-500 transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-gold-500 transition-colors">Privacy Policy</a></li>
               </ul>
             </div>
 
