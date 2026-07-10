@@ -219,9 +219,39 @@ export default function Carousel3D() {
       }
     }
   };
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diffX = touchStartX.current - touchEndX;
+    const threshold = 50; // swipe threshold in pixels
+
+    if (Math.abs(diffX) > threshold) {
+      if (diffX > 0) {
+        // Swiped Left -> go to next card
+        const nextIndex = (currentIndex + 1) % faceCount;
+        handleCardClick(nextIndex);
+      } else {
+        // Swiped Right -> go to previous card
+        const prevIndex = (currentIndex - 1 + faceCount) % faceCount;
+        handleCardClick(prevIndex);
+      }
+    }
+    touchStartX.current = null;
+  };
 
   return (
-    <div ref={containerRef} className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 mt-8 md:-mt-24">
+    <div
+      ref={containerRef}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      className="w-full overflow-hidden flex flex-col justify-center py-10 md:py-1 mt-8 md:-mt-24"
+    >
       <div className="flex grow items-center justify-center [perspective:2500px] [transform-style:preserve-3d]">
         <motion.div
           style={{

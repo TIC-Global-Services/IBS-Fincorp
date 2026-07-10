@@ -87,7 +87,7 @@ export function LeadPopup() {
           {/* Close button (Absolute on mobile, Relative on desktop) */}
           <button
             onClick={handleDismiss}
-            className="absolute md:static top-3.5 right-3.5 text-white/40 hover:text-white transition-colors cursor-pointer md:order-last shrink-0"
+            className="absolute md:static top-2 right-2.5 text-white/40 hover:text-white transition-colors cursor-pointer md:order-last shrink-0"
             aria-label="Close popup"
           >
             <CloseIcon width={16} height={16} />

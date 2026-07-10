@@ -64,14 +64,14 @@ export default function ComparisonAppSection() {
       videoRef.current.muted = nextMuted;
       setIsMuted(nextMuted);
       if (videoRef.current.paused) {
-        videoRef.current.play().catch(() => {});
+        videoRef.current.play().catch(() => { });
       }
     }
   };
 
   useIntersectionObserver(
     videoRef,
-    () => { videoRef.current?.play().catch(() => {}); },
+    () => { videoRef.current?.play().catch(() => { }); },
     () => {
       if (videoRef.current) {
         videoRef.current.pause();
@@ -135,7 +135,7 @@ export default function ComparisonAppSection() {
             {/* Video container with sound toggle */}
             <div
               onClick={() => toggleMute()}
-              className="w-[300px] h-[570px] relative z-10 rounded-[48px] overflow-hidden hover:scale-105 transition-transform duration-500 flex items-center justify-center cursor-pointer group"
+              className="w-full h-full md:w-[300px] md:h-[570px] relative z-10 rounded-[48px] overflow-hidden hover:scale-105 transition-transform duration-500 flex items-center justify-center cursor-pointer group"
 
             >
               <video
@@ -145,7 +145,7 @@ export default function ComparisonAppSection() {
                 loop
                 muted={isMuted}
                 playsInline
-                className="w-full h-full object-cover relative z-10"
+                className=" w-full h-full object-cover relative z-10"
               />
 
               {/* Sound status indicator overlay */}
