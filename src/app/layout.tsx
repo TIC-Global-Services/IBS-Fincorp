@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter_Tight, Plus_Jakarta_Sans, Manrope } from "next/font/google";
 import Image from "next/image";
+import Script from "next/script";
 import "./globals.css";
 import { Preloader } from "@/components/ui/preloader";
 const interTight = Inter_Tight({
@@ -75,6 +76,8 @@ export default function RootLayout({
         <a href="https://wa.link/xpwwox" target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-50 hover:scale-110 transition-transform duration-300">
           <Image src="/assets/whatsapp-icon.png" alt="Contact Us" width={60} height={60} className="drop-shadow-2xl rounded-full" />
         </a>
+        {/* Tally embed script for dynamic iframe height */}
+        <Script src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
       </body>
     </html>
   );
