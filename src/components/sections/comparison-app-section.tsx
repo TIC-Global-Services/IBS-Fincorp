@@ -272,7 +272,7 @@ export default function ComparisonAppSection() {
             <div className="hidden md:block absolute bottom-0 left-0 w-full h-[2px] z-20 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] -webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)">
               <motion.div
                 className="w-full h-full bg-gold-400 origin-left shadow-[0_0_10px_2px_rgba(255,215,0,0.5)]"
-                style={{ scaleX }}
+                style={{ scaleX, willChange: "transform" }}
               />
             </div>
             {/* Mobile Continuous Left Track Line */}
@@ -280,7 +280,7 @@ export default function ComparisonAppSection() {
             {/* Mobile Continuous Left Glow Line */}
             <motion.div
               className="md:hidden absolute top-[41px] bottom-[250px] sm:bottom-[220px] left-0 w-[2px] bg-gold-400 z-20 origin-top shadow-[0_0_10px_2px_rgba(255,215,0,0.5)]"
-              style={{ scaleY }}
+              style={{ scaleY, willChange: "transform" }}
             />
 
             {/* Step 1 */}
@@ -295,21 +295,21 @@ export default function ComparisonAppSection() {
               <div className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-white/10 z-10"></div>
               <motion.div
                 className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-gradient-to-t from-gold-400 to-transparent z-10"
-                style={{ opacity: line1Opacity }}
+                style={{ opacity: line1Opacity, willChange: "opacity" }}
               />
 
               {/* Corner Dot (Desktop right-bottom) */}
               <div className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
               <motion.div
                 className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
-                style={{ opacity: line1Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+                style={{ opacity: line1Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)", willChange: "opacity" }}
               />
 
               {/* Corner Dot (Mobile top-left) */}
               <div className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
               <motion.div
                 className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
-                style={{ opacity: 1, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+                style={{ opacity: 1, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)", willChange: "opacity" }}
               />
             </div>
 
@@ -325,21 +325,21 @@ export default function ComparisonAppSection() {
               <div className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-white/10 z-10"></div>
               <motion.div
                 className="hidden md:block absolute right-0 bottom-0 w-[1px] h-full bg-gradient-to-t from-gold-400 to-transparent z-10"
-                style={{ opacity: line2Opacity }}
+                style={{ opacity: line2Opacity, willChange: "opacity" }}
               />
 
               {/* Corner Dot (Desktop) */}
               <div className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
               <motion.div
                 className="hidden md:block absolute -bottom-[4px] -right-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
-                style={{ opacity: line2Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+                style={{ opacity: line2Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)", willChange: "opacity" }}
               />
 
               {/* Corner Dot (Mobile) */}
               <div className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
               <motion.div
                 className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
-                style={{ opacity: line1Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+                style={{ opacity: line1Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)", willChange: "opacity" }}
               />
             </div>
 
@@ -355,7 +355,7 @@ export default function ComparisonAppSection() {
               <div className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white/20 z-10"></div>
               <motion.div
                 className="md:hidden absolute top-[36px] -left-[5px] w-[10px] h-[10px] rounded-full bg-white z-20"
-                style={{ opacity: line2Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)" }}
+                style={{ opacity: line2Opacity, boxShadow: "0 0 10px 4px rgba(255,215,0,0.8)", willChange: "opacity" }}
               />
             </div>
           </div>
