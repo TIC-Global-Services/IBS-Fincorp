@@ -12,21 +12,14 @@ export function LeadPopup() {
   useEffect(() => {
     const handleScroll = () => {
       const solutionsEl = document.getElementById("solutions");
-      const ctaEl = document.getElementById("cta");
 
       if (!solutionsEl) return;
 
       const currentScroll = window.scrollY;
       const solutionsTop = solutionsEl.getBoundingClientRect().top + window.scrollY;
-      const ctaTop = ctaEl ? (ctaEl.getBoundingClientRect().top + window.scrollY) : document.body.scrollHeight;
 
-      // 1. Hide if scrolled back up above Solutions section (homepage top)
-      // 2. Hide if scrolled down and the bottom of the screen has reached the CTA section
-      // 3. Otherwise, show while the user is actively viewing Solutions down to CTA
-      if (
-        currentScroll >= solutionsTop - 100 &&
-        currentScroll + window.innerHeight < ctaTop + 100
-      ) {
+      // Hide when scrolled above Solutions; show everywhere else (down to footer)
+      if (currentScroll >= solutionsTop - 100) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
